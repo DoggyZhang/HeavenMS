@@ -1,11 +1,15 @@
 ﻿/logs/**
 .idea/
+.gradle/
+gradle/
 
 # build files
 
 /build/
 /dist/
 /nbproject/
+
+/heaven/build/
 
 /tools/MapleArrowFetcher/build/
 /tools/MapleArrowFetcher/dist/

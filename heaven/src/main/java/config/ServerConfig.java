@@ -5,6 +5,7 @@ public class ServerConfig {
     public boolean USE_THREAD_TRACKER;
 
     //Database Configuration
+    public String DB_DRIVER;
     public String DB_URL;
     public String DB_USER;
     public String DB_PASS;

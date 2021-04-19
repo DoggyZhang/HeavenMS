@@ -61,7 +61,8 @@ public class DatabaseConnection {
     
     public DatabaseConnection() {
         try {
-            Class.forName("com.mysql.jdbc.Driver"); // touch the mysql driver
+            Class.forName(YamlConfig.config.server.DB_DRIVER); // touch the mysql driver
+            System.out.println("DB Driver: " + YamlConfig.config.server.DB_DRIVER);
         } catch (ClassNotFoundException e) {
             System.out.println("[SEVERE] SQL Driver Not Found. Consider death by clams.");
             e.printStackTrace();
