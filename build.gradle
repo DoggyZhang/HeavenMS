@@ -1,19 +1,13 @@
-plugins {
-    id 'java'
+allprojects {
+    group 'org.heaven'
+    version '1.0-SNAPSHOT'
+
+    repositories {
+        mavenLocal()
+        mavenCentral()
+    }
 }
 
-group 'org.example'
-version '1.0-SNAPSHOT'
+subprojects {
 
-repositories {
-    mavenCentral()
-}
-
-dependencies {
-    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.6.0'
-    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine'
-}
-
-test {
-    useJUnitPlatform()
 }

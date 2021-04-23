@@ -1,0 +1,20 @@
+plugins {
+    id 'java'
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.6.0'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine'
+
+    implementation group: 'com.zaxxer', name: 'HikariCP-java7', version: '2.4.13'
+    implementation group: 'org.apache.mina', name: 'mina-core', version: '2.1.4'
+    implementation group: 'org.slf4j', name: 'slf4j-api', version: '1.7.30'
+    implementation group: 'org.slf4j', name: 'slf4j-jdk14', version: '1.7.30'
+    implementation group: 'com.esotericsoftware.yamlbeans', name: 'yamlbeans', version: '1.15'
+    // implementation group: 'mysql', name: 'mysql-connector-java', version: '8.0.12'
+    implementation group: 'mysql', name: 'mysql-connector-java', version: '5.1.6'
+}
