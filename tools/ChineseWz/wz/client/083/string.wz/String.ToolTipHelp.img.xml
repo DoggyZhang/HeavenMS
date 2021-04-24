@@ -1,0 +1,3813 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<dir name="ToolTipHelp.img">
+  <dir name="Game">
+    <dir name="Button">
+      <dir name="Shop">
+        <string name="Title" value="Cash Shop" />
+        <string name="Desc" value="It's a place where, armed with Cash, you'll be able to purchase accessories, clothes, messenger item, hair salon coupons, coupons for plastic surgery, and other various items." />
+      </dir>
+      <dir name="Item">
+        <string name="Title" value="Item Inventory (I)" />
+        <string name="Desc" value="The window that allows the character to see the items it owns.\nThe items are categorized under Equip., Use, Set-Up, and Etc. items." />
+      </dir>
+      <dir name="Equip">
+        <string name="Title" value="Equipment Window (E)" />
+        <string name="Desc" value="The window that shows the equipped items, and allowing the character to equip/unequip them.\nOpen the item inventory alongside it to use the equip. items." />
+      </dir>
+      <dir name="Stat">
+        <string name="Title" value="Ability Window (S)" />
+        <string name="Desc" value="The window that shows detailed character info and its abilities.\nUse AP to enhance many different kinds of abilities. " />
+      </dir>
+      <dir name="Skill">
+        <string name="Title" value="Skill Window (K)" />
+        <string name="Desc" value="The window that shows the detailed look of the skillbook owned by the character.\nUse skill points to learn the skills available." />
+      </dir>
+      <dir name="Chat">
+        <string name="Title" value="Messenger Window" />
+        <string name="Desc" value="The window that lets you chat with buddies within a world." />
+      </dir>
+      <dir name="Menu">
+        <string name="Title" value="Menu" />
+        <string name="Desc" value="The window that lets you change the options or game infos.\nCan change game and system option.\nCan also see quest info, party info, and the community info." />
+      </dir>
+      <dir name="Whisper">
+        <string name="Title" value="Whisper" />
+        <string name="Desc" value="Press the button to choose the character you want to whisper to.\nPress it once more to disable whisper." />
+      </dir>
+      <dir name="MapTransfer">
+        <dir name="Register">
+          <string name="Title" value="Register Map" />
+          <string name="Desc" value="Registers the map the character is at to the teleport list. Can save up to 5 maps." />
+        </dir>
+        <dir name="RegisterEx">
+          <string name="Title" value="Register Map" />
+          <string name="Desc" value="Registers the map where the character is located into the Teleport List. Can register upto 10 different places." />
+        </dir>
+        <dir name="Delete">
+          <string name="Title" value="Delete Map" />
+          <string name="Desc" value="Delete the chosen map from the list." />
+        </dir>
+        <dir name="Move">
+          <string name="Title" value="Move" />
+          <string name="Desc" value="Teleports to the map of your choice, or to the map where the chosen character is." />
+        </dir>
+      </dir>
+      <dir name="KeySet">
+        <string name="Title" value="Key Config." />
+      </dir>
+      <dir name="QuickSlot">
+        <string name="Title" value="Show Quick Slot" />
+      </dir>
+      <dir name="QuickSlotD">
+        <string name="Title" value="Hide Quick Slot" />
+      </dir>
+      <dir name="Claim">
+        <string name="Title" value="Alert GM" />
+      </dir>
+      <dir name="QuestAlarm">
+        <string name="Desc" value="Click on Quest Alarm button if you wish to register the current quest into the Quest Alarm. Up to 5 quests can be registered in this alarm." />
+      </dir>
+      <dir name="StatAuto">
+        <string name="Title" value="Stat Auto-Assign" />
+        <string name="Desc" value="Distributes the remaining AP according to your level and class." />
+      </dir>
+      <dir name="StatAuto1">
+        <string name="Title" value="Stat Auto-Assign (Brawler)" />
+        <string name="Desc" value="Distributes the remaining AP according to Brawler requirements." />
+      </dir>
+      <dir name="StatAuto2">
+        <string name="Title" value="Stat Auto-Assign (Gunslinger)" />
+        <string name="Desc" value="Distributes the remaining AP according to Gunslinger requirements." />
+      </dir>
+    </dir>
+    <dir name="UIWnd">
+      <dir name="Stat">
+        <dir name="0">
+          <string name="Title" value="Name of the Character" />
+          <string name="Desc" value="Once the name is made,\nthe name can't be changed." />
+          <vector name="lt" value="8, 32" />
+          <vector name="rb" value="55, 47" />
+        </dir>
+        <dir name="1">
+          <string name="Title" value="Job of the Character" />
+          <string name="Desc" value="Can make the job advancement to Warrior, Bowman, Thief, Magician, or Pirate. \nWarrior : Minimum of Level 10, Perion\nBowman : Minimum of Level 10, Henesys\nMagician : Minimum of Level 8, Ellinia\nThief : Minimum of Level 10, Kerning City\nPirate : Minimum of Level 10, The Nautilus" />
+          <vector name="lt" value="8, 50" />
+          <vector name="rb" value="55, 75" />
+        </dir>
+        <dir name="2">
+          <string name="Title" value="Level" />
+          <string name="Desc" value="Accumulate enough EXP to raise the level of the character." />
+          <vector name="lt" value="8, 78" />
+          <vector name="rb" value="55, 93" />
+        </dir>
+        <dir name="3">
+          <string name="Title" value="Main Guild" />
+          <string name="Desc" value="The main community of the communities the account belongs to. Press &quot;G&quot; to check guild info." />
+          <vector name="lt" value="8, 96" />
+          <vector name="rb" value="55, 111" />
+        </dir>
+        <dir name="4">
+          <string name="Title" value="Health Point" />
+          <string name="Desc" value="It's a health stat, and if it reaches 0, the character dies.\nHP decreases if either attacked by an enemy or if a certain skill is used.\nIt can go up to the maximum of 30,000 points." />
+          <vector name="lt" value="8, 114" />
+          <vector name="rb" value="55, 129" />
+        </dir>
+        <dir name="5">
+          <string name="Title" value="Mana Point" />
+          <string name="Desc" value="The stat needed to use various skills.\nIt can go up to the maximum of 30,000 points." />
+          <vector name="lt" value="8, 132" />
+          <vector name="rb" value="55, 147" />
+        </dir>
+        <dir name="6">
+          <string name="Title" value="EXP" />
+          <string name="Desc" value="The amount of experience gained. \nObtained by killing a monster or completing a quest." />
+          <vector name="lt" value="8, 150" />
+          <vector name="rb" value="55, 165" />
+        </dir>
+        <dir name="7">
+          <string name="Title" value="Fame" />
+          <string name="Desc" value="The level of fame can be increased or decreased, based on other users. Some equipments and quests require the character reach a certain level of fame." />
+          <vector name="lt" value="8, 168" />
+          <vector name="rb" value="55, 183" />
+        </dir>
+        <dir name="8">
+          <string name="Title" value="Strength (STR)" />
+          <string name="Desc" value="The stat needed to use heavy weapons and/or armors.\nIt determines the attacking ability of the warriors and pirates (Brawlers)." />
+          <vector name="lt" value="8, 243" />
+          <vector name="rb" value="55, 259" />
+        </dir>
+        <dir name="9">
+          <string name="Title" value="Dexterity (DEX)" />
+          <string name="Desc" value="This stat is vital to making direct attacks using a weapon. This is the most significant stat when it comes to the strength of the attacks for warriors and pirates (Gunslingers). " />
+          <vector name="lt" value="8, 262" />
+          <vector name="rb" value="55, 277" />
+        </dir>
+        <dir name="10">
+          <string name="Title" value="Intelligence (INT)" />
+          <string name="Desc" value="The higher this stat, the higher the accuracy and strenghth of your magic attack. The most important stat that determines the magic attacks for mages." />
+          <vector name="lt" value="8, 280" />
+          <vector name="rb" value="55, 295" />
+        </dir>
+        <dir name="11">
+          <string name="Title" value="Luck (LUK)" />
+          <string name="Desc" value="The higher it is, the higher the avoidability is. \nIt determines the Thief's attacking ability and the Mage's magic attack accuracy. \nAlso, the higher it is, the less EXP a character loses by dying." />
+          <vector name="lt" value="8, 298" />
+          <vector name="rb" value="55, 313" />
+        </dir>
+        <dir name="12">
+          <string name="Title" value="AP(Ability Point)" />
+          <string name="Desc" value="Amount to increase STR, DEX, INT,LUK, HP and MP. For STR, DEX, INT and LUK, every 1 AP used will increase the stats by 1.  For HP and MP, it differs pending on the jobs and characters.  5 Points will be given upon level up." />
+          <vector name="lt" value="7, 192" />
+          <vector name="rb" value="90, 214" />
+        </dir>
+      </dir>
+      <dir name="StatDetail">
+        <dir name="0">
+          <vector name="lt" value="13, 7" />
+          <vector name="rb" value="70, 22" />
+          <string name="Title" value="Attack" />
+          <string name="Desc" value="The stat that impacts the damage caused by physical attacks. This stat is related to strength (STR) for warriors and magicians, dexterity (DEX) for bowmen, strength, dexterity and luck (LUK) for thieves and strength and dexterity for pirates. The above stat and the equipment's physical attack are added to decide on the overall physical attack.  " />
+        </dir>
+        <dir name="1">
+          <vector name="lt" value="13, 25" />
+          <vector name="rb" value="70, 40" />
+          <string name="Title" value="Weapon Def." />
+          <string name="Desc" value="The stat that determines the ability to defend the weapon attack.\nBased on all equipped armors' weapon def. " />
+        </dir>
+        <dir name="2">
+          <vector name="lt" value="13, 43" />
+          <vector name="rb" value="70, 58" />
+          <string name="Title" value="Magic" />
+          <string name="Desc" value="The stat that determines the success rate and the attacking ability of spells.\nBased on INT and equipped items' magic power." />
+        </dir>
+        <dir name="3">
+          <vector name="lt" value="13, 61" />
+          <vector name="rb" value="70, 76" />
+          <string name="Title" value="Magic Def." />
+          <string name="Desc" value="The stat for defending spells.\nBased on magic def. of every armor that's been equipped." />
+        </dir>
+        <dir name="4">
+          <vector name="lt" value="13, 79" />
+          <vector name="rb" value="70, 94" />
+          <string name="Title" value="Accuracy" />
+          <string name="Desc" value="The stat that determines the accuracy of weapon attack. \nThe higher, the more accurate.\nBased on dexterity and the equipment item options." />
+        </dir>
+        <dir name="5">
+          <vector name="lt" value="13, 97" />
+          <vector name="rb" value="70, 112" />
+          <string name="Title" value="Avoidability" />
+          <string name="Desc" value="The stat that enables the character to avoid weapon damage.\nThe higher it is, the better the character avoids weapon damage.\nBased on dexterity, luck, and the equipment item options." />
+        </dir>
+        <dir name="6">
+          <vector name="lt" value="13, 115" />
+          <vector name="rb" value="70, 130" />
+          <string name="Title" value="" />
+          <string name="Desc" value="" />
+        </dir>
+        <dir name="7">
+          <vector name="lt" value="13, 133" />
+          <vector name="rb" value="70, 148" />
+          <string name="Title" value="Speed" />
+          <string name="Desc" value="A character's speed can increase upto 140%. Can be changed through equipment item options or skills." />
+        </dir>
+        <dir name="8">
+          <vector name="lt" value="13, 151" />
+          <vector name="rb" value="70, 166" />
+          <string name="Title" value="Jump" />
+          <string name="Desc" value="A character's jump ability can increase upto 123%. \nCan be changed through equipment item options or skills." />
+        </dir>
+      </dir>
+    </dir>
+  </dir>
+  <dir name="Mapobject">
+    <dir name="0">
+      <dir name="0">
+        <string name="Title" value="Character Jump(Alt)" />
+        <string name="Desc" value="Press Alt on keyboard to jump" />
+      </dir>
+      <dir name="1">
+        <string name="Title" value="Move Character(Arrow Keys)" />
+        <string name="Desc" value="Move around, climb up the ladder, and use portals using the arrow keys." />
+      </dir>
+      <dir name="2">
+        <string name="Title" value="Use Portal(Up)" />
+      </dir>
+      <dir name="3">
+        <string name="Title" value="To New Places..." />
+        <string name="Desc" value="Move to the right to explore new grounds." />
+      </dir>
+      <dir name="4">
+        <string name="Title" value="Starting Point" />
+      </dir>
+    </dir>
+    <dir name="10000">
+      <dir name="0">
+        <string name="Title" value="Use Portal (Up)" />
+      </dir>
+    </dir>
+    <dir name="20000">
+      <dir name="0">
+        <string name="Title" value="Mushroom Town" />
+      </dir>
+      <dir name="1">
+        <string name="Title" value="Snail Hunting Ground" />
+      </dir>
+      <dir name="2">
+        <string name="Title" value="Nina &amp; Sen's House" />
+      </dir>
+    </dir>
+    <dir name="30000">
+      <dir name="0">
+        <string name="Title" value="Snail Hunting Ground" />
+      </dir>
+      <dir name="1">
+        <string name="Title" value="Snail Hunting Ground" />
+      </dir>
+      <dir name="2">
+        <string name="Title" value="Snail Hunting Ground" />
+      </dir>
+      <dir name="3">
+        <string name="Title" value="Snail Hunting Ground" />
+      </dir>
+      <dir name="4">
+        <string name="Title" value="Snail Hunting Ground" />
+      </dir>
+      <dir name="5">
+        <string name="Title" value="Snail Hunting Ground" />
+      </dir>
+    </dir>
+    <dir name="40000">
+      <dir name="0">
+        <string name="Title" value="Amherst" />
+      </dir>
+      <dir name="1">
+        <string name="Title" value="Southperry" />
+      </dir>
+      <dir name="2">
+        <string name="Title" value="Amherst" />
+      </dir>
+      <dir name="3">
+        <string name="Title" value="Southperry" />
+      </dir>
+    </dir>
+    <dir name="40001">
+      <dir name="0">
+        <string name="Title" value="Amherst" />
+      </dir>
+      <dir name="1">
+        <string name="Title" value="Southperry" />
+      </dir>
+      <dir name="2">
+        <string name="Title" value="Amherst" />
+      </dir>
+      <dir name="3">
+        <string name="Title" value="Southperry" />
+      </dir>
+    </dir>
+    <dir name="40002">
+      <dir name="0">
+        <string name="Title" value="Amherst" />
+      </dir>
+      <dir name="1">
+        <string name="Title" value="Southperry" />
+      </dir>
+      <dir name="2">
+        <string name="Title" value="Amherst" />
+      </dir>
+      <dir name="3">
+        <string name="Title" value="Southperry" />
+      </dir>
+    </dir>
+    <dir name="50000">
+      <dir name="0">
+        <string name="Title" value="Amherst" />
+      </dir>
+      <dir name="1">
+        <string name="Title" value="Amherst" />
+      </dir>
+      <dir name="2">
+        <string name="Title" value="Snail Hunting Ground" />
+      </dir>
+      <dir name="3">
+        <string name="Title" value="Amherst" />
+      </dir>
+      <dir name="4">
+        <string name="Title" value="Southperry" />
+      </dir>
+    </dir>
+    <dir name="60000">
+      <dir name="0">
+        <string name="Title" value="Armor Shop" />
+        <string name="Desc" value="This is the place to purchase armors." />
+      </dir>
+      <dir name="1">
+        <string name="Title" value="Southperry --&gt; Lith Harbor (Victoria Island)" />
+        <string name="Desc" value="Fee : 150 Mesos\n\nGet on the ship that heads to Lith Harbor through Shanks. Once out of Maple Island, you will not be able to return here ever again." />
+      </dir>
+    </dir>
+    <dir name="1000000">
+      <dir name="0">
+        <string name="Title" value="Weapon Store" />
+        <string name="Desc" value="This is the place to purchase weapons." />
+      </dir>
+      <dir name="1">
+        <string name="Title" value="Department Store" />
+        <string name="Desc" value="This is the place to purchase potions, scrolls, and other goods." />
+      </dir>
+      <dir name="2">
+        <string name="Title" value="Entrance to Adventurer Training Center" />
+        <string name="Desc" value="Toward Southperry" />
+      </dir>
+      <dir name="3">
+        <string name="Title" value="Amherst" />
+      </dir>
+    </dir>
+    <dir name="1010000">
+      <dir name="0">
+        <string name="Title" value="Split Road of Destiny" />
+        <string name="Desc" value="Toward Southperry" />
+      </dir>
+      <dir name="1">
+        <string name="Title" value="Adventurer Training Center" />
+      </dir>
+    </dir>
+    <dir name="100000000">
+      <dir name="0">
+        <string name="Title" value="Cab Station" />
+      </dir>
+      <dir name="1">
+        <string name="Title" value="Henesys Market" />
+      </dir>
+      <dir name="2">
+        <string name="Title" value="Henesys Park" />
+      </dir>
+      <dir name="3">
+        <string name="Title" value="Dungeon" />
+      </dir>
+      <dir name="4">
+        <string name="Title" value="Henesys" />
+      </dir>
+      <dir name="5">
+        <string name="Title" value="The Hill East of Henesys" />
+      </dir>
+      <dir name="6">
+        <string name="Title" value="Henesys" />
+      </dir>
+      <dir name="7">
+        <string name="Title" value="Henesys Hunting Ground" />
+      </dir>
+      <dir name="8">
+        <string name="Title" value="Henesys" />
+      </dir>
+      <dir name="9">
+        <string name="Title" value="Maya's House" />
+      </dir>
+      <dir name="10">
+        <string name="Title" value="Mini Dungeon: Mushroom Castle" />
+      </dir>
+      <dir name="11">
+        <string name="Title" value="Dungeon (Towards Sleepywood)" />
+      </dir>
+    </dir>
+    <dir name="100000100">
+      <dir name="0">
+        <string name="Title" value="Henesys Market" />
+      </dir>
+      <dir name="1">
+        <string name="Title" value="Free Market" />
+      </dir>
+      <dir name="2">
+        <string name="Title" value="Weapon Store" />
+      </dir>
+      <dir name="3">
+        <string name="Title" value="Department Store" />
+      </dir>
+      <dir name="4">
+        <string name="Title" value="Pet Store" />
+      </dir>
+      <dir name="5">
+        <string name="Title" value="Skin Care" />
+      </dir>
+      <dir name="6">
+        <string name="Title" value="Hair Salon" />
+      </dir>
+      <dir name="7">
+        <string name="Title" value="Hair Salon" />
+      </dir>
+      <dir name="8">
+        <string name="Title" value="Plastic Surgery" />
+      </dir>
+      <dir name="9">
+        <string name="Title" value="Henesys Market" />
+      </dir>
+      <dir name="10">
+        <string name="Title" value="Henesys Park" />
+      </dir>
+      <dir name="11">
+        <string name="Title" value="Henesys" />
+      </dir>
+      <dir name="12">
+        <string name="Title" value="Henesys Market" />
+      </dir>
+    </dir>
+    <dir name="100000200">
+      <dir name="0">
+        <string name="Title" value="Henesys" />
+      </dir>
+      <dir name="1">
+        <string name="Title" value="Henesys Park" />
+      </dir>
+      <dir name="2">
+        <string name="Title" value="Pet Walkway" />
+      </dir>
+      <dir name="3">
+        <string name="Title" value="Henesys" />
+      </dir>
+      <dir name="4">
+        <string name="Title" value="Henesys Market" />
+      </dir>
+      <dir name="5">
+        <string name="Title" value="Henesys Game Park" />
+      </dir>
+      <dir name="6">
+        <string name="Title" value="Bowman Instructional School" />
+      </dir>
+      <dir name="7">
+        <string name="Title" value="Bowman Instructional School" />
+      </dir>
+    </dir>
+    <dir name="101000000">
+      <dir name="0">
+        <string name="Title" value="Cab Station" />
+      </dir>
+      <dir name="1">
+        <string name="Title" value="Weapon稟rmor Shop" />
+      </dir>
+      <dir name="2">
+        <string name="Title" value="Department Store" />
+      </dir>
+      <dir name="3">
+        <string name="Title" value="Cab Station" />
+      </dir>
+      <dir name="4">
+        <string name="Title" value="Ellinia Station" />
+      </dir>
+      <dir name="5">
+        <string name="Title" value="Magic Library" />
+      </dir>
+      <dir name="6">
+        <string name="Title" value="World Tour Info Desk" />
+      </dir>
+      <dir name="7">
+        <string name="Title" value="Marr's Forest" />
+      </dir>
+      <dir name="8">
+        <string name="Title" value="Sky Ferry" />
+        <string name="Desc" value="The ship that passes through Ereve is at anchor." />
+      </dir>
+    </dir>
+    <dir name="101000300">
+      <dir name="0">
+        <string name="Title" value="Henesys" />
+      </dir>
+      <dir name="1">
+        <string name="Title" value="Perion" />
+      </dir>
+      <dir name="2">
+        <string name="Title" value="Ellinia" />
+      </dir>
+      <dir name="3">
+        <string name="Title" value="Kerning City" />
+      </dir>
+      <dir name="4">
+        <string name="Title" value="Ticket Booth" />
+      </dir>
+    </dir>
+    <dir name="101030100">
+      <dir name="0">
+        <string name="Title" value="Rocky Road II" />
+      </dir>
+      <dir name="1">
+        <string name="Title" value="Excavation Site I" />
+      </dir>
+      <dir name="2">
+        <string name="Title" value="East Domain of Perion" />
+      </dir>
+      <dir name="3">
+        <string name="Title" value="Excavation Site I" />
+      </dir>
+    </dir>
+    <dir name="101030400">
+      <dir name="0">
+        <string name="Title" value="Rocky Road II" />
+      </dir>
+      <dir name="1">
+        <string name="Title" value="East Rocky Mountain II" />
+      </dir>
+      <dir name="2">
+        <string name="Title" value="Rocky Road I" />
+      </dir>
+    </dir>
+    <dir name="102000000">
+      <dir name="0">
+        <string name="Title" value="West Street Corner of Perion" />
+      </dir>
+      <dir name="1">
+        <string name="Title" value="Cab Station" />
+      </dir>
+      <dir name="2">
+        <string name="Title" value="On the Way to Dungeon" />
+      </dir>
+      <dir name="3">
+        <string name="Title" value="East Domain of Perion" />
+      </dir>
+      <dir name="4">
+        <string name="Title" value="Department Store" />
+      </dir>
+      <dir name="5">
+        <string name="Title" value="Free Market" />
+      </dir>
+      <dir name="6">
+        <string name="Title" value="Weapon稟rmor Shop" />
+      </dir>
+      <dir name="7">
+        <string name="Title" value="Warriors' Sanctuary" />
+      </dir>
+      <dir name="8">
+        <string name="Title" value="World Tour Info Desk" />
+      </dir>
+    </dir>
+    <dir name="102020000">
+      <dir name="0">
+        <string name="Title" value="West Domain of Perion" />
+      </dir>
+      <dir name="1">
+        <string name="Title" value="West Rocky Mountain II" />
+      </dir>
+      <dir name="2">
+        <string name="Title" value="West Street Corner of Perion" />
+      </dir>
+      <dir name="3">
+        <string name="Title" value="West Domain of Perion" />
+      </dir>
+      <dir name="4">
+        <string name="Title" value="West Rocky Mountain II" />
+      </dir>
+      <dir name="5">
+        <string name="Title" value="West Street Corner of Perion" />
+      </dir>
+      <dir name="6">
+        <string name="Title" value="             DANGER!             " />
+        <string name="Desc" value="Danger zone from here on. Be cautious." />
+      </dir>
+    </dir>
+    <dir name="103000000">
+      <dir name="0">
+        <string name="Title" value="Subway" />
+      </dir>
+      <dir name="1">
+        <string name="Title" value="Key Shop" />
+      </dir>
+      <dir name="2">
+        <string name="Title" value="Maple Internet Cafe" />
+      </dir>
+      <dir name="3">
+        <string name="Title" value="Kerning City Pharmacy" />
+      </dir>
+      <dir name="4">
+        <string name="Title" value="Kerning City Pharmacy" />
+      </dir>
+      <dir name="5">
+        <string name="Title" value="Fusion Jazz Bar" />
+      </dir>
+      <dir name="6">
+        <string name="Title" value="Hair Salon" />
+      </dir>
+      <dir name="7">
+        <string name="Title" value="Repair Shop" />
+      </dir>
+      <dir name="8">
+        <string name="Title" value="Naora Hosptial" />
+      </dir>
+      <dir name="9">
+        <string name="Title" value="Naora Hosptial" />
+      </dir>
+      <dir name="10">
+        <string name="Title" value="Self-Defence Item Store" />
+      </dir>
+      <dir name="11">
+        <string name="Title" value="Cab Station" />
+      </dir>
+      <dir name="12">
+        <string name="Title" value="World Tour Info Desk" />
+      </dir>
+    </dir>
+    <dir name="103030000">
+      <dir name="0">
+        <string name="Title" value="Kerning City Middle Forest II" />
+      </dir>
+      <dir name="1">
+        <string name="Title" value="L Forest III" />
+      </dir>
+      <dir name="2">
+        <string name="Title" value="Three-Way Road" />
+      </dir>
+    </dir>
+    <dir name="104000000">
+      <dir name="0">
+        <string name="Title" value="Ticket Booth" />
+      </dir>
+      <dir name="1">
+        <string name="Title" value="Department Store" />
+      </dir>
+      <dir name="2">
+        <string name="Title" value="Armor Shop" />
+      </dir>
+      <dir name="3">
+        <string name="Title" value="Cab Station" />
+      </dir>
+      <dir name="4">
+        <string name="Title" value="Ticket Price Guideline" />
+        <string name="Desc" value="\nPerion, Ellinia: 1200 Mesos, Henesys: 800 Mesos, Kerning City: 1000 Mesos\n\n\n- 90% Discount for Beginners!!" />
+      </dir>
+      <dir name="5">
+        <string name="Title" value="Weapon Store" />
+      </dir>
+      <dir name="6">
+        <string name="Title" value="Info Shop" />
+      </dir>
+    </dir>
+    <dir name="104010000">
+      <dir name="0">
+        <string name="Title" value="Kerning City Middle Forest I" />
+      </dir>
+      <dir name="1">
+        <string name="Title" value="Forest West of Henesys" />
+      </dir>
+      <dir name="2">
+        <string name="Title" value="Thicket Around the Beach III" />
+      </dir>
+      <dir name="3">
+        <string name="Title" value="Thicket Around the Beach III" />
+      </dir>
+      <dir name="4">
+        <string name="Title" value="Forest West of Henesys" />
+      </dir>
+      <dir name="5">
+        <string name="Title" value="Kerning City" />
+      </dir>
+      <dir name="6">
+        <string name="Title" value="Danger Zone" />
+      </dir>
+      <dir name="9">
+        <string name="Title" value="Danger Zone" />
+      </dir>
+    </dir>
+    <dir name="105040000">
+      <dir name="0">
+        <string name="Title" value="Entrance to Henesys Dungeon" />
+      </dir>
+      <dir name="1">
+        <string name="Title" value="Deep Forest" />
+      </dir>
+      <dir name="2">
+        <string name="Title" value="Sleepywood" />
+      </dir>
+      <dir name="3">
+        <string name="Title" value="Deep Forest Hunting Ground I" />
+      </dir>
+    </dir>
+    <dir name="105040300">
+      <dir name="0">
+        <string name="Title" value="Hotel" />
+      </dir>
+      <dir name="1">
+        <string name="Title" value="Swampy Land in a Deep Forest" />
+      </dir>
+      <dir name="2">
+        <string name="Title" value="Dungeon" />
+      </dir>
+    </dir>
+    <dir name="200000000">
+      <dir name="0">
+        <string name="Title" value="Free Market" />
+      </dir>
+      <dir name="1">
+        <string name="Title" value="Weapon稟rmor Shop" />
+      </dir>
+      <dir name="2">
+        <string name="Title" value="Guild Office" />
+      </dir>
+      <dir name="3">
+        <string name="Title" value="Department Store" />
+      </dir>
+      <dir name="4">
+        <string name="Title" value="Orbis Station" />
+      </dir>
+      <dir name="5">
+        <string name="Title" value="Orbis Park" />
+      </dir>
+      <dir name="6">
+        <string name="Title" value="Orbis Station" />
+      </dir>
+      <dir name="7">
+        <string name="Title" value="Orbis Tower" />
+      </dir>
+      <dir name="8">
+        <string name="Title" value="Cloud Park" />
+      </dir>
+      <dir name="9">
+        <string name="Title" value="World Tour Info Desk" />
+      </dir>
+    </dir>
+    <dir name="200000100">
+      <dir name="0">
+        <string name="Title" value="Orbis" />
+      </dir>
+      <dir name="1">
+        <string name="Title" value="Station" />
+      </dir>
+    </dir>
+    <dir name="200000110">
+      <dir name="0">
+        <string name="Title" value="Station &lt;To Ellinia&gt;" />
+      </dir>
+      <dir name="1">
+        <string name="Title" value="Orbis Station - Waiting Room" />
+      </dir>
+    </dir>
+    <dir name="200000120">
+      <dir name="0">
+        <string name="Title" value="Station &lt;To Ludibrium&gt;" />
+      </dir>
+      <dir name="1">
+        <string name="Title" value="Orbis Station - Waiting Room" />
+      </dir>
+    </dir>
+    <dir name="200000130">
+      <dir name="0">
+        <string name="Title" value="Station &lt;To Leafre&gt;" />
+      </dir>
+      <dir name="1">
+        <string name="Title" value="Orbis Station - Waiting Room" />
+      </dir>
+    </dir>
+    <dir name="200000140">
+      <dir name="0">
+        <string name="Title" value="Station &lt;To Mu Lung&gt;" />
+      </dir>
+      <dir name="1">
+        <string name="Title" value="Orbis Station - Waiting Room" />
+      </dir>
+    </dir>
+    <dir name="200010000">
+      <dir name="0" />
+      <dir name="1">
+        <string name="Title" value="The Road to Garden of 3 Colors" />
+      </dir>
+      <dir name="2">
+        <string name="Title" value="Cloud Park II" />
+      </dir>
+    </dir>
+    <dir name="200010100">
+      <dir name="0">
+        <string name="Title" value="Garden of Red I" />
+      </dir>
+      <dir name="1">
+        <string name="Title" value="Garden of Yellow I" />
+      </dir>
+      <dir name="2">
+        <string name="Title" value="Garden of Blue I" />
+      </dir>
+      <dir name="3">
+        <string name="Title" value="The Road to Garden of 3 Colors" />
+      </dir>
+      <dir name="4">
+        <string name="Title" value="Cloud Park I" />
+      </dir>
+    </dir>
+    <dir name="200010200">
+      <dir name="0">
+        <string name="Title" value="Stairway to the Sky II" />
+      </dir>
+      <dir name="1">
+        <string name="Title" value="Garden of Red II" />
+      </dir>
+      <dir name="2">
+        <string name="Title" value="Garden of Yellow II" />
+      </dir>
+      <dir name="3">
+        <string name="Title" value="Garden of Blue II" />
+      </dir>
+    </dir>
+    <dir name="200082100">
+      <dir name="0">
+        <string name="Title" value="Orbis Tower - Basement" />
+      </dir>
+      <dir name="1">
+        <string name="Title" value="Orbis Tower - Basement" />
+      </dir>
+    </dir>
+    <dir name="211040000">
+      <dir name="0">
+        <string name="Title" value="Ice Valley I" />
+      </dir>
+      <dir name="1">
+        <string name="Title" value="Cold Field I" />
+      </dir>
+      <dir name="2">
+        <string name="Title" value="Icy Cold Field" />
+      </dir>
+    </dir>
+    <dir name="211000000">
+      <dir name="0">
+        <string name="Title" value="Orbis Tower" />
+      </dir>
+      <dir name="1">
+        <string name="Title" value="El Nath" />
+      </dir>
+      <dir name="2">
+        <string name="Title" value="El Nath Market" />
+      </dir>
+      <dir name="3">
+        <string name="Title" value="Chief's Residence" />
+      </dir>
+      <dir name="4">
+        <string name="Title" value="El Nath" />
+      </dir>
+      <dir name="5">
+        <string name="Title" value="El Nath Mountain Range" />
+      </dir>
+    </dir>
+    <dir name="211000100">
+      <dir name="0">
+        <string name="Title" value="El Nath" />
+      </dir>
+      <dir name="1">
+        <string name="Title" value="El Nath Market" />
+      </dir>
+      <dir name="2">
+        <string name="Title" value="Free Market" />
+      </dir>
+      <dir name="3">
+        <string name="Title" value="Weapon稟rmor Shop" />
+      </dir>
+      <dir name="4">
+        <string name="Title" value="Department Store" />
+      </dir>
+    </dir>
+    <dir name="219000000">
+      <dir name="0">
+        <string name="Title" value="Department Store" />
+      </dir>
+    </dir>
+    <dir name="220000000">
+      <dir name="0">
+        <string name="Title" value="Ludibrium - East Entrance" />
+        <string name="Desc" value="On the Way to Helios Tower" />
+      </dir>
+      <dir name="1">
+        <string name="Title" value="Skin Care" />
+      </dir>
+      <dir name="2">
+        <string name="Title" value="Clocktower" />
+      </dir>
+      <dir name="3">
+        <string name="Title" value="Hair Salon" />
+      </dir>
+      <dir name="4">
+        <string name="Title" value="Ludibrium - West Entrance 1" />
+        <string name="Desc" value="On the Way to Eos Tower" />
+      </dir>
+      <dir name="5">
+        <string name="Title" value="Pet Walkway" />
+      </dir>
+      <dir name="6">
+        <string name="Title" value="Free Market" />
+      </dir>
+      <dir name="7">
+        <string name="Title" value="Plastic Surgery" />
+      </dir>
+      <dir name="8">
+        <string name="Title" value="Department Store" />
+      </dir>
+      <dir name="9">
+        <string name="Title" value="Department Store" />
+      </dir>
+      <dir name="10">
+        <string name="Title" value="Weapon稟rmor Shop" />
+      </dir>
+      <dir name="11">
+        <string name="Title" value="Ludibrium Station" />
+      </dir>
+      <dir name="12">
+        <string name="Title" value="Clocktower" />
+      </dir>
+      <dir name="13">
+        <string name="Title" value="Pet Walkway" />
+      </dir>
+      <dir name="14">
+        <string name="Title" value="Townstreet" />
+      </dir>
+      <dir name="15">
+        <string name="Title" value="Free Market稰lastic Surgery" />
+      </dir>
+      <dir name="16">
+        <string name="Title" value="Weapon Store稤epartment Store稬udibrium Station" />
+      </dir>
+      <dir name="17">
+        <string name="Title" value="Helios Tower" />
+      </dir>
+      <dir name="18">
+        <string name="Title" value="World Tour Info Desk" />
+      </dir>
+    </dir>
+    <dir name="220000100">
+      <dir name="0">
+        <string name="Title" value="Ticket Booth" />
+      </dir>
+      <dir name="1">
+        <string name="Title" value="Station" />
+      </dir>
+    </dir>
+    <dir name="220000300">
+      <dir name="0">
+        <string name="Title" value="Tara and Sarah's House" />
+      </dir>
+      <dir name="1">
+        <string name="Title" value="Korin's House" />
+      </dir>
+      <dir name="2">
+        <string name="Title" value="Manager Karl's House" />
+      </dir>
+      <dir name="3">
+        <string name="Title" value="Chloe's House" />
+      </dir>
+      <dir name="4">
+        <string name="Title" value="Mation's House" />
+      </dir>
+      <dir name="5">
+        <string name="Title" value="Ludibrium - West Entrance 2" />
+        <string name="Desc" value="On the Way to Eos Tower" />
+      </dir>
+      <dir name="6">
+        <string name="Title" value="Eos Tower" />
+      </dir>
+      <dir name="7">
+        <string name="Title" value="Ludibrium" />
+      </dir>
+    </dir>
+    <dir name="220000400">
+      <dir name="0">
+        <string name="Title" value="Eos Tower" />
+      </dir>
+      <dir name="1">
+        <string name="Title" value="Eos Tower" />
+      </dir>
+      <dir name="2">
+        <string name="Title" value="Townstreet" />
+      </dir>
+    </dir>
+    <dir name="220000500">
+      <dir name="0">
+        <string name="Title" value="Helios Tower" />
+      </dir>
+      <dir name="1">
+        <string name="Title" value="Ludibrium" />
+      </dir>
+      <dir name="2">
+        <string name="Title" value="Helios Tower" />
+      </dir>
+    </dir>
+    <dir name="220050300">
+      <dir name="0">
+        <string name="Title" value="Warped Path of Time" />
+      </dir>
+      <dir name="1">
+        <string name="Title" value="Forgotten Path of Time" />
+      </dir>
+    </dir>
+    <dir name="221050300">
+      <dir name="0">
+        <string name="Title" value="Warped Path of Time" />
+      </dir>
+      <dir name="1">
+        <string name="Title" value="Forgotten Path of Time" />
+      </dir>
+    </dir>
+    <dir name="221000000">
+      <dir name="0">
+        <string name="Title" value="Free Market" />
+      </dir>
+      <dir name="1">
+        <string name="Title" value="Headquarter" />
+      </dir>
+      <dir name="2">
+        <string name="Title" value="Safety Zone" />
+      </dir>
+      <dir name="3">
+        <string name="Title" value="Off-Limits" />
+      </dir>
+    </dir>
+    <dir name="221000200">
+      <dir name="0">
+        <string name="Title" value="Medical Office" />
+      </dir>
+      <dir name="1">
+        <string name="Title" value="Weapon Provider" />
+      </dir>
+      <dir name="2">
+        <string name="Title" value="Armor Provider" />
+      </dir>
+    </dir>
+    <dir name="221000400">
+      <dir name="0">
+        <string name="Title" value="Eos Tower" />
+      </dir>
+      <dir name="1">
+        <string name="Title" value="Eos Tower" />
+      </dir>
+    </dir>
+    <dir name="221030000">
+      <dir name="0">
+        <string name="Title" value="Boswell Field I" />
+      </dir>
+      <dir name="1">
+        <string name="Title" value="The Omega Sector" />
+      </dir>
+      <dir name="2">
+        <string name="Title" value="Kulan  Field I" />
+      </dir>
+    </dir>
+    <dir name="222010000">
+      <dir name="0">
+        <string name="Title" value="Black Mountain &lt;Corner&gt;" />
+      </dir>
+      <dir name="1">
+        <string name="Title" value="Korean Folk Town" />
+      </dir>
+      <dir name="2">
+        <string name="Title" value="Small Pond" />
+      </dir>
+      <dir name="3">
+        <string name="Title" value="Small Pond" />
+      </dir>
+      <dir name="4">
+        <string name="Title" value="Korean Folk Town" />
+      </dir>
+    </dir>
+    <dir name="222010100">
+      <dir name="0">
+        <string name="Title" value="Tiger Forest I" />
+      </dir>
+      <dir name="1">
+        <string name="Title" value="Entrance to Black Mountain" />
+      </dir>
+      <dir name="2">
+        <string name="Title" value="Tiger Ridge" />
+      </dir>
+    </dir>
+    <dir name="222010200">
+      <dir name="0">
+        <string name="Title" value="Black Mountain Valley" />
+      </dir>
+      <dir name="1">
+        <string name="Title" value="Small Pond" />
+      </dir>
+      <dir name="2">
+        <string name="Title" value="Fox Ridge" />
+      </dir>
+    </dir>
+    <dir name="230000000">
+      <dir name="0">
+        <string name="Title" value="Aquarium Department Store" />
+      </dir>
+      <dir name="1">
+        <string name="Title" value="Aquarium Zoo" />
+      </dir>
+      <dir name="2">
+        <string name="Title" value="Aquarium Market" />
+      </dir>
+      <dir name="3">
+        <string name="Title" value="Aquarium" />
+      </dir>
+    </dir>
+    <dir name="230000001">
+      <dir name="0">
+        <string name="Title" value="Aquarium Zoo" />
+      </dir>
+      <dir name="1">
+        <string name="Title" value="Aquarium Department Store" />
+      </dir>
+    </dir>
+    <dir name="230000002">
+      <dir name="0">
+        <string name="Title" value="Department Store" />
+      </dir>
+      <dir name="1">
+        <string name="Title" value="Armor Shop" />
+      </dir>
+      <dir name="2">
+        <string name="Title" value="Weapon Store" />
+      </dir>
+      <dir name="3">
+        <string name="Title" value="Storage" />
+      </dir>
+    </dir>
+    <dir name="230000003">
+      <dir name="0">
+        <string name="Title" value="Balrog" />
+      </dir>
+      <dir name="1">
+        <string name="Title" value="White Fang and Yeti" />
+      </dir>
+      <dir name="2">
+        <string name="Title" value="Pig and Ribbon Pig" />
+      </dir>
+      <dir name="3">
+        <string name="Title" value="Aquarium Zoo" />
+      </dir>
+    </dir>
+    <dir name="230010000">
+      <dir name="0">
+        <string name="Title" value="Orbis Tower" />
+      </dir>
+    </dir>
+    <dir name="230010400">
+      <dir name="0">
+        <string name="Title" value="Aquarium" />
+      </dir>
+      <dir name="1">
+        <string name="Title" value="Turban Shell Hill" />
+      </dir>
+    </dir>
+    <dir name="230020000">
+      <dir name="0">
+        <string name="Title" value="Aquarium" />
+      </dir>
+    </dir>
+    <dir name="230020100">
+      <dir name="0">
+        <string name="Title" value="The Sharp Unknown" />
+      </dir>
+      <dir name="1">
+        <string name="Title" value="Blue Seaweed Road" />
+      </dir>
+    </dir>
+    <dir name="230030000">
+      <dir name="0">
+        <string name="Title" value="Mushroom Coral Hill" />
+      </dir>
+      <dir name="1">
+        <string name="Title" value="Big Fish Valley" />
+      </dir>
+    </dir>
+    <dir name="230030200">
+      <dir name="0">
+        <string name="Title" value="Korean Folk Town" />
+      </dir>
+    </dir>
+    <dir name="230020200">
+      <dir name="0">
+        <string name="Title" value="Mushroom Coral Hill" />
+      </dir>
+    </dir>
+    <dir name="240000000">
+      <dir name="0">
+        <string name="Title" value="Department Store" />
+      </dir>
+      <dir name="1">
+        <string name="Title" value="Weapon稟rmor Store" />
+      </dir>
+      <dir name="2">
+        <string name="Title" value="Free Market" />
+      </dir>
+      <dir name="3">
+        <string name="Title" value="West Forest of Leafre" />
+      </dir>
+      <dir name="4">
+        <string name="Title" value="East Forest of Leafre" />
+      </dir>
+      <dir name="5">
+        <string name="Title" value="Leafre Station" />
+      </dir>
+      <dir name="6">
+        <string name="Title" value="Leafre" />
+      </dir>
+      <dir name="7">
+        <string name="Title" value="World Tour Info Desk" />
+      </dir>
+    </dir>
+    <dir name="240000100">
+      <dir name="0">
+        <string name="Title" value="Leafre" />
+      </dir>
+      <dir name="1">
+        <string name="Title" value="Ticket Booth" />
+      </dir>
+      <dir name="2">
+        <string name="Title" value="Station" />
+      </dir>
+    </dir>
+    <dir name="240010000">
+      <dir name="0">
+        <string name="Title" value="Leafre" />
+      </dir>
+      <dir name="1">
+        <string name="Title" value="Minar Forest : West Border" />
+      </dir>
+    </dir>
+    <dir name="240010100">
+      <dir name="0">
+        <string name="Title" value="West Forest of Leafre" />
+      </dir>
+      <dir name="1">
+        <string name="Title" value="Cranky Forest" />
+      </dir>
+    </dir>
+    <dir name="240010200">
+      <dir name="0">
+        <string name="Title" value="Steep Hill" />
+      </dir>
+      <dir name="1">
+        <string name="Title" value="Steep Hill" />
+      </dir>
+      <dir name="2">
+        <string name="Title" value="Minar Forest : West Border" />
+      </dir>
+      <dir name="3">
+        <string name="Title" value="The Area of Red Kentaurus" />
+      </dir>
+      <dir name="4">
+        <string name="Title" value="Minar Forest : West Border" />
+      </dir>
+    </dir>
+    <dir name="240010300">
+      <dir name="0">
+        <string name="Title" value="Forest : Forked Road" />
+      </dir>
+      <dir name="1">
+        <string name="Title" value="Cranky Forest" />
+      </dir>
+    </dir>
+    <dir name="240010400">
+      <dir name="0">
+        <string name="Title" value="Entrance to Dragon Forest" />
+      </dir>
+      <dir name="1">
+        <string name="Title" value="Steep Hill" />
+      </dir>
+      <dir name="2">
+        <string name="Title" value="Valley of the Antelope" />
+      </dir>
+      <dir name="3">
+        <string name="Title" value="Steep Hill" />
+      </dir>
+      <dir name="4">
+        <string name="Title" value="Valley of the Antelope" />
+      </dir>
+      <dir name="5">
+        <string name="Title" value="Entrance to Dragon Forest" />
+      </dir>
+    </dir>
+    <dir name="240010800">
+      <dir name="0">
+        <string name="Title" value="Minar Forest : East Border" />
+      </dir>
+      <dir name="1">
+        <string name="Title" value="Sky Nest I" />
+      </dir>
+      <dir name="2">
+        <string name="Title" value="Battlefield of Water and Darkness" />
+      </dir>
+      <dir name="3">
+        <string name="Title" value="Minar Forest : East Border" />
+      </dir>
+      <dir name="4">
+        <string name="Title" value="Sky Nest I" />
+      </dir>
+    </dir>
+    <dir name="240011000">
+      <dir name="0">
+        <string name="Title" value="Minar Forest : East Border" />
+      </dir>
+      <dir name="1">
+        <string name="Title" value="Leafre" />
+      </dir>
+    </dir>
+    <dir name="240020000">
+      <dir name="0">
+        <string name="Title" value="Battlefield of Fire and Water" />
+      </dir>
+      <dir name="1">
+        <string name="Title" value="Cranky Forest" />
+      </dir>
+      <dir name="2">
+        <string name="Title" value="Battlefield of Fire and Darkness" />
+      </dir>
+    </dir>
+    <dir name="240020300">
+      <dir name="0">
+        <string name="Title" value="The Area of Blue Kentaurus" />
+      </dir>
+      <dir name="1">
+        <string name="Title" value="Entrance to Sky Nest" />
+      </dir>
+      <dir name="2">
+        <string name="Title" value="The Area of Black Kentaurus" />
+      </dir>
+    </dir>
+    <dir name="240030000">
+      <dir name="0">
+        <string name="Title" value="Forest : Forked Road" />
+      </dir>
+      <dir name="1">
+        <string name="Title" value="Dragon Forest I" />
+      </dir>
+    </dir>
+    <dir name="240030100">
+      <dir name="0">
+        <string name="Title" value="Dragon Forest II" />
+      </dir>
+      <dir name="7">
+        <string name="Title" value="Entrance to Dragon Forest" />
+      </dir>
+      <dir name="1">
+        <string name="Title" value="Entrance to Dragon Forest" />
+      </dir>
+      <dir name="2">
+        <string name="Title" value="Dragon Forest II" />
+      </dir>
+      <dir name="3">
+        <string name="Title" value="Burning Forest" />
+      </dir>
+      <dir name="4">
+        <string name="Title" value="Disappeared Forest" />
+      </dir>
+    </dir>
+    <dir name="240030103">
+      <dir name="0">
+        <string name="Title" value="Dragon Forest I" />
+      </dir>
+    </dir>
+    <dir name="240030104">
+      <dir name="0">
+        <string name="Title" value="Dragon Forest I" />
+      </dir>
+    </dir>
+    <dir name="240030200">
+      <dir name="0">
+        <string name="Title" value="Dragon Forest III" />
+      </dir>
+      <dir name="1">
+        <string name="Title" value="Dragon Forest I" />
+      </dir>
+    </dir>
+    <dir name="240030300">
+      <dir name="0">
+        <string name="Title" value="Dragon Forest II" />
+      </dir>
+    </dir>
+    <dir name="240040000">
+      <dir name="0">
+        <string name="Title" value="Dragon Forest III" />
+      </dir>
+    </dir>
+    <dir name="240040100">
+      <dir name="0">
+        <string name="Title" value="Dragon Canyon" />
+      </dir>
+      <dir name="1">
+        <string name="Title" value="East Path of Canyon" />
+      </dir>
+      <dir name="2">
+        <string name="Title" value="West Path of Canyon" />
+      </dir>
+    </dir>
+    <dir name="240040400">
+      <dir name="0">
+        <string name="Title" value="West Path of Canyon" />
+      </dir>
+      <dir name="1">
+        <string name="Title" value="East Path of Canyon" />
+      </dir>
+      <dir name="2">
+        <string name="Title" value="Entrance to Dragon Nest" />
+      </dir>
+    </dir>
+    <dir name="240040500">
+      <dir name="0">
+        <string name="Title" value="The Destroyed Dragon Nest" />
+      </dir>
+      <dir name="1">
+        <string name="Title" value="Dead Dragon Nest" />
+      </dir>
+      <dir name="2">
+        <string name="Title" value="Wyvern Canyon" />
+      </dir>
+    </dir>
+    <dir name="240040600">
+      <dir name="0">
+        <string name="Title" value="The Dragon Nest Left Behind" />
+      </dir>
+      <dir name="1">
+        <string name="Title" value="Entrance to Cave of Life" />
+      </dir>
+      <dir name="2">
+        <string name="Title" value="Dangerous Dragon Nest" />
+      </dir>
+    </dir>
+    <dir name="250000000">
+      <dir name="0">
+        <string name="Title" value="World Tour Info Desk" />
+      </dir>
+      <dir name="1">
+        <string name="Title" value="Mu Lung Hair Salon" />
+      </dir>
+      <dir name="2">
+        <string name="Title" value="Mu Lung Plastic Surgery" />
+      </dir>
+      <dir name="3">
+        <string name="Title" value="Armor Shop" />
+      </dir>
+      <dir name="4">
+        <string name="Title" value="Weapon Store" />
+      </dir>
+      <dir name="5">
+        <string name="Title" value="Mu Lung Skin Care" />
+      </dir>
+      <dir name="6">
+        <string name="Title" value="Mu Lung Department Store" />
+      </dir>
+      <dir name="7">
+        <string name="Title" value="Free Market Entrance" />
+      </dir>
+      <dir name="8">
+        <string name="Title" value="Mu Lung Temple" />
+      </dir>
+    </dir>
+    <dir name="250010301">
+      <dir name="0">
+        <string name="Title" value="Snake Area" />
+      </dir>
+    </dir>
+    <dir name="250010500">
+      <dir name="0">
+        <string name="Title" value="Peach Farm 2" />
+      </dir>
+      <dir name="1">
+        <string name="Title" value="Where the Sky Forest Ends" />
+      </dir>
+      <dir name="2">
+        <string name="Title" value="Foggy Forest" />
+      </dir>
+    </dir>
+    <dir name="250010501">
+      <dir name="0">
+        <string name="Title" value="Virtuous Forest" />
+      </dir>
+      <dir name="1">
+        <string name="Title" value="Peach Farm1" />
+      </dir>
+    </dir>
+    <dir name="250010700">
+      <dir name="0">
+        <string name="Title" value="Isolated Swamp" />
+      </dir>
+    </dir>
+    <dir name="251000000">
+      <dir name="0">
+        <string name="Title" value="Weapon Store" />
+      </dir>
+      <dir name="1">
+        <string name="Title" value="Armor Shop" />
+      </dir>
+    </dir>
+    <dir name="251010400">
+      <dir name="0">
+        <string name="Title" value="Bellflower Valley" />
+      </dir>
+      <dir name="1">
+        <string name="Title" value="Isolated Swamp" />
+      </dir>
+    </dir>
+    <dir name="251010500">
+      <dir name="0">
+        <string name="Title" value="Peach Farm 3" />
+      </dir>
+      <dir name="1">
+        <string name="Title" value="Old Swamp" />
+      </dir>
+    </dir>
+    <dir name="500000000">
+      <dir name="0">
+        <string name="Title" value="Free Market" />
+      </dir>
+      <dir name="1">
+        <string name="Title" value="World Tour Info Desk" />
+      </dir>
+    </dir>
+    <dir name="680000000">
+      <dir name="0">
+        <string name="Title" value="Amoria Wedding Shop" />
+      </dir>
+      <dir name="1">
+        <string name="Title" value="Saint Maple Altar" />
+      </dir>
+      <dir name="2">
+        <string name="Title" value="Amoria Plastic Surgery " />
+      </dir>
+      <dir name="3">
+        <string name="Title" value="Amoria Hair Salon" />
+      </dir>
+      <dir name="4">
+        <string name="Title" value="White Wedding Altar" />
+      </dir>
+      <dir name="5">
+        <string name="Title" value="Amoria" />
+      </dir>
+      <dir name="6">
+        <string name="Title" value="Purple Plains 1" />
+      </dir>
+      <dir name="7">
+        <string name="Title" value="Wedding Cathedral" />
+      </dir>
+      <dir name="8">
+        <string name="Title" value="Wedding Chapel" />
+      </dir>
+    </dir>
+    <dir name="500020100">
+      <dir name="0">
+        <string name="Title" value="Outside the Entrance to the Village" />
+      </dir>
+      <dir name="1">
+        <string name="Title" value="Fancy Swamp" />
+      </dir>
+      <dir name="2">
+        <string name="Title" value="Small Jungle" />
+      </dir>
+      <dir name="3">
+        <string name="Title" value="Outside the Entrance to the Village" />
+      </dir>
+      <dir name="4">
+        <string name="Title" value="Fancy Swamp" />
+      </dir>
+      <dir name="5">
+        <string name="Title" value="Small Jungle" />
+      </dir>
+    </dir>
+    <dir name="701000000">
+      <dir name="0">
+        <string name="Title" value="Department Store" />
+      </dir>
+      <dir name="1">
+        <string name="Title" value="Weapon稟rmor Shop" />
+      </dir>
+      <dir name="2">
+        <string name="Title" value="Newspaper Tray" />
+      </dir>
+      <dir name="3">
+        <string name="Title" value="Newspaper Tray" />
+      </dir>
+      <dir name="4">
+        <string name="Title" value="Department Store" />
+      </dir>
+      <dir name="5">
+        <string name="Title" value="World Tour Info Desk" />
+      </dir>
+    </dir>
+    <dir name="740000000">
+      <dir name="0">
+        <string name="Title" value="Weapon Store" />
+      </dir>
+      <dir name="1">
+        <string name="Title" value="Armor Store" />
+      </dir>
+      <dir name="2">
+        <string name="Title" value="Department Store" />
+      </dir>
+      <dir name="3">
+        <string name="Title" value="Taipei Route" />
+      </dir>
+      <dir name="4">
+        <string name="Title" value="Subway&lt;Taipei&gt;" />
+      </dir>
+      <dir name="5">
+        <string name="Title" value="World Tour Info Desk" />
+      </dir>
+    </dir>
+    <dir name="740000100">
+      <dir name="0">
+        <string name="Title" value="Exit" />
+      </dir>
+    </dir>
+    <dir name="740010200">
+      <dir name="0">
+        <string name="Title" value="Back Alley of Taipei" />
+      </dir>
+      <dir name="1">
+        <string name="Title" value="Streets of Taipei II" />
+      </dir>
+      <dir name="2">
+        <string name="Title" value="Streets of TaipeiⅣ" />
+      </dir>
+    </dir>
+    <dir name="741000000">
+      <dir name="0">
+        <string name="Title" value="Hair Salon" />
+      </dir>
+      <dir name="1">
+        <string name="Title" value="Hair Salon" />
+      </dir>
+      <dir name="2">
+        <string name="Title" value="Plastic Surgery" />
+      </dir>
+      <dir name="3">
+        <string name="Title" value="Plastic Surgery" />
+      </dir>
+      <dir name="4">
+        <string name="Title" value="Plastic Surgery" />
+      </dir>
+      <dir name="5">
+        <string name="Title" value="Skin Care" />
+      </dir>
+    </dir>
+    <dir name="741000001">
+      <dir name="0">
+        <string name="Title" value="Skin Care" />
+      </dir>
+      <dir name="1">
+        <string name="Title" value="Plastic Surgery" />
+      </dir>
+    </dir>
+    <dir name="741010200">
+      <dir name="0">
+        <string name="Title" value="Streets of Night Market II" />
+      </dir>
+      <dir name="1">
+        <string name="Title" value="Streets of Night MarketⅣ" />
+      </dir>
+      <dir name="2">
+        <string name="Title" value="In Between the Road of Night Market I" />
+      </dir>
+    </dir>
+    <dir name="800000000">
+      <dir name="0">
+        <string name="Title" value="Mushroom Shrine" />
+      </dir>
+      <dir name="1">
+        <string name="Title" value="Fish Cake Shop" />
+      </dir>
+      <dir name="2">
+        <string name="Title" value="Yakisoba Shop" />
+      </dir>
+      <dir name="3">
+        <string name="Title" value="Takoyaki Shop" />
+      </dir>
+      <dir name="4">
+        <string name="Title" value="Mushroom Ramen Shop" />
+      </dir>
+      <dir name="5">
+        <string name="Title" value="Dango Shop" />
+      </dir>
+      <dir name="6">
+        <string name="Title" value="Mushroom Shrine" />
+      </dir>
+      <dir name="7">
+        <string name="Title" value="World Tour Info Desk" />
+      </dir>
+    </dir>
+    <dir name="800020000">
+      <dir name="0">
+        <string name="Title" value="Crow Forest II" />
+      </dir>
+      <dir name="1">
+        <string name="Title" value="The Animal Forest" />
+      </dir>
+      <dir name="2">
+        <string name="Title" value="Mushroom Forest" />
+      </dir>
+    </dir>
+    <dir name="800020101">
+      <dir name="0">
+        <string name="Title" value="Bamboo Forest" />
+      </dir>
+      <dir name="1">
+        <string name="Title" value="Cloud Fox Mountain" />
+      </dir>
+      <dir name="2">
+        <string name="Title" value="Crow Forest I" />
+      </dir>
+    </dir>
+    <dir name="920010100">
+      <dir name="0">
+        <string name="Title" value="&lt;Lobby&gt;" />
+      </dir>
+      <dir name="1">
+        <string name="Title" value="&lt;Sealed Room&gt;" />
+      </dir>
+      <dir name="2">
+        <string name="Title" value="&lt;Storage&gt;" />
+      </dir>
+      <dir name="3">
+        <string name="Title" value="&lt;Lounge&gt;" />
+      </dir>
+      <dir name="4">
+        <string name="Title" value="&lt;Walkway&gt;" />
+      </dir>
+      <dir name="5">
+        <string name="Title" value="&lt;On the Way Up&gt;" />
+      </dir>
+    </dir>
+    <dir name="101030103">
+      <dir name="0">
+        <string name="Title" value="Excavation Site II" />
+      </dir>
+      <dir name="1">
+        <string name="Title" value="Excavation Site" />
+      </dir>
+    </dir>
+    <dir name="101030104">
+      <dir name="0">
+        <string name="Title" value="RemainsI" />
+      </dir>
+      <dir name="1">
+        <string name="Title" value="Remains3" />
+      </dir>
+    </dir>
+    <dir name="540000000">
+      <dir name="0">
+        <string name="Title" value="Changi Airport" />
+      </dir>
+      <dir name="1">
+        <string name="Title" value="Central Way 1" />
+      </dir>
+    </dir>
+    <dir name="540000100">
+      <dir name="0">
+        <string name="Title" value="Central Way 2" />
+      </dir>
+    </dir>
+    <dir name="540000200">
+      <dir name="0">
+        <string name="Title" value="Central Way 3" />
+      </dir>
+    </dir>
+    <dir name="540000300">
+      <dir name="0">
+        <string name="Title" value="Central Way 2" />
+      </dir>
+      <dir name="1">
+        <string name="Title" value="Surburban Area 1" />
+      </dir>
+    </dir>
+    <dir name="540020000">
+      <dir name="0">
+        <string name="Title" value="Surburban Area 2" />
+      </dir>
+      <dir name="1">
+        <string name="Title" value="Boat Quay Town" />
+      </dir>
+    </dir>
+    <dir name="540020100">
+      <dir name="0">
+        <string name="Title" value="Surburban Area 1" />
+      </dir>
+    </dir>
+    <dir name="541000300">
+      <dir name="0">
+        <string name="Title" value="Ghost Ship 1" />
+      </dir>
+    </dir>
+    <dir name="100030000">
+      <dir name="0">
+        <string name="Title" value="Utah's pig farm" />
+      </dir>
+      <dir name="1">
+        <string name="Title" value="Ellinia southern forest" />
+      </dir>
+      <dir name="2">
+        <string name="Title" value="Nautilus Harbor" />
+      </dir>
+      <dir name="3">
+        <string name="Title" value="Utah's Pig Farm" />
+      </dir>
+      <dir name="4">
+        <string name="Title" value="Ellinia southern forest" />
+      </dir>
+      <dir name="5">
+        <string name="Title" value="Ellinia eastern forest" />
+      </dir>
+      <dir name="6">
+        <string name="Title" value="Nautilus Harbor" />
+      </dir>
+      <dir name="7">
+        <string name="Title" value="Utah's Pig Farm" />
+      </dir>
+      <dir name="8">
+        <string name="Title" value="Ellinia southern forest" />
+      </dir>
+      <dir name="9">
+        <string name="Title" value="Nautilus Harbor" />
+      </dir>
+      <dir name="10">
+        <string name="Title" value="Forest East of Henesys" />
+      </dir>
+    </dir>
+    <dir name="101040001">
+      <dir name="0">
+        <string name="Title" value="Stone plate of Boogi" />
+        <string name="Desc" value="You will need to destroy the resource first before you defeated Boogi " />
+      </dir>
+    </dir>
+    <dir name="104030000">
+      <dir name="0">
+        <string name="Title" value="Henesys hunting ground 1" />
+      </dir>
+      <dir name="1">
+        <string name="Title" value="Henesys Western forest" />
+      </dir>
+    </dir>
+    <dir name="200000150">
+      <dir name="0">
+        <string name="Title" value="Orbis Station waiting room" />
+      </dir>
+      <dir name="1">
+        <string name="Title" value="Platform to Ariant" />
+      </dir>
+    </dir>
+    <dir name="200082300">
+      <dir name="0">
+        <string name="Title" value="Sea Interchange" />
+      </dir>
+    </dir>
+    <dir name="211000200">
+      <dir name="0">
+        <string name="Title" value="Orbis Tower" />
+      </dir>
+      <dir name="1">
+        <string name="Title" value="ElNath" />
+      </dir>
+    </dir>
+    <dir name="211041100">
+      <dir name="0">
+        <string name="Title" value="lich -alert-" />
+        <string name="Desc" value="Lich area!! If you cannot escape from lich, dedicate teeth of zombie to grave!! Resource of lich's power is underneath.....grave.." />
+      </dir>
+      <dir name="1">
+        <string name="Title" value="Dead Tree's Forest II" />
+      </dir>
+    </dir>
+    <dir name="211041200">
+      <dir name="0">
+        <string name="Title" value="lich -alert-" />
+        <string name="Desc" value="Lich area!! If you cannot escape from lich, dedicate teeth of zombie to grave!! Resource of lich's power is underneath.....grave.." />
+      </dir>
+      <dir name="1">
+        <string name="Title" value="Dead tree;s forest I" />
+      </dir>
+      <dir name="2">
+        <string name="Title" value="Dead tree;s forest III" />
+      </dir>
+    </dir>
+    <dir name="211041300">
+      <dir name="0">
+        <string name="Title" value="lich -alert-" />
+        <string name="Desc" value="Lich area!! If you cannot escape from lich, dedicate teeth of zombie to grave!! Resource of lich's power is underneath.....grave.." />
+      </dir>
+    </dir>
+    <dir name="211041400">
+      <dir name="0">
+        <string name="Title" value="lich -alert-" />
+        <string name="Desc" value="Lich area!! If you cannot escape from lich, dedicate teeth of zombie to grave!! Resource of lich's power is underneath.....grave.." />
+      </dir>
+    </dir>
+    <dir name="222010101">
+      <dir name="0">
+        <string name="Title" value="Small pond" />
+      </dir>
+      <dir name="1">
+        <string name="Title" value="Tiger forest II" />
+      </dir>
+    </dir>
+    <dir name="222010102">
+      <dir name="0">
+        <string name="Title" value="Tiger forest II" />
+      </dir>
+      <dir name="1">
+        <string name="Title" value="※Prohibited to proceed " />
+      </dir>
+    </dir>
+    <dir name="230010100">
+      <dir name="0">
+        <string name="Title" value="Sea Interchange" />
+      </dir>
+      <dir name="1">
+        <string name="Title" value="Red Coral Forest" />
+      </dir>
+    </dir>
+    <dir name="230010200">
+      <dir name="0">
+        <string name="Title" value="Crystal Valley" />
+      </dir>
+      <dir name="1">
+        <string name="Title" value="Turban Shell Hill" />
+      </dir>
+    </dir>
+    <dir name="230010300">
+      <dir name="0">
+        <string name="Title" value="Red Coral Forest" />
+      </dir>
+      <dir name="1">
+        <string name="Title" value="Western Sea Crossroad" />
+      </dir>
+    </dir>
+    <dir name="260000000">
+      <dir name="0">
+        <string name="Title" value="Outside the Ariant West Gate" />
+      </dir>
+      <dir name="1">
+        <string name="Title" value="Post Ware House" />
+      </dir>
+      <dir name="2">
+        <string name="Title" value="World Tour Manual" />
+      </dir>
+      <dir name="3">
+        <string name="Title" value="Ariant Platform" />
+      </dir>
+      <dir name="4">
+        <string name="Title" value="Ariant Skin Care Clinic" />
+      </dir>
+      <dir name="5">
+        <string name="Title" value="Ariant Plastic Surgery" />
+      </dir>
+      <dir name="6">
+        <string name="Title" value="Ariant town" />
+      </dir>
+      <dir name="7">
+        <string name="Title" value="Free market" />
+      </dir>
+      <dir name="8">
+        <string name="Title" value="Ariant Palace" />
+      </dir>
+      <dir name="9">
+        <string name="Title" value="Ariant Weapon shop" />
+      </dir>
+      <dir name="10">
+        <string name="Title" value="Ariant Armor shop" />
+      </dir>
+      <dir name="11">
+        <string name="Title" value="Ariant Potion shop" />
+      </dir>
+      <dir name="12">
+        <string name="Title" value="Ext North Gate of Ariant" />
+      </dir>
+      <dir name="13">
+        <string name="Title" value="Ariant Hair shop" />
+      </dir>
+      <dir name="14">
+        <string name="Title" value="Ext East gate of Ariant" />
+      </dir>
+      <dir name="15">
+        <string name="Title" value="Ariant Platform" />
+      </dir>
+    </dir>
+    <dir name="260000200">
+      <dir name="0">
+        <string name="Title" value="Ridium Processing Workshop" />
+      </dir>
+      <dir name="1">
+        <string name="Title" value="Ariant Market" />
+      </dir>
+    </dir>
+    <dir name="260010000">
+      <dir name="0">
+        <string name="Title" value="Ariant" />
+      </dir>
+    </dir>
+    <dir name="260010600">
+      <dir name="0">
+        <string name="Title" value="Dry Desert" />
+      </dir>
+    </dir>
+    <dir name="260010700">
+      <dir name="0">
+        <string name="Title" value="Ariant" />
+      </dir>
+    </dir>
+    <dir name="260020000">
+      <dir name="0">
+        <string name="Title" value="Ariant" />
+      </dir>
+      <dir name="1">
+        <string name="Title" value="Camel Taxi" />
+        <string name="Desc" value="Magatia 1500 Mesos" />
+      </dir>
+    </dir>
+    <dir name="260020700">
+      <dir name="0">
+        <string name="Title" value="Camel Taxi" />
+        <string name="Desc" value="Ariant 1500 Mesos" />
+      </dir>
+    </dir>
+    <dir name="990000200">
+      <dir name="0">
+        <string name="Title" value="Shelenian Ruins" />
+      </dir>
+    </dir>
+    <dir name="60002">
+      <dir name="0">
+        <string name="Title" value="Southperry" />
+        <string name="Desc" value="Southperry is a port city." />
+      </dir>
+    </dir>
+    <dir name="120000100">
+      <dir name="0">
+        <string name="Title" value="The Ship's Control Room" />
+      </dir>
+      <dir name="1">
+        <string name="Title" value="Restaurant" />
+      </dir>
+      <dir name="2">
+        <string name="Title" value="Central Corridor of The Nautilus (↓)" />
+      </dir>
+      <dir name="3">
+        <string name="Title" value="Training Room" />
+      </dir>
+      <dir name="4">
+        <string name="Title" value="Kyrin's Control Room" />
+        <string name="Desc" value="If you want to make a job advancement to becoming a pirate,  then go to the room on the left most corner..." />
+      </dir>
+    </dir>
+    <dir name="120000300">
+      <dir name="0">
+        <string name="Title" value="Central Corridor of The Nautilus (↑)" />
+      </dir>
+      <dir name="1">
+        <string name="Title" value="Generator Room" />
+      </dir>
+      <dir name="2">
+        <string name="Title" value="Generator Room" />
+      </dir>
+    </dir>
+    <dir name="211010000">
+      <dir name="0">
+        <string name="Title" value="Hunter's Altar" />
+        <string name="Desc" value="A small altar setup by the hunters in El Nath. This was made to appease the Snow Witch when she appears enraged. If a dropped item from the snowfield is used as the sacrifice, then the witch will be appeased." />
+      </dir>
+    </dir>
+    <dir name="211020000">
+      <dir name="0">
+        <string name="Title" value="Hunter's Altar" />
+        <string name="Desc" value="A small altar setup by the hunters in El Nath. This was made to appease the Snow Witch when she appears enraged. If a dropped item from the snowfield is used as the sacrifice, then the witch will be appeased." />
+      </dir>
+    </dir>
+    <dir name="211050000">
+      <dir name="0">
+        <string name="Title" value="Hunter's Altar" />
+        <string name="Desc" value="A small altar setup by the hunters in El Nath. This was made to appease the Snow Witch when she appears enraged. If a dropped item from the snowfield is used as the sacrifice, then the witch will be appeased." />
+      </dir>
+      <dir name="1">
+        <string name="Title" value="Rider's Field" />
+      </dir>
+    </dir>
+    <dir name="229010000">
+      <dir name="0">
+        <string name="Title" value="Abandoned Grave" />
+      </dir>
+      <dir name="1">
+        <string name="Title" value="On the Way Back" />
+      </dir>
+    </dir>
+    <dir name="261020200">
+      <dir name="0">
+        <string name="Title" value="Poison Spray" />
+        <string name="Desc" value="A poison sprayer used to defeat Rurumo. All alchemists from Alcadno should only use this to eliminate Rurumo. Who keeps taking the poison from the spray bottle?" />
+      </dir>
+    </dir>
+    <dir name="261020400">
+      <dir name="0">
+        <string name="Title" value="Poison Spray" />
+        <string name="Desc" value="A poison sprayer used to defeat Rurumo. All alchemists from Alcadno should only use this to eliminate Rurumo. Who keeps taking the poison from the spray bottle?" />
+      </dir>
+    </dir>
+    <dir name="261020600">
+      <dir name="0">
+        <string name="Title" value="Poison Spray" />
+        <string name="Desc" value="A poison sprayer used to defeat Rurumo. All alchemists from Alcadno should only use this to eliminate Rurumo. Who keeps taking the poison from the spray bottle?" />
+      </dir>
+    </dir>
+    <dir name="300000000">
+      <dir name="0">
+        <string name="Title" value="Barrier Stone" />
+      </dir>
+      <dir name="1">
+        <string name="Title" value="General Shop" />
+      </dir>
+      <dir name="2">
+        <string name="Title" value="Clinic" />
+      </dir>
+      <dir name="3">
+        <string name="Title" value="Camp Conference Room" />
+      </dir>
+      <dir name="4">
+        <string name="Title" value="Barrier Stone" />
+      </dir>
+    </dir>
+    <dir name="300010000">
+      <dir name="0">
+        <string name="Title" value="Altaire Camp" />
+      </dir>
+      <dir name="1">
+        <string name="Title" value="Mossy Tree Forest " />
+      </dir>
+    </dir>
+    <dir name="300010200">
+      <dir name="0">
+        <string name="Title" value="Mossy Tree Forest Trail" />
+        <string name="Desc" value="If you're a lost adventurer, go this way..." />
+      </dir>
+    </dir>
+    <dir name="300010300">
+      <dir name="0">
+        <string name="Title" value="Western Region of Mossy Tree Forest" />
+        <string name="Desc" value="The camp is beyond the western region of the forest. -Rios-" />
+      </dir>
+      <dir name="1">
+        <string name="Title" value="Southern Region of Mossy Tree Forest" />
+      </dir>
+      <dir name="2">
+        <string name="Title" value="Toward the Boulder Mountain" />
+      </dir>
+    </dir>
+    <dir name="300020000">
+      <dir name="0">
+        <string name="Title" value="Mossy Tree Forest Trail" />
+        <string name="Desc" value="If you're a lost adventurer, go this way..." />
+      </dir>
+    </dir>
+    <dir name="300030000">
+      <dir name="0">
+        <string name="Title" value="Danger Zone.  Explorations Not Allowed!" />
+        <string name="Desc" value="Due to strange occurrences as of late, explorations are not being allowed. -Athena Pierce-" />
+      </dir>
+    </dir>
+    <dir name="500010000">
+      <dir name="0">
+        <string name="Title" value="Toad Pond" />
+      </dir>
+      <dir name="1">
+        <string name="Title" value="Floating Market" />
+      </dir>
+    </dir>
+    <dir name="500010100">
+      <dir name="0">
+        <string name="Title" value="Frog Pond/Floating Market" />
+      </dir>
+    </dir>
+    <dir name="800020110">
+      <dir name="0">
+        <string name="Title" value="Watch Out for the Bamboo Warrior!" />
+        <string name="Desc" value="If a cold breeze blows through the Bamboo Forest, that's when Bamboo Warrior appears! Watch out for the Bamboo Warrior that's holding a grudge. To eliminate the warrior, slash the bamboo trees in the Forest..." />
+      </dir>
+    </dir>
+    <dir name="800020120">
+      <dir name="0">
+        <string name="Title" value="Watch Out for the Bamboo Warrior!" />
+        <string name="Desc" value="If a cold breeze blows through the Bamboo Forest, that's when Bamboo Warrior appears! Watch out for the Bamboo Warrior that's holding a grudge. To eliminate the warrior, slash the bamboo trees in the Forest..." />
+      </dir>
+    </dir>
+    <dir name="800020130">
+      <dir name="0">
+        <string name="Title" value="Watch Out for the Bamboo Warrior!" />
+        <string name="Desc" value="If a cold breeze blows through the Bamboo Forest, that's when Bamboo Warrior appears! Watch out for the Bamboo Warrior that's holding a grudge. To eliminate the warrior, slash the bamboo trees in the Forest..." />
+      </dir>
+    </dir>
+    <dir name="100040105">
+      <string name="quest00" value="Rotten Tree Trail" />
+      <dir name="0">
+        <string name="Title" value="The Forest of Evil II" />
+      </dir>
+      <dir name="1">
+        <string name="Title" value="Monkey Forest II" />
+      </dir>
+    </dir>
+    <dir name="120000200">
+      <dir name="0">
+        <string name="Title" value="Morgan's Weapons Shop" />
+      </dir>
+      <dir name="1">
+        <string name="Title" value="Rodos' Armor Shop" />
+      </dir>
+      <dir name="2">
+        <string name="Title" value="Conference Room" />
+      </dir>
+      <dir name="3">
+        <string name="Title" value="Exit" />
+      </dir>
+      <dir name="4">
+        <string name="Title" value="Gali's General Goods Shop" />
+      </dir>
+      <dir name="5">
+        <string name="Title" value="Upper Corridor of The Nautilus (↑)" />
+      </dir>
+      <dir name="6">
+        <string name="Title" value="Lower Corridor of The Nautilus (↓)" />
+      </dir>
+      <dir name="7">
+        <string name="Title" value="Bedroom" />
+      </dir>
+      <dir name="8">
+        <string name="Title" value="Weapon / Armor Shop" />
+      </dir>
+      <dir name="9">
+        <string name="Title" value="General Goods Shop / Stairs" />
+      </dir>
+      <dir name="10">
+        <string name="Title" value="Free Market" />
+      </dir>
+    </dir>
+    <dir name="222000000">
+      <dir name="0">
+        <string name="Title" value="General Goods Shop" />
+      </dir>
+      <dir name="1">
+        <string name="Title" value="Korean Folk Town" />
+      </dir>
+      <dir name="2">
+        <string name="Title" value="Black Mountain" />
+      </dir>
+      <dir name="3">
+        <string name="Title" value="Black Mountain" />
+      </dir>
+      <dir name="4">
+        <string name="Title" value="Weapon / Armor Shop" />
+      </dir>
+      <dir name="5">
+        <string name="Title" value="Helios Tower &lt;Library&gt;" />
+      </dir>
+      <dir name="6">
+        <string name="Title" value="Entrance to Black Mountain" />
+      </dir>
+      <dir name="7">
+        <string name="Title" value="Free Market Entrance" />
+      </dir>
+    </dir>
+    <dir name="222010300">
+      <dir name="0">
+        <string name="Title" value="222010400.000000" />
+      </dir>
+      <dir name="1">
+        <string name="Title" value="Tiger Ridge" />
+      </dir>
+      <dir name="2">
+        <string name="Title" value="Tower" />
+        <string name="Desc" value="All those that pass Fox Valley should throw Samiho's tail from the top of the tower to pay off it's scores" />
+      </dir>
+    </dir>
+    <dir name="261000000">
+      <dir name="0">
+        <string name="Title" value="Sahel" />
+      </dir>
+      <dir name="1">
+        <string name="Title" value="Alcadno Society - General Store" />
+      </dir>
+      <dir name="2">
+        <string name="Title" value="Zenumist Society - Weapon &amp; Armor Shop" />
+      </dir>
+      <dir name="3">
+        <string name="Title" value="Magatia Bank" />
+      </dir>
+      <dir name="4">
+        <string name="Title" value="Stan's Workroom" />
+      </dir>
+      <dir name="5">
+        <string name="Title" value="Weapon &amp; Armor Shop" />
+      </dir>
+      <dir name="6">
+        <string name="Title" value="Zenumist Society" />
+      </dir>
+      <dir name="7">
+        <string name="Title" value="General Store" />
+      </dir>
+      <dir name="8">
+        <string name="Title" value="Alcadno Society" />
+      </dir>
+      <dir name="9">
+        <string name="Title" value="Free Market Entrance" />
+      </dir>
+    </dir>
+    <dir name="100000002">
+      <dir name="0">
+        <string name="Title" value="Pig Park" />
+      </dir>
+      <dir name="1">
+        <string name="Title" value="Theme Dungeon: Mushroom Castle" />
+      </dir>
+      <dir name="2">
+        <string name="Title" value="헤네시스" />
+      </dir>
+      <dir name="3">
+        <string name="Title" value="Theme Dungeon: Mushroom Castle" />
+      </dir>
+    </dir>
+    <dir name="100000003">
+      <dir name="0">
+        <string name="Title" value="An Empty House (Towards Henesys)" />
+      </dir>
+      <dir name="1">
+        <string name="Title" value="Pig Park II" />
+      </dir>
+    </dir>
+    <dir name="100000004">
+      <dir name="0">
+        <string name="Title" value="Someone Else's House" />
+      </dir>
+      <dir name="1">
+        <string name="Title" value="Pig Park (Towards Henesys)" />
+      </dir>
+    </dir>
+    <dir name="100000005">
+      <dir name="0">
+        <string name="Title" value="Pig Park II (Towards Henesys)" />
+      </dir>
+    </dir>
+    <dir name="100010000">
+      <dir name="0">
+        <string name="Title" value="The Forest East of Henesys (Towards Ellinia/Nautilus)" />
+      </dir>
+      <dir name="1">
+        <string name="Title" value="Henesys" />
+      </dir>
+    </dir>
+    <dir name="100020000">
+      <dir name="0">
+        <string name="Title" value="Mini Dungeon: Henesys Pig Farm" />
+      </dir>
+      <dir name="1">
+        <string name="Title" value="Mini Dungeon: Henesys Pig Farm" />
+      </dir>
+      <dir name="2">
+        <string name="Title" value="The Forest East of Henesys (Towards Ellinia/Nautilus)" />
+      </dir>
+      <dir name="3">
+        <string name="Title" value="The Hill East of Henesys" />
+      </dir>
+    </dir>
+    <dir name="100040000">
+      <dir name="0">
+        <string name="Title" value="The Forest of Wisdom (Towards Ellinia)" />
+      </dir>
+      <dir name="1">
+        <string name="Title" value="The Forest East of Henesys (Towards Henesys/Nautilus)" />
+      </dir>
+      <dir name="2">
+        <string name="Title" value="The Forest of Wisdom (Towards Ellinia)" />
+      </dir>
+      <dir name="3">
+        <string name="Title" value="The Forest East of Henesys (Towards Henesys/Nautilus)" />
+      </dir>
+      <dir name="4">
+        <string name="Title" value="The Forest of Wisdom (Towards Ellinia)" />
+      </dir>
+      <dir name="5">
+        <string name="Title" value="The Forest East of Henesys (Towards Henesys/Nautilus)" />
+      </dir>
+    </dir>
+    <dir name="100040100">
+      <dir name="0">
+        <string name="Title" value="The Forest South of Ellinia (Towards Henesys/Nautilus)" />
+      </dir>
+      <dir name="1">
+        <string name="Title" value="The Field South of Ellinia (Towards Ellinia)" />
+      </dir>
+    </dir>
+    <dir name="100040101">
+      <dir name="0">
+        <string name="Title" value="The Forest of Wisdom" />
+      </dir>
+      <dir name="1">
+        <string name="Title" value="Monkey Forest II" />
+      </dir>
+    </dir>
+    <dir name="100040103">
+      <dir name="0">
+        <string name="Title" value="The Forest of Evil I" />
+      </dir>
+      <dir name="1">
+        <string name="Title" value="Monkey Forest I" />
+      </dir>
+    </dir>
+    <dir name="101010000">
+      <dir name="0">
+        <string name="Title" value="The Tree That Grew I (Towards Perion)" />
+      </dir>
+      <dir name="1">
+        <string name="Title" value="Ellinia" />
+      </dir>
+    </dir>
+    <dir name="101010100">
+      <dir name="0">
+        <string name="Title" value="The Tree That Grew II" />
+      </dir>
+      <dir name="1">
+        <string name="Title" value="The Field Up North of Ellinia (Towards Ellinia)" />
+      </dir>
+      <dir name="2">
+        <string name="Title" value="The Forest North of Ellinia (Towards Perion)" />
+      </dir>
+    </dir>
+    <dir name="101010101">
+      <dir name="0">
+        <string name="Title" value="The Tree That Grew III" />
+      </dir>
+      <dir name="1">
+        <string name="Title" value="The Tree That Grew I" />
+      </dir>
+    </dir>
+    <dir name="101010102">
+      <dir name="0">
+        <string name="Title" value="Crest Of The Tree That Grew" />
+      </dir>
+      <dir name="1">
+        <string name="Title" value="The Tree That Grew II" />
+      </dir>
+    </dir>
+    <dir name="101010103">
+      <dir name="0">
+        <string name="Title" value="             &lt;Warning&gt;             " />
+        <string name="Desc" value="Height: 30km above ground level. This is the highest peak of the tallest tree in Ellinia. The wind blows eastwards towards Sleepywood. Jump at your own risk." />
+      </dir>
+    </dir>
+    <dir name="101020000">
+      <dir name="0">
+        <string name="Title" value="East Domain of Perion (Towards Perion)" />
+      </dir>
+      <dir name="1">
+        <string name="Title" value="The Tree That Grew1 (Towards Ellinia)" />
+      </dir>
+      <dir name="2">
+        <string name="Title" value="Tree Dungeon, Forest Up North I" />
+      </dir>
+      <dir name="3">
+        <string name="Title" value="Tree Dungeon, Forest Up North I" />
+      </dir>
+      <dir name="4">
+        <string name="Title" value="Tree Dungeon, Forest Up North II" />
+      </dir>
+      <dir name="5">
+        <string name="Title" value="Tree Dungeon, Forest Up North II" />
+      </dir>
+      <dir name="6">
+        <string name="Title" value="Tree Dungeon, Forest Up North III" />
+      </dir>
+      <dir name="7">
+        <string name="Title" value="Tree Dungeon, Forest Up North III" />
+      </dir>
+      <dir name="8">
+        <string name="Title" value="Tree Dungeon, Forest Up North IV" />
+      </dir>
+      <dir name="9">
+        <string name="Title" value="Tree Dungeon, Forest Up North V" />
+      </dir>
+      <dir name="10">
+        <string name="Title" value="Tree Dungeon, Forest Up North VI" />
+      </dir>
+      <dir name="11">
+        <string name="Title" value="Tree Dungeon, Forest Up North VI" />
+      </dir>
+      <dir name="12">
+        <string name="Title" value="Tree Dungeon, Forest Up North VII" />
+      </dir>
+      <dir name="13">
+        <string name="Title" value="Tree Dungeon, Forest Up North VII" />
+      </dir>
+      <dir name="14">
+        <string name="Title" value="Tree Dungeon, Forest Up North VIII" />
+      </dir>
+      <dir name="15">
+        <string name="Title" value="Tree Dungeon, Forest Up North VIII" />
+      </dir>
+      <dir name="16">
+        <string name="Title" value="Tree Dungeon, Forest Up North IX" />
+      </dir>
+    </dir>
+    <dir name="101030000">
+      <dir name="0">
+        <string name="Title" value="Rocky Road III (Towards Perion)" />
+      </dir>
+      <dir name="1">
+        <string name="Title" value="The Forest North of Ellinia (Towards Ellinia)" />
+      </dir>
+      <dir name="2">
+        <string name="Title" value="Rocky Road III (Towards Perion)" />
+      </dir>
+      <dir name="3">
+        <string name="Title" value="The Forest North of Ellinia (Towards Ellinia)" />
+      </dir>
+    </dir>
+    <dir name="101030101">
+      <dir name="0">
+        <string name="Title" value="Excavation Site II (Towards Excavation Site)" />
+      </dir>
+      <dir name="1">
+        <string name="Title" value="Rocky Road III (Towards Victoria Road)" />
+      </dir>
+    </dir>
+    <dir name="101030102">
+      <dir name="0">
+        <string name="Title" value="Excavation Site I (Towards Victoria Road)" />
+      </dir>
+      <dir name="1">
+        <string name="Title" value="Excavation Site III (Towards Excavation Site)" />
+      </dir>
+    </dir>
+    <dir name="101030200">
+      <dir name="0">
+        <string name="Title" value="Rocky Road I (Towards Perion)" />
+      </dir>
+      <dir name="1">
+        <string name="Title" value="Rocky Road III (Towards Ellinia)" />
+      </dir>
+    </dir>
+    <dir name="101030300">
+      <dir name="0">
+        <string name="Title" value="East Rocky Mountain I (Towards Perion)" />
+      </dir>
+      <dir name="1">
+        <string name="Title" value="Rocky Road II (Towards Ellinia)" />
+      </dir>
+    </dir>
+    <dir name="101030401">
+      <dir name="0">
+        <string name="Title" value="East Rocky Mountain I (Towards Victoria Road)" />
+      </dir>
+      <dir name="1">
+        <string name="Title" value="East Rocky Mountain III" />
+      </dir>
+    </dir>
+    <dir name="101030402">
+      <dir name="0">
+        <string name="Title" value="East Rocky Mountain II (Towards Victoria Road)" />
+      </dir>
+      <dir name="1">
+        <string name="Title" value="East Rocky Mountain IV" />
+      </dir>
+    </dir>
+    <dir name="101030403">
+      <dir name="0">
+        <string name="Title" value="East Rocky Mountain III (Towards Victoria Road)" />
+      </dir>
+      <dir name="1">
+        <string name="Title" value="East Rocky Mountain V" />
+      </dir>
+    </dir>
+    <dir name="101030404">
+      <dir name="0">
+        <string name="Title" value="East Rocky Mountain IV (Towards Victoria Road)" />
+      </dir>
+      <dir name="1">
+        <string name="Title" value="East Rocky Mountain VI" />
+      </dir>
+    </dir>
+    <dir name="101030405">
+      <dir name="0">
+        <string name="Title" value="East Rocky Mountain V (Towards Victoria Road)" />
+      </dir>
+      <dir name="1">
+        <string name="Title" value="East Rocky Mountain VII" />
+      </dir>
+    </dir>
+    <dir name="101040000">
+      <dir name="0">
+        <string name="Title" value="Perion" />
+      </dir>
+      <dir name="1">
+        <string name="Title" value="East Rocky Mountain I (Towards Ellinia)" />
+      </dir>
+    </dir>
+    <dir name="102010000">
+      <dir name="0">
+        <string name="Title" value="West Rocky Mountain I (Towards Kerning City)" />
+      </dir>
+      <dir name="1">
+        <string name="Title" value="Perion" />
+      </dir>
+    </dir>
+    <dir name="102030000">
+      <dir name="0">
+        <string name="Title" value="Construction Site North of Kerning City (Towards Kerning City)" />
+      </dir>
+      <dir name="1">
+        <string name="Title" value="West Rocky Mountain I (Towards Perion)" />
+      </dir>
+    </dir>
+    <dir name="102040000">
+      <dir name="0">
+        <string name="Title" value="Sunset Sky (Towards Kerning City)" />
+      </dir>
+      <dir name="1">
+        <string name="Title" value="West Domain of Perion (Towards Perion)" />
+      </dir>
+      <dir name="2">
+        <string name="Title" value="Abandoned Subway Station" />
+      </dir>
+    </dir>
+    <dir name="102050000">
+      <dir name="0">
+        <string name="Title" value="Kerning City" />
+      </dir>
+      <dir name="1">
+        <string name="Title" value="Construction Site North of Kerning City (Towards Perion)" />
+      </dir>
+    </dir>
+    <dir name="103010000">
+      <dir name="0">
+        <string name="Title" value="Kerning City" />
+      </dir>
+      <dir name="1">
+        <string name="Title" value="L Forest I (Towards Henesys/Lith Harbor)" />
+      </dir>
+      <dir name="2">
+        <string name="Title" value="Kerning City" />
+      </dir>
+      <dir name="3">
+        <string name="Title" value="L Forest III (Towards Henesys/Lith Harbor)" />
+      </dir>
+    </dir>
+    <dir name="103020000">
+      <dir name="0">
+        <string name="Title" value="Kerning City Construction Site (Towards Kerning City)" />
+      </dir>
+      <dir name="1">
+        <string name="Title" value="L Forest II (Towards Henesys/Lith Harbor)" />
+      </dir>
+    </dir>
+    <dir name="103020100">
+      <dir name="0">
+        <string name="Title" value="L Forest I (Towards Kerning City)" />
+      </dir>
+      <dir name="1">
+        <string name="Title" value="L Forest III (Towards Henesys/Lith Harbor)" />
+      </dir>
+    </dir>
+    <dir name="103020200">
+      <dir name="0">
+        <string name="Title" value="Kerning City Middle Forest I (Towards Henesys/Lith Harbor)" />
+      </dir>
+      <dir name="1">
+        <string name="Title" value="L Forest II (Towards Kerning City)" />
+      </dir>
+    </dir>
+    <dir name="103030100">
+      <dir name="0">
+        <string name="Title" value="Kerning City Middle Forest III" />
+      </dir>
+      <dir name="1">
+        <string name="Title" value="Kerning City Middle Forest I" />
+      </dir>
+    </dir>
+    <dir name="104000100">
+      <dir name="0">
+        <string name="Title" value="Lith Harbor" />
+      </dir>
+      <dir name="1">
+        <string name="Title" value="Thicket Around the Beach I (Towards Victoria Road)" />
+      </dir>
+    </dir>
+    <dir name="104000200">
+      <dir name="0">
+        <string name="Title" value="Right Around Lith Harbor (Towards Lith Harbor)" />
+      </dir>
+      <dir name="1">
+        <string name="Title" value="Thicket Around the Beach II (Towards Victoria Road)" />
+      </dir>
+    </dir>
+    <dir name="104000300">
+      <dir name="0">
+        <string name="Title" value="Thicket Around the Beach I (Towards Lith Harbor)" />
+      </dir>
+      <dir name="1">
+        <string name="Title" value="Thicket Around the Beach III (Towards Victoria Road)" />
+      </dir>
+    </dir>
+    <dir name="104000400">
+      <dir name="0">
+        <string name="Title" value="Thicket Around the Beach II (Towards Lith Harbor)" />
+      </dir>
+      <dir name="1">
+        <string name="Title" value="3-Way Road-Split (Towards Victoria Road)" />
+      </dir>
+    </dir>
+    <dir name="104020000">
+      <dir name="0">
+        <string name="Title" value="3-Way Road-Split (Towards Kerning City/Lith Harbor)" />
+      </dir>
+      <dir name="1">
+        <string name="Title" value="Hill West of Henesys (Towards Henesys)" />
+      </dir>
+    </dir>
+    <dir name="104040000">
+      <dir name="0">
+        <string name="Title" value="Henesys Hunting Ground II" />
+      </dir>
+      <dir name="1">
+        <string name="Title" value="Henesys" />
+      </dir>
+      <dir name="2">
+        <string name="Title" value="Hill West of Henesys (Towards Lith Harbor/Kerning City)" />
+      </dir>
+      <dir name="3">
+        <string name="Title" value="Henesys Hunting Ground II" />
+      </dir>
+    </dir>
+    <dir name="104040001">
+      <dir name="0">
+        <string name="Title" value="Henesys Hunting Ground III" />
+      </dir>
+      <dir name="1">
+        <string name="Title" value="Henesys Hunting Ground I" />
+      </dir>
+      <dir name="2">
+        <string name="Title" value="Henesys Hunting Ground III" />
+      </dir>
+    </dir>
+    <dir name="104040002">
+      <dir name="0">
+        <string name="Title" value="Henesys Hunting Ground II" />
+      </dir>
+    </dir>
+    <dir name="105030000">
+      <dir name="0">
+        <string name="Title" value="Swampy Land (Towards Kerning City)" />
+      </dir>
+      <dir name="1">
+        <string name="Title" value="Dungeon (Towards Perion)" />
+      </dir>
+      <dir name="2">
+        <string name="Title" value="Swampy Land in a Deep Forest (Towards Sleepywood)" />
+      </dir>
+    </dir>
+    <dir name="105040100">
+      <dir name="0">
+        <string name="Title" value="Hunting Ground in the Deep Forest I" />
+      </dir>
+      <dir name="1">
+        <string name="Title" value="Swampy Land in a Deep Forest (Towards Sleepywood)" />
+      </dir>
+    </dir>
+    <dir name="105040304">
+      <dir name="0">
+        <string name="Title" value="Mini Dungeon: The Ruins of the Fallen Golem" />
+      </dir>
+    </dir>
+    <dir name="105050100">
+      <dir name="0">
+        <string name="Title" value="Mini Dungeon: Cave Where Mushrooms Grow" />
+      </dir>
+    </dir>
+    <dir name="106000000">
+      <dir name="0">
+        <string name="Title" value="Perion" />
+      </dir>
+      <dir name="1">
+        <string name="Title" value="Deep Valley II (Towards Sleepywood)" />
+      </dir>
+      <dir name="2">
+        <string name="Title" value="Perion" />
+      </dir>
+      <dir name="3">
+        <string name="Title" value="Deep Valley II (Towards Sleepywood)" />
+      </dir>
+    </dir>
+    <dir name="106000001">
+      <dir name="0">
+        <string name="Title" value="Deep Valley I" />
+      </dir>
+      <dir name="1">
+        <string name="Title" value="Dangerous Valley II" />
+      </dir>
+    </dir>
+    <dir name="106000100">
+      <dir name="0">
+        <string name="Title" value="Deep Valley3 (Towards Sleepywood)" />
+      </dir>
+      <dir name="1">
+        <string name="Title" value="The Burnt Land1" />
+      </dir>
+      <dir name="2">
+        <string name="Title" value="Deep Valley I (Towards Perion)" />
+      </dir>
+    </dir>
+    <dir name="106000101">
+      <dir name="0">
+        <string name="Title" value="Deep Valley II" />
+      </dir>
+      <dir name="1">
+        <string name="Title" value="The Burnt Land II" />
+      </dir>
+    </dir>
+    <dir name="106000110">
+      <dir name="0">
+        <string name="Title" value="The Burnt Land I" />
+      </dir>
+      <dir name="1">
+        <string name="Title" value="The Burnt Land III" />
+      </dir>
+    </dir>
+    <dir name="106000120">
+      <dir name="0">
+        <string name="Title" value="The Burnt Land II" />
+      </dir>
+      <dir name="1">
+        <string name="Title" value="The Burnt Land IV" />
+      </dir>
+    </dir>
+    <dir name="106000130">
+      <dir name="0">
+        <string name="Title" value="The Burnt Land III" />
+      </dir>
+      <dir name="1">
+        <string name="Title" value="The Burnt Land V" />
+      </dir>
+    </dir>
+    <dir name="106000200">
+      <dir name="0">
+        <string name="Title" value="Deep Valley II (Towards Perion)" />
+      </dir>
+      <dir name="1">
+        <string name="Title" value="Path to Perion Dungeon (Towards Sleepywood)" />
+      </dir>
+    </dir>
+    <dir name="106000300">
+      <dir name="0">
+        <string name="Title" value="Deep Forest (Towards Sleepywood)" />
+      </dir>
+      <dir name="1">
+        <string name="Title" value="Deep Valley III (Towards Perion)" />
+      </dir>
+    </dir>
+    <dir name="106010000">
+      <dir name="0">
+        <string name="Title" value="Henesys" />
+      </dir>
+      <dir name="1">
+        <string name="Title" value="Entrance to Henesys Dungeon (Towards Sleepywood)" />
+      </dir>
+    </dir>
+    <dir name="106010100">
+      <dir name="0">
+        <string name="Title" value="Path to the Dungeon (Towards Henesys)" />
+      </dir>
+      <dir name="1">
+        <string name="Title" value="Hunting Ground in the Deep Forest II (Towards Sleepywood)" />
+      </dir>
+    </dir>
+    <dir name="106010101">
+      <dir name="0">
+        <string name="Title" value="The Entrance of Golem's Temple" />
+      </dir>
+    </dir>
+    <dir name="106010102">
+      <dir name="0">
+        <string name="Title" value="The Breathing Rock" />
+      </dir>
+      <dir name="1">
+        <string name="Title" value="Golem's Temple I" />
+      </dir>
+      <dir name="2">
+        <string name="Title" value="Golem's Temple II" />
+      </dir>
+      <dir name="3">
+        <string name="Title" value="Golem's Temple III" />
+      </dir>
+      <dir name="4">
+        <string name="Title" value="Golem's Temple IV" />
+      </dir>
+    </dir>
+    <dir name="107000500">
+      <dir name="0">
+        <string name="Title" value="Dangerous Croko II (Towards Kerning City)" />
+      </dir>
+      <dir name="1">
+        <string name="Title" value="Deep Forest (Towards Sleepywood)" />
+      </dir>
+    </dir>
+    <dir name="120010000">
+      <dir name="0">
+        <string name="Title" value="The Forest East of Henesys (Towards Victoria Road)" />
+      </dir>
+      <dir name="1">
+        <string name="Title" value="Nautilus" />
+      </dir>
+    </dir>
+    <dir name="130000000">
+      <dir name="0">
+        <string name="Title" value="Spot where Shinsoo fell asleep" />
+      </dir>
+    </dir>
+    <dir name="200090500">
+      <dir name="0">
+        <string name="Title" value="Sky Road : Toward the Temple of Time" />
+      </dir>
+    </dir>
+    <dir name="200090510">
+      <dir name="0">
+        <string name="Title" value="Sky Road : Toward Leafre" />
+      </dir>
+    </dir>
+    <dir name="221023400">
+      <dir name="0">
+        <string name="Title" value="Mini Dungeon: Drummer Bunny's Lair" />
+      </dir>
+    </dir>
+    <dir name="240020500">
+      <dir name="0">
+        <string name="Title" value="Mini Dungeon: The Round Table of Kentaurus" />
+      </dir>
+    </dir>
+    <dir name="240040511">
+      <dir name="0">
+        <string name="Title" value="Mini Dungeon: The Restoring Memory" />
+      </dir>
+    </dir>
+    <dir name="240040520">
+      <dir name="0">
+        <string name="Title" value="Mini Dungeon: Newt Secured Zone" />
+      </dir>
+    </dir>
+    <dir name="260020600">
+      <dir name="0">
+        <string name="Title" value="Mini Dungeon: Hill of Sandstorms" />
+      </dir>
+    </dir>
+    <dir name="261020300">
+      <dir name="0">
+        <string name="Title" value="Mini Dungeon: Critical Error" />
+      </dir>
+    </dir>
+    <dir name="270000000">
+      <dir name="0">
+        <string name="Title" value="Road to the Future" />
+      </dir>
+      <dir name="1">
+        <string name="Title" value="Road of the Present" />
+      </dir>
+      <dir name="2">
+        <string name="Title" value="Road to the Past" />
+      </dir>
+    </dir>
+    <dir name="270000100">
+      <dir name="0">
+        <string name="Title" value="Air Field" />
+      </dir>
+      <dir name="1">
+        <string name="Title" value="Air Field" />
+      </dir>
+      <dir name="2">
+        <string name="Title" value="Temple Entrance" />
+      </dir>
+      <dir name="3">
+        <string name="Title" value="Three Doors" />
+      </dir>
+      <dir name="4">
+        <string name="Title" value="Temple Entrance" />
+      </dir>
+    </dir>
+    <dir name="270010000">
+      <dir name="0">
+        <string name="Title" value="Three Doors" />
+      </dir>
+      <dir name="1">
+        <string name="Title" value="Door of Memory" />
+      </dir>
+      <dir name="2">
+        <string name="Title" value="Road to the Past : Memory" />
+      </dir>
+    </dir>
+    <dir name="270010100">
+      <dir name="0">
+        <string name="Title" value="Past of the Verdure" />
+      </dir>
+    </dir>
+    <dir name="270010110">
+      <dir name="0">
+        <string name="Title" value="Memory Keeper's Room" />
+      </dir>
+      <dir name="1">
+        <string name="Title" value="Memory Lane 2" />
+      </dir>
+    </dir>
+    <dir name="270010111">
+      <dir name="0">
+        <string name="Title" value="Time Observatory" />
+      </dir>
+    </dir>
+    <dir name="270010200">
+      <dir name="0">
+        <string name="Title" value="Resting Spot of Memory 1" />
+      </dir>
+      <dir name="1">
+        <string name="Title" value="Resting Spot of Memory 2" />
+      </dir>
+    </dir>
+    <dir name="270010210">
+      <dir name="0">
+        <string name="Title" value="Memory Lane 3" />
+      </dir>
+    </dir>
+    <dir name="270010310">
+      <dir name="0">
+        <string name="Title" value="Memory Lane 4" />
+      </dir>
+    </dir>
+    <dir name="270010500">
+      <dir name="0">
+        <string name="Title" value="Frozen Past" />
+      </dir>
+    </dir>
+    <dir name="270020000">
+      <dir name="0">
+        <string name="Title" value="Memory Lane Direction" />
+      </dir>
+      <dir name="1">
+        <string name="Title" value="Door of Regrets" />
+      </dir>
+    </dir>
+    <dir name="270020100">
+      <dir name="0">
+        <string name="Title" value="Frozen Past" />
+      </dir>
+    </dir>
+    <dir name="270020110">
+      <dir name="0">
+        <string name="Title" value="Road of Regrets 1" />
+      </dir>
+    </dir>
+    <dir name="270020210">
+      <dir name="0">
+        <string name="Title" value="Sorcerer's Room" />
+      </dir>
+      <dir name="1">
+        <string name="Title" value="Road of Regrets 2" />
+      </dir>
+    </dir>
+    <dir name="270020400">
+      <dir name="0">
+        <string name="Title" value="Resting Spot of Regret 4" />
+      </dir>
+    </dir>
+    <dir name="270030000">
+      <dir name="0">
+        <string name="Title" value="Road to Oblivion" />
+      </dir>
+      <dir name="1">
+        <string name="Title" value="Road of Regrets 5" />
+      </dir>
+      <dir name="2">
+        <string name="Title" value="Door of Oblivion" />
+      </dir>
+    </dir>
+    <dir name="270030210">
+      <dir name="0">
+        <string name="Title" value="Road to Oblivion 2" />
+      </dir>
+    </dir>
+    <dir name="270030300">
+      <dir name="0">
+        <string name="Title" value="Resting Spot of Oblivion 3" />
+      </dir>
+    </dir>
+    <dir name="270030400">
+      <dir name="0">
+        <string name="Title" value="Resting Spot of Oblivion 3" />
+      </dir>
+    </dir>
+    <dir name="270030410">
+      <dir name="0">
+        <string name="Title" value="Road to Oblivion 4" />
+      </dir>
+      <dir name="1">
+        <string name="Title" value="Road to Oblivion 5" />
+      </dir>
+      <dir name="2">
+        <string name="Title" value="Record Keeper's Room" />
+      </dir>
+    </dir>
+    <dir name="270030500">
+      <dir name="0">
+        <string name="Title" value="Toward the Temple Ruins" />
+      </dir>
+    </dir>
+    <dir name="930000800">
+      <dir name="0">
+        <string name="Title" value="          Spring of Purification            " />
+        <string name="Desc" value="A spring of clean water. It appears to have the power to detoxify the Golem's Marble filled with poison inside. Let's try dropping the marble in front of the spring. poison which fills." />
+      </dir>
+    </dir>
+    <dir name="130000200">
+      <dir name="0">
+        <string name="Title" value="Training Forest" />
+      </dir>
+      <dir name="1">
+        <string name="Title" value="Knights Chamber" />
+      </dir>
+      <dir name="2">
+        <string name="Title" value="Department Store" />
+      </dir>
+      <dir name="3">
+        <string name="Title" value="in the direction of the Sky Ferry" />
+      </dir>
+      <dir name="4">
+        <string name="Title" value="Free Market" />
+      </dir>
+      <dir name="5">
+        <string name="Title" value="Ereve Weapon Store" />
+      </dir>
+      <dir name="6">
+        <string name="Title" value="Department Store" />
+      </dir>
+      <dir name="7">
+        <string name="Title" value="Sky Ferry" />
+        <string name="Desc" value="The ship that passes through Ereve is at anchor." />
+      </dir>
+    </dir>
+    <dir name="200000160">
+      <dir name="0">
+        <string name="Title" value="Orbis Station Waiting Room" />
+      </dir>
+      <dir name="1">
+        <string name="Title" value="Station to Ereve" />
+      </dir>
+    </dir>
+    <dir name="922230000">
+      <dir name="0">
+        <string name="Title" value="Exit" />
+      </dir>
+    </dir>
+    <dir name="925020000">
+      <dir name="0">
+        <string name="Title" value="Mu Lung Training Center" />
+      </dir>
+    </dir>
+    <dir name="980020000">
+      <dir name="0">
+        <string name="Title" value="Entrance of the Goldrich maze" />
+        <string name="Desc" value="You're at the entrance to Mr. Goldrich's private lane. If you want to enter, please use your golden compass." />
+      </dir>
+    </dir>
+    <dir name="550000100">
+      <dir name="0">
+        <string name="Title" value="Outskirt of Muddy Banks" />
+      </dir>
+    </dir>
+    <dir name="551030000">
+      <dir name="0">
+        <string name="Title" value="Mini Dungeon: Longest Ride on ByeBye Station" />
+      </dir>
+    </dir>
+    <dir name="551020000">
+      <dir name="0">
+        <string name="Title" value="Cable Car" />
+      </dir>
+    </dir>
+    <dir name="551010000">
+      <dir name="0">
+        <string name="Title" value="Cable Car Station 1" />
+      </dir>
+    </dir>
+    <dir name="551000200">
+      <dir name="0">
+        <string name="Title" value="Hibiscus Road 2" />
+      </dir>
+    </dir>
+    <dir name="551000100">
+      <dir name="0">
+        <string name="Title" value="Hibiscus Road 1" />
+      </dir>
+    </dir>
+    <dir name="551000000">
+      <dir name="0">
+        <string name="Title" value="Kampung Village" />
+      </dir>
+    </dir>
+    <dir name="105090311">
+      <dir name="0">
+        <string name="Title" value="Mini Dungeon: Drake's Blue Cave" />
+      </dir>
+    </dir>
+    <dir name="970000100">
+      <dir name="0">
+        <string name="Title" value="Maple Studio" />
+      </dir>
+      <dir name="1">
+        <string name="Title" value="Ludibrium Studio" />
+      </dir>
+      <dir name="2">
+        <string name="Title" value="Ariant Studio" />
+      </dir>
+      <dir name="3">
+        <string name="Title" value="Orbis Studio" />
+      </dir>
+      <dir name="4">
+        <string name="Title" value="Mu Lung Studio" />
+      </dir>
+      <dir name="5">
+        <string name="Title" value="Magatia Studio" />
+      </dir>
+      <dir name="6">
+        <string name="Title" value="Ereve Studio" />
+      </dir>
+      <dir name="7">
+        <string name="Title" value="Cookie Studio" />
+      </dir>
+    </dir>
+    <dir name="2000000">
+      <dir name="0">
+        <string name="Title" value="Armor Store" />
+        <string name="Desc" value="You may purchase armors here." />
+      </dir>
+      <dir name="1">
+        <string name="Title" value="Southperry → Lith Harbor of Victoria Island" />
+        <string name="Desc" value="Fee : 150 mesos\n\nBoard a ship headed to Lith Harbor by speaking with Shanks. Once you leave here, you won’t be able to come back." />
+      </dir>
+    </dir>
+    <dir name="1020000">
+      <dir name="0">
+        <string name="Title" value="Southperry" />
+      </dir>
+    </dir>
+    <dir name="106020000">
+      <dir name="0">
+        <string name="Title" value="Castle of King Mush" />
+      </dir>
+      <dir name="1">
+        <string name="Title" value="Empty House (To Henesys)" />
+      </dir>
+    </dir>
+    <dir name="106020100">
+      <dir name="0">
+        <string name="Title" value="Mushking Castle" />
+      </dir>
+    </dir>
+    <dir name="106020200">
+      <dir name="0">
+        <string name="Title" value="Mushking Castle" />
+      </dir>
+    </dir>
+    <dir name="106020300">
+      <dir name="0">
+        <string name="Title" value="Mushking Castle" />
+      </dir>
+      <dir name="1">
+        <string name="Title" value="Barrier of the Magic Spore " />
+        <string name="Desc" value="Double-click on Killer Mushroom Spore item to permanently penetrate the barrier, or use 1 Poison Spore dropped from the Poison Mushroom to temporarily break the barrier." />
+      </dir>
+    </dir>
+    <dir name="106020400">
+      <dir name="0">
+        <string name="Title" value="Mushking Castle" />
+      </dir>
+      <dir name="1">
+        <string name="Title" value="Cliff Shadows" />
+      </dir>
+    </dir>
+    <dir name="106020401">
+      <dir name="0">
+        <string name="Title" value="Cliff Shadows" />
+      </dir>
+    </dir>
+    <dir name="106020402">
+      <dir name="0">
+        <string name="Title" value="Cliff Shadows" />
+      </dir>
+    </dir>
+    <dir name="106020403">
+      <dir name="0">
+        <string name="Title" value="Mushking Castle (Beware of Cliff)" />
+      </dir>
+    </dir>
+    <dir name="106020500">
+      <dir name="0">
+        <string name="Title" value="Outside the Wall of Mushroom Castle" />
+        <string name="Desc" value="Double-click on the Thorn Remover to remove the thorns from the vine, then climb on it." />
+      </dir>
+    </dir>
+    <dir name="106020501">
+      <dir name="0">
+        <string name="Title" value="Entering Mushking Castle" />
+        <string name="Desc" value="You can only enter the castle by stepping on the vine with thorns removed." />
+      </dir>
+    </dir>
+    <dir name="106020600">
+      <dir name="0">
+        <string name="Title" value="West Castle Tower" />
+      </dir>
+    </dir>
+    <dir name="106021800">
+      <dir name="0">
+        <string name="Title" value="Mushroom Castle Exit" />
+      </dir>
+    </dir>
+    <dir name="106021300">
+      <dir name="0">
+        <string name="Title" value="East Castle Tower" />
+      </dir>
+    </dir>
+    <dir name="106021200">
+      <dir name="0">
+        <string name="Title" value="Central Castle Tower" />
+      </dir>
+    </dir>
+    <dir name="106021100">
+      <dir name="0">
+        <string name="Title" value="Central Castle Tower" />
+      </dir>
+    </dir>
+    <dir name="106021000">
+      <dir name="0">
+        <string name="Title" value="Central Castle Tower" />
+      </dir>
+    </dir>
+    <dir name="106020800">
+      <dir name="0">
+        <string name="Title" value="West Castle Tower" />
+      </dir>
+    </dir>
+    <dir name="106020700">
+      <dir name="0">
+        <string name="Title" value="West Castle Tower" />
+      </dir>
+    </dir>
+    <dir name="140000000">
+      <dir name="0">
+        <string name="Title" value="Towards Center of the Island" />
+      </dir>
+      <dir name="1">
+        <string name="Title" value="To Harbor" />
+      </dir>
+      <dir name="2">
+        <string name="Title" value="Rien Library" />
+      </dir>
+      <dir name="3">
+        <string name="Title" value="Weapon/Armor Store" />
+      </dir>
+      <dir name="4">
+        <string name="Title" value="Department Store" />
+      </dir>
+    </dir>
+    <dir name="140010000">
+      <dir name="0">
+        <string name="Title" value="Rien" />
+      </dir>
+      <dir name="1">
+        <string name="Title" value="Penguin Training Center" />
+      </dir>
+    </dir>
+    <dir name="140010100">
+      <dir name="0">
+        <string name="Title" value="Penguin Training Center" />
+      </dir>
+    </dir>
+    <dir name="140020000">
+      <dir name="0">
+        <string name="Title" value="Penguin Port" />
+      </dir>
+    </dir>
+    <dir name="140020200">
+      <dir name="0">
+        <string name="Title" value="Penguin Port" />
+      </dir>
+      <dir name="1">
+        <string name="Title" value="Rien" />
+      </dir>
+    </dir>
+    <dir name="260020500">
+      <dir name="0">
+        <string name="Title" value="Pyramid Dunes" />
+      </dir>
+      <dir name="1">
+        <string name="Title" value="The Ruins of Desert Nomads" />
+      </dir>
+      <dir name="2">
+        <string name="Title" value="Sahel 2" />
+      </dir>
+      <dir name="3">
+        <string name="Title" value="Pyramid Dunes" />
+      </dir>
+    </dir>
+    <dir name="251010402">
+      <dir name="0">
+        <string name="Title" value="Mini Dungeon: Pillage of Treasure Island " />
+      </dir>
+    </dir>
+    <dir name="240010900">
+      <dir name="0">
+        <string name="Title" value="Tera Forest" />
+      </dir>
+      <dir name="1">
+        <string name="Title" value="Tera Forest" />
+      </dir>
+    </dir>
+  </dir>
+  <dir name="PortalTooltip">
+    <dir name="100000100">
+      <string name="market00" value="Free Market Entrance" />
+    </dir>
+    <dir name="100030000">
+      <string name="quest00" value="Utah's Pig Farm" />
+    </dir>
+    <dir name="101030104">
+      <string name="pt00" value="Hidden Relic" />
+    </dir>
+    <dir name="102000000">
+      <string name="market00" value="Free Market Entrance" />
+    </dir>
+    <dir name="105090700">
+      <string name="in00" value="Secret Shrine" />
+    </dir>
+    <dir name="105090800">
+      <string name="in00" value="Forgotten Shrine" />
+    </dir>
+    <dir name="200000000">
+      <string name="market00" value="Free Market Entrance" />
+    </dir>
+    <dir name="211000100">
+      <string name="market00" value="Free Market Entrance" />
+    </dir>
+    <dir name="211042300">
+      <string name="ps00" value="Zakum Altar" />
+    </dir>
+    <dir name="220000000">
+      <string name="market00" value="Free Market Entrance" />
+    </dir>
+    <dir name="221000000">
+      <string name="market00" value="Free Market Entrance" />
+    </dir>
+    <dir name="230000000">
+      <string name="market01" value="Free Market Entrance" />
+    </dir>
+    <dir name="230040410">
+      <string name="boss00" value="Pianus Cave" />
+    </dir>
+    <dir name="240000000">
+      <string name="market00" value="Free Market Entrance" />
+    </dir>
+    <dir name="240010700">
+      <string name="pt00" value="The Top of the Sky Nest" />
+    </dir>
+    <dir name="240020100">
+      <string name="boss00" value="Griffey Forest" />
+    </dir>
+    <dir name="240020400">
+      <string name="boss00" value="Manon Forest" />
+    </dir>
+    <dir name="240040610">
+      <string name="in00" value="Nine Spirit's Nest" />
+    </dir>
+    <dir name="240040700">
+      <string name="out00" value="Peak of the Big Nest" />
+      <string name="temp00" value="Entrance to Cave of Horntail" />
+    </dir>
+    <dir name="240050100">
+      <string name="in00" value="1st Room of Maze" />
+    </dir>
+    <dir name="240050101">
+      <string name="in00" value="2nd Room of Maze" />
+    </dir>
+    <dir name="240050102">
+      <string name="in00" value="3rd Room of Maze" />
+    </dir>
+    <dir name="240050103">
+      <string name="in00" value="4th Room of Maze" />
+    </dir>
+    <dir name="240050104">
+      <string name="in00" value="5th Room of Maze" />
+    </dir>
+    <dir name="240050105">
+      <string name="in00" value="Room of Maze" />
+    </dir>
+    <dir name="240050400">
+      <string name="temp00" value="Entrance to the Cave of Life" />
+    </dir>
+    <dir name="250000000">
+      <string name="market00" value="Free Market Entrance" />
+    </dir>
+    <dir name="251000000">
+      <string name="market00" value="Free Market Entrance" />
+    </dir>
+    <dir name="280010000">
+      <string name="ps01" value="The Room of Tragedy" />
+    </dir>
+    <dir name="500000000">
+      <string name="market00" value="Free Market Entrance" />
+    </dir>
+    <dir name="925100000">
+      <string name="next00" value="Through the Head of the Ship!" />
+    </dir>
+    <dir name="925100100">
+      <string name="next00" value="Through the Deck I" />
+    </dir>
+    <dir name="925100200">
+      <string name="next00" value="Through the Deck II" />
+    </dir>
+    <dir name="925100300">
+      <string name="next00" value="Eliminate Pirates!" />
+    </dir>
+    <dir name="925100400">
+      <string name="next00" value="The Captain's Dignity" />
+    </dir>
+    <dir name="910000000">
+      <string name="out00" value="Entrance to Free Market" />
+    </dir>
+    <dir name="261020600">
+      <string name="up00" value="Research Center A-3" />
+    </dir>
+    <dir name="920010100">
+      <string name="in00" value="Tower of Goddess &lt;Walkway&gt;" />
+      <string name="in01" value="Tower of Goddess &lt;Storage&gt;" />
+      <string name="in02" value="Tower of Goddess &lt;Lobby&gt;" />
+      <string name="in03" value="Tower of Goddess &lt;Sealed Room&gt;" />
+    </dir>
+    <dir name="920010300">
+      <string name="st00" value="Tower of Goddess &lt;Center Tower&gt;" />
+    </dir>
+    <dir name="920010500">
+      <string name="st00" value="Tower of Goddess &lt;Center Tower&gt;" />
+    </dir>
+    <dir name="920010800">
+      <string name="in00" value="Tower of Goddess &lt;Center Tower&gt;" />
+    </dir>
+    <dir name="100040105">
+      <string name="quest00" value="Dead Tree Path" />
+    </dir>
+    <dir name="120000200">
+      <string name="market00" value="Free Market Entrance" />
+    </dir>
+    <dir name="222000000">
+      <string name="market00" value="Free Market Entrance" />
+    </dir>
+    <dir name="222010300">
+      <string name="west00" value="Tiger Ridge" />
+    </dir>
+    <dir name="261000000">
+      <string name="market0" value="Free Market" />
+    </dir>
+    <dir name="100020000">
+      <string name="MD00" value="Mini Dungeon: Henesys Pig Farm" />
+    </dir>
+    <dir name="101000000">
+      <string name="jobin00" value="Magic Library" />
+      <string name="in04" value="Sky Ferry" />
+      <string name="inERShip" value="Sky Ferry" />
+    </dir>
+    <dir name="105040304">
+      <string name="MD00" value="Mini Dungeon: The Ruins of the Fallen Golem" />
+    </dir>
+    <dir name="105050100">
+      <string name="MD00" value="Mini Dungeon: Cave Where Mushrooms Grow" />
+    </dir>
+    <dir name="221023400">
+      <string name="MD00" value="Mini Dungeon: Drummer Bunny's Lair" />
+    </dir>
+    <dir name="240020500">
+      <string name="MD00" value="Mini Dungeon: The Round Table of Kentaurus" />
+    </dir>
+    <dir name="240040511">
+      <string name="MD00" value="Mini Dungeon: The Restoring Memory" />
+    </dir>
+    <dir name="240040520">
+      <string name="MD00" value="Mini Dungeon: Newt Secured Zone" />
+    </dir>
+    <dir name="260020600">
+      <string name="MD00" value="Mini Dungeon: Hill of Sandstorms" />
+    </dir>
+    <dir name="261020300">
+      <string name="MD00" value="Mini Dungeon: Critical Error" />
+    </dir>
+    <dir name="130000200">
+      <string name="west00" value="Training Forest 1" />
+      <string name="st00" value="Free Market Entrance" />
+    </dir>
+    <dir name="130010000">
+      <string name="in00" value="Tino's Forest" />
+      <string name="in01" value="Tiv's Forest" />
+    </dir>
+    <dir name="130010100">
+      <string name="in00" value="Timu's Forest" />
+      <string name="in01" value="Tiru's Forest" />
+    </dir>
+    <dir name="130010200">
+      <string name="west00" value="Drill Hall Entrance" />
+    </dir>
+    <dir name="240020101">
+      <string name="in00" value="Remote Forest" />
+    </dir>
+    <dir name="240020102">
+      <string name="in00" value="Remote Forest" />
+    </dir>
+    <dir name="240020401">
+      <string name="in00" value="Remote Forest" />
+    </dir>
+    <dir name="240020402">
+      <string name="in00" value="Remote Forest" />
+    </dir>
+    <dir name="130020000">
+      <string name="in00" value="The 1st Drill Hall" />
+      <string name="in01" value="The 2nd Drill Hall" />
+      <string name="in02" value="The 3rd Drill Hall" />
+      <string name="in03" value="The 4th Drill Hall" />
+    </dir>
+    <dir name="240020600">
+      <string name="out00" value="Griffey Forest" />
+      <string name="out01" value="Manon Forest" />
+    </dir>
+    <dir name="106020400">
+      <string name="right00" value="Edge of Castle Wall" />
+      <string name="right01" value="Steep Downhill 1" />
+    </dir>
+    <dir name="106021000">
+      <string name="in00" value="Castle Security Room" />
+    </dir>
+    <dir name="222020400">
+      <string name="in00" value="To the Past" />
+    </dir>
+    <dir name="914000000">
+      <string name="out00" value="On the Way to Escape" />
+    </dir>
+    <dir name="914000100">
+      <string name="out00" value="Burning Forest 1" />
+    </dir>
+    <dir name="914000200">
+      <string name="west00" value="Burning Forest 2" />
+    </dir>
+    <dir name="914000210">
+      <string name="west00" value="Burning Forest 3" />
+    </dir>
+    <dir name="914000300">
+      <string name="east00" value="Burning Forest 3" />
+    </dir>
+    <dir name="914000500">
+      <string name="out00" value="Burning Forest 1" />
+    </dir>
+    <dir name="140090100">
+      <string name="west00" value="Cold Forest 2" />
+    </dir>
+    <dir name="140090200">
+      <string name="west00" value="Cold Forest 3" />
+    </dir>
+    <dir name="140090300">
+      <string name="west00" value="Cold Forest 4" />
+    </dir>
+    <dir name="140090400">
+      <string name="west00" value="Cold Forest 5" />
+    </dir>
+    <dir name="140000000">
+      <string name="market00" value="Free Market" />
+      <string name="west00" value="Field West of Rien" />
+    </dir>
+    <dir name="140010000">
+      <string name="east00" value="Rien" />
+      <string name="west00" value="Entrance to Rien Training Center" />
+    </dir>
+    <dir name="140030000">
+      <string name="in00" value="Mirror of Desire" />
+    </dir>
+    <dir name="140010200">
+      <string name="in00" value="Mirror Cave" />
+    </dir>
+    <dir name="140020200">
+      <string name="east00" value="Penguin Port" />
+    </dir>
+    <dir name="914020000">
+      <string name="out00" value="Battle Against Maha" />
+    </dir>
+    <dir name="211050000">
+      <string name="in00" value="Rider's Field" />
+    </dir>
+    <dir name="914030000">
+      <string name="out00" value="Field of Wolves" />
+    </dir>
+    <dir name="140010100">
+      <string name="in00" value="Rien Training Center" />
+    </dir>
+    <dir name="104000000">
+      <string name="in03" value="Lith Harbor Info Shop" />
+    </dir>
+    <dir name="200060000">
+      <string name="in00" value="Neglected Strolling Path" />
+    </dir>
+    <dir name="925040001">
+      <string name="out00" value="Back Alley of Mu Lung Dojo" />
+    </dir>
+    <dir name="300000010">
+      <string name="in00" value="Library" />
+    </dir>
+    <dir name="100000200">
+      <string name="in02" value="Bowman Instructional School" />
+    </dir>
+    <dir name="103000310">
+      <string name="out00" value="To Kerning City" />
+    </dir>
+  </dir>
+  <dir name="Shop">
+    <dir name="Button">
+      <dir name="BuyAvatar">
+        <string name="Title" value="Buying Equipped Items" />
+        <string name="Desc" value="Buying the items that are equipped by the character. The existing items are not\nincluded in the purchase." />
+      </dir>
+      <dir name="DefaultAvatar">
+        <string name="Title" value="Back to Default" />
+        <string name="Desc" value="Character being put back into the state of default before walking into the cash shop." />
+      </dir>
+      <dir name="Rebate">
+        <string name="Title" value="Deleting Items" />
+        <string name="Desc" value="Deleting cash items and saving a percentage of its price as MaplePoints" />
+      </dir>
+      <dir name="ExEquip">
+        <string name="Title" value="Extending Equip. Inventory" />
+        <string name="Desc" value="Extending an equip. inventory by 4 slots (1 line)\n8000 A-Cash" />
+      </dir>
+      <dir name="ExConsume">
+        <string name="Title" value="Extending Use Inventory" />
+        <string name="Desc" value="Extending a use inventory by 4 slots (1 line)\n8000 A-Cash" />
+      </dir>
+      <dir name="ExInstall">
+        <string name="Title" value="Extending Set-Up Inventory" />
+        <string name="Desc" value="Extending a set-up inventory by 4 slots (1 line)\n8000 A-Cash" />
+      </dir>
+      <dir name="ExEtc">
+        <string name="Title" value="Extending Etc. Inventory" />
+        <string name="Desc" value="Extending an etc. inventory by 4 slots (1 line)\n8000 A-Cash" />
+      </dir>
+      <dir name="Charge">
+        <string name="Title" value="Recharging Cash" />
+        <string name="Desc" value="Please visit the website to charge your account." />
+      </dir>
+      <dir name="Check">
+        <string name="Title" value="Check Cash" />
+        <string name="Desc" value="Checking the remaining Cash" />
+      </dir>
+      <dir name="Coupon">
+        <string name="Title" value="Using Coupon" />
+        <string name="Desc" value="Exchanging the item coupon into an item." />
+      </dir>
+      <dir name="TakeoffAvatar">
+        <string name="Title" value="Remove All" />
+        <string name="Desc" value="Remove all the items that the character is wearing." />
+      </dir>
+      <dir name="GiftToken">
+        <string name="Title" value="Gift Token" />
+        <string name="Desc" value="Click to see &quot;How to Gift&quot; Details" />
+      </dir>
+    </dir>
+  </dir>
+  <dir name="MTS">
+    <dir name="Button">
+      <dir name="Check">
+        <string name="Title" value="Check Points" />
+        <string name="Desc" value="Checking the remaining points." />
+      </dir>
+    </dir>
+  </dir>
+</dir>
