@@ -7,10 +7,10 @@ import java.util.*;
 
 @XmlAccessorType(XmlAccessType.FIELD)
 // XML文件中的根标识
-@XmlRootElement(name = "dir")
+@XmlRootElement(name = "imgdir")
 public class CashImgXml extends ArrayList<CashImgXml.Cash> implements Serializable {
 
-    @XmlElement(name = "dir")
+    @XmlElement(name = "imgdir")
     public List<Cash> cashList = new ArrayList<>();
 
     @XmlAttribute(name = "name")
@@ -24,7 +24,7 @@ public class CashImgXml extends ArrayList<CashImgXml.Cash> implements Serializab
         return map;
     }
 
-    @XmlRootElement(name = "dir")
+    @XmlRootElement(name = "imgdir")
     public static class Cash extends ArrayList<CashDetail> {
 
         @XmlAttribute(name = "name")
