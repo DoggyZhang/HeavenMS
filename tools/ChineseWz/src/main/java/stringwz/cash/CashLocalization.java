@@ -9,21 +9,22 @@ import java.util.*;
 
 public class CashLocalization implements ChineseLocalization {
 
-    private static final String TARGET_XML = "E:\\MapleStory\\HeavenMS\\tools\\ChineseWz\\wz\\client\\083\\string.wz\\Cash.img.xml";
-    private static final String CHINESE_XML = "E:\\MapleStory\\HeavenMS\\tools\\ChineseWz\\wz\\server\\079\\string.wz\\Cash.img.xml";
+    private static final String TARGET_FILE_NAME = "Cash.img.xml";
+
+    private static final String REPLACE_TARGET = "E:\\MapleStory\\HeavenMS\\tools\\ChineseWz\\wz\\client\\083\\string.wz\\" + TARGET_FILE_NAME;
+    private static final String REPLACE_BY = "E:\\MapleStory\\HeavenMS\\tools\\ChineseWz\\wz\\server\\079\\string.wz\\" + TARGET_FILE_NAME;
 
     private static final String OUTPUT_FOLDER = "E:\\MapleStory\\HeavenMS\\tools\\ChineseWz\\wz\\wz_chinese";
-    private static final String OUTPUT_FILE_NAME = "Cash.img.xml";
-    private static final String OUTPUT_FILE = OUTPUT_FOLDER + "\\" + OUTPUT_FILE_NAME;
-    private static final String NOT_MATCH_FILE = OUTPUT_FOLDER + "\\Cash_not_match_id.txt";
+    private static final String OUTPUT_FILE = OUTPUT_FOLDER + "\\" + TARGET_FILE_NAME;
+    private static final String NOT_MATCH_FILE = OUTPUT_FOLDER + "\\" + TARGET_FILE_NAME + "_not_match_id.txt";
 
     @Override
     public void localize() {
-        CashImgXml replaceByCashImgXml = CashParser.parse(CHINESE_XML);
+        CashImgXml replaceByCashImgXml = CashParser.parse(REPLACE_BY);
         // 拿到所有的汉化信息
         Map<String, CashImgXml.Cash> replaceByCashItemMap = replaceByCashImgXml.getEqpItemMap();
 
-        CashImgXml targetEqpImgXml = CashParser.parse(TARGET_XML);
+        CashImgXml targetEqpImgXml = CashParser.parse(REPLACE_TARGET);
         Map<String, CashImgXml.Cash> targetCashItemMap = targetEqpImgXml.getEqpItemMap();
 
         List<String> notMatchedList = new ArrayList<>();

@@ -1,4 +1,4 @@
-package stringwz.skill;
+package stringwz.petdialog;
 
 import org.apache.commons.io.*;
 import stringwz.*;
@@ -7,9 +7,9 @@ import utils.*;
 import java.io.*;
 import java.util.*;
 
-public class SkillLocalization implements ChineseLocalization {
+public class PetDialogLocalization implements ChineseLocalization {
 
-    private static final String TARGET_FILE_NAME = "Skill.img.xml";
+    private static final String TARGET_FILE_NAME = "PetDialog.img.xml";
 
     private static final String REPLACE_TARGET = "E:\\MapleStory\\HeavenMS\\tools\\ChineseWz\\wz\\client\\083\\string.wz\\" + TARGET_FILE_NAME;
     private static final String REPLACE_BY = "E:\\MapleStory\\HeavenMS\\tools\\ChineseWz\\wz\\server\\079\\string.wz\\" + TARGET_FILE_NAME;
@@ -20,25 +20,25 @@ public class SkillLocalization implements ChineseLocalization {
 
     @Override
     public void localize() {
-        SkillImgXml replaceBySkillImgXml = SkillParser.parse(REPLACE_BY);
+        PetDialogImgXml replaceByCashImgXml = PetDialogParser.parse(REPLACE_BY);
         // 拿到所有的汉化信息
-        HashMap<String, SkillImgXml.Skill> replaceByCashItemMap = replaceBySkillImgXml.getMapItemMap();
+        Map<String, PetDialogImgXml.PetDialog> replaceByCashItemMap = replaceByCashImgXml.getPetDialogItemMap();
 
-        SkillImgXml targetEqpImgXml = SkillParser.parse(REPLACE_TARGET);
-        HashMap<String, SkillImgXml.Skill> targetCashItemMap = targetEqpImgXml.getMapItemMap();
+        PetDialogImgXml targetEqpImgXml = PetDialogParser.parse(REPLACE_TARGET);
+        Map<String, PetDialogImgXml.PetDialog> targetCashItemMap = targetEqpImgXml.getPetDialogItemMap();
 
         List<String> notMatchedList = new ArrayList<>();
         for (String id : targetCashItemMap.keySet()) {
-            SkillImgXml.Skill replaceItem = replaceByCashItemMap.get(id);
+            PetDialogImgXml.PetDialog replaceItem = replaceByCashItemMap.get(id);
             if (replaceItem == null) {
                 notMatchedList.add(id);
                 continue;
             }
 
-            SkillImgXml.Skill targetItem = targetCashItemMap.get(id);
+            PetDialogImgXml.PetDialog targetItem = targetCashItemMap.get(id);
 
-            HashMap<String, String> replaceMap = replaceItem.toMap();
-            HashMap<String, String> targetMap = targetItem.toMap();
+            Map<String, String> replaceMap = replaceItem.toMap();
+            Map<String, String> targetMap = targetItem.toMap();
             for (String name : targetMap.keySet()) {
                 String newValue = replaceMap.get(name);
                 if (newValue == null || newValue.isEmpty()) {

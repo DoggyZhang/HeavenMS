@@ -9,13 +9,14 @@ import java.util.*;
 
 public class EqpLocalization implements ChineseLocalization {
 
-    private static final String REPLACE_TARGET = "E:\\MapleStory\\HeavenMS\\tools\\ChineseWz\\wz\\client\\083\\string.wz\\String.Eqp.img.xml";
-    private static final String REPLACE_BY = "E:\\MapleStory\\HeavenMS\\tools\\ChineseWz\\wz\\server\\079\\string.wz\\Eqp.img.xml";
+    private static final String TARGET_FILE_NAME = "Eqp.img.xml";
+
+    private static final String REPLACE_TARGET = "E:\\MapleStory\\HeavenMS\\tools\\ChineseWz\\wz\\client\\083\\string.wz\\" + TARGET_FILE_NAME;
+    private static final String REPLACE_BY = "E:\\MapleStory\\HeavenMS\\tools\\ChineseWz\\wz\\server\\079\\string.wz\\" + TARGET_FILE_NAME;
 
     private static final String OUTPUT_FOLDER = "E:\\MapleStory\\HeavenMS\\tools\\ChineseWz\\wz\\wz_chinese";
-    private static final String OUTPUT_FILE_NAME = "Eqp.img.xml";
-    private static final String OUTPUT_FILE = OUTPUT_FOLDER + "\\" + OUTPUT_FILE_NAME;
-    private static final String NOT_MATCH_FILE = OUTPUT_FOLDER + "\\Eqp_not_match_id.txt";
+    private static final String OUTPUT_FILE = OUTPUT_FOLDER + "\\" + TARGET_FILE_NAME;
+    private static final String NOT_MATCH_FILE = OUTPUT_FOLDER + "\\" + TARGET_FILE_NAME + "_not_match_id.txt";
 
     @Override
     public void localize() {

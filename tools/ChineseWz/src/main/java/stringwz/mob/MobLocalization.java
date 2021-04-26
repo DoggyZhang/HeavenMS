@@ -1,4 +1,4 @@
-package stringwz.skill;
+package stringwz.mob;
 
 import org.apache.commons.io.*;
 import stringwz.*;
@@ -7,9 +7,9 @@ import utils.*;
 import java.io.*;
 import java.util.*;
 
-public class SkillLocalization implements ChineseLocalization {
+public class MobLocalization implements ChineseLocalization {
 
-    private static final String TARGET_FILE_NAME = "Skill.img.xml";
+    private static final String TARGET_FILE_NAME = "Mob.img.xml";
 
     private static final String REPLACE_TARGET = "E:\\MapleStory\\HeavenMS\\tools\\ChineseWz\\wz\\client\\083\\string.wz\\" + TARGET_FILE_NAME;
     private static final String REPLACE_BY = "E:\\MapleStory\\HeavenMS\\tools\\ChineseWz\\wz\\server\\079\\string.wz\\" + TARGET_FILE_NAME;
@@ -20,25 +20,25 @@ public class SkillLocalization implements ChineseLocalization {
 
     @Override
     public void localize() {
-        SkillImgXml replaceBySkillImgXml = SkillParser.parse(REPLACE_BY);
+        MobImgXml replaceByCashImgXml = MobParser.parse(REPLACE_BY);
         // 拿到所有的汉化信息
-        HashMap<String, SkillImgXml.Skill> replaceByCashItemMap = replaceBySkillImgXml.getMapItemMap();
+        Map<String, MobImgXml.Mob> replaceByCashItemMap = replaceByCashImgXml.getMobItemMap();
 
-        SkillImgXml targetEqpImgXml = SkillParser.parse(REPLACE_TARGET);
-        HashMap<String, SkillImgXml.Skill> targetCashItemMap = targetEqpImgXml.getMapItemMap();
+        MobImgXml targetEqpImgXml = MobParser.parse(REPLACE_TARGET);
+        Map<String, MobImgXml.Mob> targetCashItemMap = targetEqpImgXml.getMobItemMap();
 
         List<String> notMatchedList = new ArrayList<>();
         for (String id : targetCashItemMap.keySet()) {
-            SkillImgXml.Skill replaceItem = replaceByCashItemMap.get(id);
+            MobImgXml.Mob replaceItem = replaceByCashItemMap.get(id);
             if (replaceItem == null) {
                 notMatchedList.add(id);
                 continue;
             }
 
-            SkillImgXml.Skill targetItem = targetCashItemMap.get(id);
+            MobImgXml.Mob targetItem = targetCashItemMap.get(id);
 
-            HashMap<String, String> replaceMap = replaceItem.toMap();
-            HashMap<String, String> targetMap = targetItem.toMap();
+            Map<String, String> replaceMap = replaceItem.toMap();
+            Map<String, String> targetMap = targetItem.toMap();
             for (String name : targetMap.keySet()) {
                 String newValue = replaceMap.get(name);
                 if (newValue == null || newValue.isEmpty()) {
