@@ -21,20 +21,12 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 package life;
 
-import java.io.File;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
-import provider.MapleData;
-import provider.MapleDataDirectoryEntry;
-import provider.MapleDataFileEntry;
-import provider.MapleDataProvider;
-import provider.MapleDataProviderFactory;
-import provider.MapleDataTool;
-import provider.wz.MapleDataType;
-import tools.Pair;
+import provider.*;
+import provider.wz.*;
+import tools.*;
+
+import java.io.*;
+import java.util.*;
 
 public class MapleLifeFactory {
     private static String wzPath = "../../wz";
