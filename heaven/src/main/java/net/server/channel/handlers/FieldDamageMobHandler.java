@@ -31,27 +31,27 @@ import tools.MaplePacketCreator;
 import tools.data.input.SeekableLittleEndianAccessor;
 
 public class FieldDamageMobHandler extends AbstractMaplePacketHandler {
-    
+
     @Override
     public final void handlePacket(SeekableLittleEndianAccessor slea, MapleClient c) {
         int mobOid = slea.readInt();    // packet structure found thanks to Darter (Rajan)
         int dmg = slea.readInt();
-        
+
         MapleCharacter chr = c.getPlayer();
         MapleMap map = chr.getMap();
-        
+
         if (map.getEnvironment().isEmpty()) {   // no environment objects activated to actually hit the mob
             FilePrinter.printError(FilePrinter.EXPLOITS + c.getPlayer().getName() + ".txt", c.getPlayer().getName() + " tried to use an obstacle on mapid " + map.getId() + " to attack.");
             return;
         }
-        
+
         MapleMonster mob = map.getMonsterByOid(mobOid);
         if (mob != null) {
             if (dmg < 0 || dmg > GameConstants.MAX_FIELD_MOB_DAMAGE) {
                 FilePrinter.printError(FilePrinter.EXPLOITS + c.getPlayer().getName() + ".txt", c.getPlayer().getName() + " tried to use an obstacle on mapid " + map.getId() + " to attack " + MapleMonsterInformationProvider.getInstance().getMobNameFromId(mob.getId()) + " with damage " + dmg);
                 return;
             }
-            
+
             map.broadcastMessage(chr, MaplePacketCreator.damageMonster(mobOid, dmg), true);
             map.damageMonster(chr, mob, dmg);
         }

@@ -23,40 +23,40 @@ package server;
 
 import config.YamlConfig;
 import constants.inventory.EquipType;
+import tools.Pair;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
-import tools.Pair;
 
 /**
- *
  * @author Jay Estrella, Ronan
  */
 public class MakerItemFactory {
-    private static MapleItemInformationProvider ii = MapleItemInformationProvider.getInstance();
-    
+    private static final MapleItemInformationProvider ii = MapleItemInformationProvider.getInstance();
+
     public static MakerItemCreateEntry getItemCreateEntry(int toCreate, int stimulantid, Map<Integer, Short> reagentids) {
         MakerItemCreateEntry makerEntry = ii.getMakerItemEntry(toCreate);
-        if(makerEntry.isInvalid()) {
+        if (makerEntry.isInvalid()) {
             return makerEntry;
         }
-        
-          // THEY DECIDED FOR SOME BIZARRE PATTERN ON THE FEE THING, ALMOST RANDOMIZED.
-        if(stimulantid != -1) {
+
+        // THEY DECIDED FOR SOME BIZARRE PATTERN ON THE FEE THING, ALMOST RANDOMIZED.
+        if (stimulantid != -1) {
             makerEntry.addCost(getMakerStimulantFee(toCreate));
         }
-        
-        if(!reagentids.isEmpty()) {
-            for(Entry<Integer, Short> r : reagentids.entrySet()) {
+
+        if (!reagentids.isEmpty()) {
+            for (Entry<Integer, Short> r : reagentids.entrySet()) {
                 makerEntry.addCost((getMakerReagentFee(toCreate, ((r.getKey() % 10) + 1))) * r.getValue());
             }
         }
-        
+
         makerEntry.trimCost();  // "commit" the real cost of the recipe.
         return makerEntry;
     }
-    
+
     public static MakerItemCreateEntry generateLeftoverCrystalEntry(int fromLeftoverid, int crystalId) {
         MakerItemCreateEntry ret = new MakerItemCreateEntry(0, 0, 1);
         ret.addReqItem(fromLeftoverid, 100);
@@ -72,13 +72,13 @@ public class MakerItemFactory {
         }
         return ret;
     }
-            
+
     private static double getMakerStimulantFee(int itemid) {
-        if(YamlConfig.config.server.USE_MAKER_FEE_HEURISTICS) {
+        if (YamlConfig.config.server.USE_MAKER_FEE_HEURISTICS) {
             EquipType et = EquipType.getEquipTypeById(itemid);
             int eqpLevel = ii.getEquipLevelReq(itemid);
 
-            switch(et) {
+            switch (et) {
                 case CAP:
                     return 1145.736246 * Math.exp(0.03336832546 * eqpLevel);
 
@@ -107,13 +107,13 @@ public class MakerItemFactory {
             return 14000;
         }
     }
-    
+
     private static double getMakerReagentFee(int itemid, int reagentLevel) {
-        if(YamlConfig.config.server.USE_MAKER_FEE_HEURISTICS) {
+        if (YamlConfig.config.server.USE_MAKER_FEE_HEURISTICS) {
             EquipType et = EquipType.getEquipTypeById(itemid);
             int eqpLevel = ii.getEquipLevelReq(itemid);
 
-            switch(et) {
+            switch (et) {
                 case CAP:
                     return 5592.01613 * Math.exp(0.02914576018 * eqpLevel) * reagentLevel;
 
@@ -142,30 +142,31 @@ public class MakerItemFactory {
             return 8000 * reagentLevel;
         }
     }
-    
+
     public static class MakerItemCreateEntry {
-        private int reqLevel, reqMakerLevel;
+        private final int reqLevel;
+        private final int reqMakerLevel;
         private double cost;
         private int reqCost;
-        private List<Pair<Integer, Integer>> reqItems = new ArrayList<>(); // itemId / amount
-        private List<Pair<Integer, Integer>> gainItems = new ArrayList<>(); // itemId / amount
+        private final List<Pair<Integer, Integer>> reqItems = new ArrayList<>(); // itemId / amount
+        private final List<Pair<Integer, Integer>> gainItems = new ArrayList<>(); // itemId / amount
 
         public MakerItemCreateEntry(int cost, int reqLevel, int reqMakerLevel) {
             this.cost = cost;
             this.reqLevel = reqLevel;
             this.reqMakerLevel = reqMakerLevel;
         }
-        
+
         public MakerItemCreateEntry(MakerItemCreateEntry mi) {
             this.cost = mi.cost;
             this.reqLevel = mi.reqLevel;
             this.reqMakerLevel = mi.reqMakerLevel;
-            
-            for(Pair<Integer, Integer> p : mi.reqItems) {
+
+            for (Pair<Integer, Integer> p : mi.reqItems) {
                 reqItems.add(p);
             }
-            
-            for(Pair<Integer, Integer> p : mi.gainItems) {
+
+            for (Pair<Integer, Integer> p : mi.gainItems) {
                 gainItems.add(p);
             }
         }
@@ -173,7 +174,7 @@ public class MakerItemFactory {
         public List<Pair<Integer, Integer>> getReqItems() {
             return reqItems;
         }
-        
+
         public List<Pair<Integer, Integer>> getGainItems() {
             return gainItems;
         }
@@ -189,7 +190,7 @@ public class MakerItemFactory {
         public int getCost() {
             return reqCost;
         }
-        
+
         public void addCost(double amount) {
             cost += amount;
         }
@@ -197,16 +198,16 @@ public class MakerItemFactory {
         protected void addReqItem(int itemId, int amount) {
             reqItems.add(new Pair<>(itemId, amount));
         }
-        
+
         protected void addGainItem(int itemId, int amount) {
             gainItems.add(new Pair<>(itemId, amount));
         }
-        
+
         public void trimCost() {
             reqCost = (int) (cost / 1000);
             reqCost *= 1000;
         }
-        
+
         public boolean isInvalid() {    // thanks Rohenn, Wh1SK3Y for noticing some items not getting checked properly
             return reqLevel < 0;
         }

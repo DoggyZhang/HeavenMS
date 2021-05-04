@@ -24,8 +24,8 @@
 package client.command.commands.gm1;
 
 import client.MapleCharacter;
-import client.command.Command;
 import client.MapleClient;
+import client.command.Command;
 import server.MapleItemInformationProvider;
 import server.life.MapleMonsterInformationProvider;
 import tools.DatabaseConnection;
@@ -48,15 +48,15 @@ public class WhoDropsCommand extends Command {
             player.dropMessage(5, "Please do @whodrops <item name>");
             return;
         }
-        
+
         if (c.tryacquireClient()) {
             try {
                 String searchString = player.getLastCommandMessage();
                 String output = "";
                 Iterator<Pair<Integer, String>> listIterator = MapleItemInformationProvider.getInstance().getItemDataByName(searchString).iterator();
-                if(listIterator.hasNext()) {
+                if (listIterator.hasNext()) {
                     int count = 1;
-                    while(listIterator.hasNext() && count <= 3) {
+                    while (listIterator.hasNext() && count <= 3) {
                         Pair<Integer, String> data = listIterator.next();
                         output += "#b" + data.getRight() + "#k is dropped by:\r\n";
                         try {
@@ -64,7 +64,7 @@ public class WhoDropsCommand extends Command {
                             PreparedStatement ps = con.prepareStatement("SELECT dropperid FROM drop_data WHERE itemid = ? LIMIT 50");
                             ps.setInt(1, data.getLeft());
                             ResultSet rs = ps.executeQuery();
-                            while(rs.next()) {
+                            while (rs.next()) {
                                 String resultName = MapleMonsterInformationProvider.getInstance().getMobNameFromId(rs.getInt("dropperid"));
                                 if (resultName != null) {
                                     output += resultName + ", ";
@@ -85,7 +85,7 @@ public class WhoDropsCommand extends Command {
                     player.dropMessage(5, "The item you searched for doesn't exist.");
                     return;
                 }
-                
+
                 c.getAbstractPlayerInteraction().npcTalk(9010000, output);
             } finally {
                 c.releaseClient();

@@ -24,9 +24,9 @@
 package client.command.commands.gm1;
 
 import client.MapleCharacter;
+import client.MapleClient;
 import client.SkillFactory;
 import client.command.Command;
-import client.MapleClient;
 
 public class BuffMeCommand extends Command {
     {

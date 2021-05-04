@@ -19,8 +19,6 @@
 */
 package server.maps;
 
-import java.util.HashMap;
-import java.util.Map;
 import net.server.audit.locks.MonitoredLockType;
 import net.server.audit.locks.MonitoredReadLock;
 import net.server.audit.locks.MonitoredReentrantReadWriteLock;
@@ -29,15 +27,19 @@ import net.server.audit.locks.factory.MonitoredReadLockFactory;
 import net.server.audit.locks.factory.MonitoredWriteLockFactory;
 import scripting.event.EventInstanceManager;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class MapleMapManager {
 
-    private int channel, world;
+    private final int channel;
+    private final int world;
     private EventInstanceManager event;
-    
-    private Map<Integer, MapleMap> maps = new HashMap<>();
-    
-    private MonitoredReadLock mapsRLock;
-    private MonitoredWriteLock mapsWLock;
+
+    private final Map<Integer, MapleMap> maps = new HashMap<>();
+
+    private final MonitoredReadLock mapsRLock;
+    private final MonitoredWriteLock mapsWLock;
 
     public MapleMapManager(EventInstanceManager eim, int world, int channel) {
         this.world = world;
@@ -102,7 +104,7 @@ public class MapleMapManager {
 
         return (map != null) ? map : loadMapFromWz(mapid, true);
     }
-    
+
     public MapleMap getDisposableMap(int mapid) {
         return loadMapFromWz(mapid, false);
     }
@@ -124,14 +126,14 @@ public class MapleMapManager {
             mapsRLock.unlock();
         }
     }
-    
+
     public void updateMaps() {
         for (MapleMap map : getMaps().values()) {
             map.respawn();
             map.mobMpRecovery();
         }
     }
-    
+
     public void dispose() {
         for (MapleMap map : getMaps().values()) {
             map.dispose();

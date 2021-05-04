@@ -21,25 +21,25 @@ package net.server.coordinator.matchchecker.listener;
 
 import client.MapleCharacter;
 import constants.string.LanguageConstants;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Set;
 import net.server.coordinator.matchchecker.AbstractMatchCheckerListener;
 import net.server.coordinator.matchchecker.MatchCheckerListenerRecipe;
 import net.server.world.MaplePartyCharacter;
 import scripting.npc.NPCConversationManager;
 import scripting.npc.NPCScriptManager;
 
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Set;
+
 /**
- *
  * @author Ronan
  */
 public class MatchCheckerCPQChallenge implements MatchCheckerListenerRecipe {
-    
+
     public static AbstractMatchCheckerListener loadListener() {
         return (new MatchCheckerCPQChallenge()).getListener();
     }
-    
+
     private static MapleCharacter getChallenger(int leaderid, Set<MapleCharacter> matchPlayers) {
         MapleCharacter leader = null;
         for (MapleCharacter chr : matchPlayers) {
@@ -48,47 +48,47 @@ public class MatchCheckerCPQChallenge implements MatchCheckerListenerRecipe {
                 break;
             }
         }
-        
+
         return leader;
     }
-    
+
     @Override
     public AbstractMatchCheckerListener getListener() {
         return new AbstractMatchCheckerListener() {
-            
+
             @Override
             public void onMatchCreated(MapleCharacter leader, Set<MapleCharacter> nonLeaderMatchPlayers, String message) {
                 NPCConversationManager cm = leader.getClient().getCM();
                 int npcid = cm.getNpc();
-                
+
                 MapleCharacter ldr = null;
                 for (MapleCharacter chr : nonLeaderMatchPlayers) {
                     ldr = chr;
                     break;
                 }
-                
+
                 MapleCharacter chr = leader;
-                
+
                 List<MaplePartyCharacter> chrMembers = new LinkedList<>();
                 for (MaplePartyCharacter mpc : chr.getParty().getMembers()) {
                     if (mpc.isOnline()) {
                         chrMembers.add(mpc);
                     }
                 }
-                
+
                 if (message.contentEquals("cpq1")) {
                     NPCScriptManager.getInstance().start("cpqchallenge", ldr.getClient(), npcid, chrMembers);
                 } else {
                     NPCScriptManager.getInstance().start("cpqchallenge2", ldr.getClient(), npcid, chrMembers);
                 }
-                
+
                 cm.sendOk(LanguageConstants.getMessage(chr, LanguageConstants.CPQChallengeRoomSent));
             }
-            
+
             @Override
             public void onMatchAccepted(int leaderid, Set<MapleCharacter> matchPlayers, String message) {
                 MapleCharacter chr = getChallenger(leaderid, matchPlayers);
-                
+
                 MapleCharacter ldr = null;
                 for (MapleCharacter ch : matchPlayers) {
                     if (ch != chr) {
@@ -96,26 +96,27 @@ public class MatchCheckerCPQChallenge implements MatchCheckerListenerRecipe {
                         break;
                     }
                 }
-                
+
                 if (message.contentEquals("cpq1")) {
                     ldr.getClient().getCM().startCPQ(chr, ldr.getMapId() + 1);
                 } else {
                     ldr.getClient().getCM().startCPQ2(chr, ldr.getMapId() + 1);
                 }
-                
+
                 ldr.getParty().setEnemy(chr.getParty());
                 chr.getParty().setEnemy(ldr.getParty());
                 chr.setChallenged(false);
             }
-            
+
             @Override
             public void onMatchDeclined(int leaderid, Set<MapleCharacter> matchPlayers, String message) {
                 MapleCharacter chr = getChallenger(leaderid, matchPlayers);
                 chr.dropMessage(5, LanguageConstants.getMessage(chr, LanguageConstants.CPQChallengeRoomDenied));
             }
-            
+
             @Override
-            public void onMatchDismissed(int leaderid, Set<MapleCharacter> matchPlayers, String message) {}
+            public void onMatchDismissed(int leaderid, Set<MapleCharacter> matchPlayers, String message) {
+            }
         };
     }
 }

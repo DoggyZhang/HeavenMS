@@ -23,20 +23,10 @@
 */
 package net.server.channel.handlers;
 
-import client.MapleClient;
 import client.MapleCharacter;
+import client.MapleClient;
 import client.inventory.Item;
 import client.inventory.manipulator.MapleInventoryManipulator;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
 import net.AbstractMaplePacketHandler;
 import net.server.Server;
 import server.CashShop;
@@ -47,17 +37,23 @@ import tools.MaplePacketCreator;
 import tools.Pair;
 import tools.data.input.SeekableLittleEndianAccessor;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.*;
+import java.util.Map.Entry;
+
 /**
- *
  * @author Penguins (Acrylic)
  * @author Ronan (HeavenMS)
  */
 public final class CouponCodeHandler extends AbstractMaplePacketHandler {
-    
+
     private static List<Pair<Integer, Pair<Integer, Integer>>> getNXCodeItems(MapleCharacter chr, Connection con, int codeid) throws SQLException {
         Map<Integer, Integer> couponItems = new HashMap<>();
         Map<Integer, Integer> couponPoints = new HashMap<>(5);
-        
+
         PreparedStatement ps = con.prepareStatement("SELECT * FROM nxcode_items WHERE codeid = ?");
         ps.setInt(1, codeid);
 
@@ -73,7 +69,7 @@ public final class CouponCodeHandler extends AbstractMaplePacketHandler {
                 }
             } else {
                 int item = rs.getInt("item");
-                
+
                 Integer i = couponItems.get(item);
                 if (i != null) {
                     couponItems.put(item, i + quantity);
@@ -82,39 +78,39 @@ public final class CouponCodeHandler extends AbstractMaplePacketHandler {
                 }
             }
         }
-        
+
         rs.close();
         ps.close();
-        
+
         List<Pair<Integer, Pair<Integer, Integer>>> ret = new LinkedList<>();
         if (!couponItems.isEmpty()) {
             for (Entry<Integer, Integer> e : couponItems.entrySet()) {
                 int item = e.getKey(), qty = e.getValue();
-                
+
                 if (MapleItemInformationProvider.getInstance().getName(item) == null) {
                     item = 4000000;
                     qty = 1;
-                    
+
                     FilePrinter.printError(FilePrinter.UNHANDLED_EVENT, "Error trying to redeem itemid " + item + " from codeid " + codeid + ".");
                 }
-                
+
                 if (!chr.canHold(item, qty)) {
                     return null;
                 }
-                
+
                 ret.add(new Pair<>(5, new Pair<>(item, qty)));
             }
         }
-        
+
         if (!couponPoints.isEmpty()) {
             for (Entry<Integer, Integer> e : couponPoints.entrySet()) {
                 ret.add(new Pair<>(e.getKey(), new Pair<>(777, e.getValue())));
             }
         }
-        
+
         return ret;
     }
-    
+
     private static Pair<Integer, List<Pair<Integer, Pair<Integer, Integer>>>> getNXCodeResult(MapleCharacter chr, String code) {
         MapleClient c = chr.getClient();
         List<Pair<Integer, Pair<Integer, Integer>>> ret = new LinkedList<>();
@@ -122,72 +118,72 @@ public final class CouponCodeHandler extends AbstractMaplePacketHandler {
             if (!c.attemptCsCoupon()) {
                 return new Pair<>(-5, null);
             }
-            
+
             Connection con = DatabaseConnection.getConnection();
             PreparedStatement ps = con.prepareStatement("SELECT * FROM nxcode WHERE code = ?");
             ps.setString(1, code);
-            
+
             ResultSet rs = ps.executeQuery();
             if (!rs.next()) {
                 return new Pair<>(-1, null);
             }
-            
+
             if (rs.getString("retriever") != null) {
                 return new Pair<>(-2, null);
             }
-            
+
             if (rs.getLong("expiration") < Server.getInstance().getCurrentTime()) {
                 return new Pair<>(-3, null);
             }
-            
+
             int codeid = rs.getInt("id");
             rs.close();
             ps.close();
-            
+
             ret = getNXCodeItems(chr, con, codeid);
             if (ret == null) {
                 return new Pair<>(-4, null);
             }
-            
+
             ps = con.prepareStatement("UPDATE nxcode SET retriever = ? WHERE code = ?");
             ps.setString(1, chr.getName());
             ps.setString(2, code);
             ps.executeUpdate();
-            
+
             ps.close();
             con.close();
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
-        
+
         c.resetCsCoupon();
         return new Pair<>(0, ret);
     }
-    
+
     private static int parseCouponResult(int res) {
         switch (res) {
             case -1:
                 return 0xB0;
-                
+
             case -2:
                 return 0xB3;
-            
+
             case -3:
                 return 0xB2;
-            
+
             case -4:
                 return 0xBB;
-                
+
             default:
                 return 0xB1;
         }
     }
-    
+
     @Override
     public final void handlePacket(SeekableLittleEndianAccessor slea, MapleClient c) {
         slea.skip(2);
         String code = slea.readMapleAsciiString();
-        
+
         if (c.tryacquireClient()) {
             try {
                 Pair<Integer, List<Pair<Integer, Pair<Integer, Integer>>>> codeRes = getNXCodeResult(c.getPlayer(), code.toUpperCase());
@@ -201,7 +197,7 @@ public final class CouponCodeHandler extends AbstractMaplePacketHandler {
                     int maplePoints = 0;
                     int nxPrepaid = 0;
                     int mesos = 0;
-                    
+
                     for (Pair<Integer, Pair<Integer, Integer>> p : codeRes.getRight()) {
                         type = p.getLeft();
                         int quantity = p.getRight().getRight();
@@ -233,7 +229,7 @@ public final class CouponCodeHandler extends AbstractMaplePacketHandler {
 
                             default:
                                 int item = p.getRight().getLeft();
-                                
+
                                 short qty;
                                 if (quantity > Short.MAX_VALUE) {
                                     qty = Short.MAX_VALUE;
@@ -242,7 +238,7 @@ public final class CouponCodeHandler extends AbstractMaplePacketHandler {
                                 } else {
                                     qty = (short) quantity;
                                 }
-                                
+
                                 if (MapleItemInformationProvider.getInstance().isCash(item)) {
                                     Item it = CashShop.generateCouponItem(item, qty);
 
@@ -250,16 +246,16 @@ public final class CouponCodeHandler extends AbstractMaplePacketHandler {
                                     cashItems.add(it);
                                 } else {
                                     MapleInventoryManipulator.addById(c, item, qty, "", -1);
-                                    items.add(new Pair<Integer, Integer>((int)qty, item));
+                                    items.add(new Pair<Integer, Integer>((int) qty, item));
                                 }
                                 break;
                         }
                     }
-                    if(cashItems.size() > 255) {
+                    if (cashItems.size() > 255) {
                         List<Item> oldList = cashItems;
                         cashItems = Arrays.asList(new Item[255]);
                         int index = 0;
-                        for(Item item : oldList) {
+                        for (Item item : oldList) {
                             cashItems.set(index, item);
                             index++;
                         }

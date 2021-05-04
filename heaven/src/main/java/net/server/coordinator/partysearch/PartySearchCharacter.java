@@ -24,37 +24,36 @@ import client.MapleCharacter;
 import java.lang.ref.WeakReference;
 
 /**
- *
  * @author Ronan
  */
 public class PartySearchCharacter {
-    
-    private WeakReference<MapleCharacter> player;
-    private int level;
+
+    private final WeakReference<MapleCharacter> player;
+    private final int level;
     private boolean queued;
-    
+
     public PartySearchCharacter(MapleCharacter chr) {
         player = new WeakReference(chr);
         level = chr.getLevel();
         queued = true;
     }
-    
+
     @Override
     public String toString() {
         MapleCharacter chr = player.get();
         return chr == null ? "[empty]" : chr.toString();
     }
-    
+
     public MapleCharacter callPlayer(int leaderid, int callerMapid) {
         MapleCharacter chr = player.get();
         if (chr == null || !MaplePartySearchCoordinator.isInVicinity(callerMapid, chr.getMapId())) {
             return null;
         }
-        
+
         if (chr.hasDisabledPartySearchInvite(leaderid)) {
             return null;
         }
-        
+
         queued = false;
         if (chr.isLoggedinWorld() && chr.getParty() == null) {
             return chr;
@@ -62,17 +61,17 @@ public class PartySearchCharacter {
             return null;
         }
     }
-    
+
     public MapleCharacter getPlayer() {
         return player.get();
     }
-    
+
     public int getLevel() {
         return level;
     }
-    
+
     public boolean isQueued() {
         return queued;
     }
-    
+
 }

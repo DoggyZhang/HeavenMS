@@ -24,8 +24,8 @@
 package client.command.commands.gm0;
 
 import client.MapleCharacter;
-import client.command.Command;
 import client.MapleClient;
+import client.command.Command;
 import net.server.Server;
 import tools.FilePrinter;
 import tools.MaplePacketCreator;

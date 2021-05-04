@@ -21,34 +21,32 @@
  */
 package server.life;
 
-import java.awt.Point;
-import java.awt.Rectangle;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
 import client.MapleCharacter;
 import client.MapleDisease;
 import client.status.MonsterStatus;
 import constants.game.GameConstants;
-import java.util.LinkedList;
-import java.util.Map;
-import net.server.services.type.ChannelServices;
 import net.server.services.task.channel.OverallService;
-import tools.Randomizer;
+import net.server.services.type.ChannelServices;
 import server.maps.MapleMap;
 import server.maps.MapleMapObject;
 import server.maps.MapleMapObjectType;
 import server.maps.MapleMist;
 import tools.ArrayMap;
+import tools.Randomizer;
+
+import java.awt.Point;
+import java.awt.Rectangle;
+import java.util.*;
 
 /**
- *
  * @author Danny (Leifde)
  */
 public class MobSkill {
 
-    private int skillId, skillLevel, mpCon;
-    private List<Integer> toSummon = new ArrayList<Integer>();
+    private final int skillId;
+    private final int skillLevel;
+    private int mpCon;
+    private final List<Integer> toSummon = new ArrayList<Integer>();
     private int spawnEffect, hp, x, y;
     private long duration, cooltime;
     private float prop;
@@ -257,7 +255,7 @@ public class MobSkill {
                     int summonLimit = monster.countAvailableMobSummons(summons.size(), skillLimit);
                     if (summonLimit >= 1) {
                         boolean bossRushMap = GameConstants.isBossRush(map.getId());
-                        
+
                         Collections.shuffle(summons);
                         for (Integer mobId : summons.subList(0, summonLimit)) {
                             MapleMonster toSpawn = MapleLifeFactory.getMonster(mobId);
@@ -283,7 +281,7 @@ public class MobSkill {
                                     case 8510100: //Pianus bomb
                                         if (Math.ceil(Math.random() * 5) == 1) {
                                             ypos = 78;
-                                            xpos = (int) Randomizer.nextInt(5) + (Randomizer.nextInt(2) == 1 ? 180 : 0);
+                                            xpos = Randomizer.nextInt(5) + (Randomizer.nextInt(2) == 1 ? 180 : 0);
                                         } else {
                                             xpos = (int) (monster.getPosition().getX() + Randomizer.nextInt(1000) - 500);
                                         }

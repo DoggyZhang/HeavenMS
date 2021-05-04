@@ -19,28 +19,29 @@
 */
 package net.server.channel.handlers;
 
-import client.MapleClient;
 import client.MapleCharacter;
+import client.MapleClient;
 import constants.skills.Gunslinger;
 import constants.skills.NightWalker;
 import net.AbstractMaplePacketHandler;
+import tools.FilePrinter;
 import tools.MaplePacketCreator;
 import tools.data.input.SeekableLittleEndianAccessor;
+
 import java.awt.Point;
-import tools.FilePrinter;
 
 /*
  * @author GabrielSin
  */
 public class GrenadeEffectHandler extends AbstractMaplePacketHandler {
- 
+
     @Override
     public void handlePacket(SeekableLittleEndianAccessor slea, MapleClient c) {
         MapleCharacter chr = c.getPlayer();
         Point position = new Point(slea.readInt(), slea.readInt());
         int keyDown = slea.readInt();
         int skillId = slea.readInt();
-       
+
         switch (skillId) {
             case NightWalker.POISON_BOMB:
             case Gunslinger.GRENADE:
@@ -53,5 +54,5 @@ public class GrenadeEffectHandler extends AbstractMaplePacketHandler {
                 FilePrinter.printError(FilePrinter.UNHANDLED_EVENT, "The skill id: " + skillId + " is not coded in " + this.getClass().getName() + ".");
         }
     }
- 
+
 }

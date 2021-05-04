@@ -21,31 +21,28 @@
 */
 package client;
 
+import net.server.audit.locks.MonitoredLockType;
+import net.server.audit.locks.factory.MonitoredReentrantLockFactory;
+import tools.DatabaseConnection;
+import tools.MaplePacketCreator;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.Collections;
-import java.util.LinkedHashMap;
-import java.util.Map;
+import java.util.*;
 import java.util.Map.Entry;
-import java.util.HashSet;
-import java.util.Set;
-import java.util.concurrent.locks.Lock;
 import java.util.concurrent.Semaphore;
-import tools.DatabaseConnection;
-import tools.MaplePacketCreator;
-import net.server.audit.locks.MonitoredLockType;
-import net.server.audit.locks.factory.MonitoredReentrantLockFactory;
+import java.util.concurrent.locks.Lock;
 
 public final class MonsterBook {
     private static final Semaphore semaphore = new Semaphore(10);
-    
+
     private int specialCard = 0;
     private int normalCard = 0;
     private int bookLevel = 1;
-    private Map<Integer, Integer> cards = new LinkedHashMap<>();
-    private Lock lock = MonitoredReentrantLockFactory.createLock(MonitoredLockType.BOOK);
+    private final Map<Integer, Integer> cards = new LinkedHashMap<>();
+    private final Lock lock = MonitoredReentrantLockFactory.createLock(MonitoredLockType.BOOK);
 
     public Set<Entry<Integer, Integer>> getCardSet() {
         lock.lock();
@@ -55,23 +52,23 @@ public final class MonsterBook {
             lock.unlock();
         }
     }
-    
+
     public void addCard(final MapleClient c, final int cardid) {
         c.getPlayer().getMap().broadcastMessage(c.getPlayer(), MaplePacketCreator.showForeignCardEffect(c.getPlayer().getId()), false);
-        
+
         Integer qty;
         lock.lock();
         try {
             qty = cards.get(cardid);
-            
-            if(qty != null) {
-                if(qty < 5) {
+
+            if (qty != null) {
+                if (qty < 5) {
                     cards.put(cardid, qty + 1);
                 }
             } else {
                 cards.put(cardid, 1);
                 qty = 0;
-                
+
                 if (cardid / 1000 >= 2388) {
                     specialCard++;
                 } else {
@@ -81,12 +78,12 @@ public final class MonsterBook {
         } finally {
             lock.unlock();
         }
-        
-        if(qty < 5) {
+
+        if (qty < 5) {
             if (qty == 0) {     // leveling system only accounts unique cards
                 calculateLevel();
             }
-            
+
             c.announce(MaplePacketCreator.addCard(false, cardid, qty + 1));
             c.announce(MaplePacketCreator.showGainCard());
         } else {
@@ -98,13 +95,13 @@ public final class MonsterBook {
         lock.lock();
         try {
             int collectionExp = (normalCard + specialCard);
-            
+
             int level = 0, expToNextlevel = 1;
             do {
                 level++;
                 expToNextlevel += level * 10;
             } while (collectionExp >= expToNextlevel);
-            
+
             bookLevel = level;  // thanks IxianMace for noticing book level differing between book UI and character info UI
         } finally {
             lock.unlock();
@@ -181,23 +178,23 @@ public final class MonsterBook {
         } finally {
             lock.unlock();
         }
-        
+
         calculateLevel();
     }
 
     private static int saveStringConcat(char[] data, int pos, Integer i) {
         return saveStringConcat(data, pos, i.toString());
     }
-    
+
     private static int saveStringConcat(char[] data, int pos, String s) {
         int len = s.length();
-        for(int j = 0; j < len; j++) {
+        for (int j = 0; j < len; j++) {
             data[pos + j] = s.charAt(j);
         }
-        
+
         return pos + len;
     }
-    
+
     private static String getSaveString(Integer charid, Set<Entry<Integer, Integer>> cardSet) {
         semaphore.acquireUninterruptibly();
         try {
@@ -215,16 +212,16 @@ public final class MonsterBook {
                 i = saveStringConcat(save, i, all.getValue());  //1 char due to being 0 ~ 5
                 i = saveStringConcat(save, i, "),");
             }
-            
+
             return new String(save, 0, i - 1);
         } finally {
             semaphore.release();
         }
     }
-    
+
     public void saveCards(final int charid) {
         Set<Entry<Integer, Integer>> cardSet = getCardSet();
-        
+
         if (cardSet.isEmpty()) {
             return;
         }
@@ -234,7 +231,7 @@ public final class MonsterBook {
             ps.setInt(1, charid);
             ps.execute();
             ps.close();
-            
+
             ps = con.prepareStatement(getSaveString(charid, cardSet));
             ps.execute();
             ps.close();
@@ -243,25 +240,25 @@ public final class MonsterBook {
             e.printStackTrace();
         }
     }
-    
+
     public static int[] getCardTierSize() {
         try {
             Connection con = DatabaseConnection.getConnection();
             PreparedStatement ps = con.prepareStatement("SELECT COUNT(*) FROM monstercarddata GROUP BY floor(cardid / 1000);");
             ResultSet rs = ps.executeQuery();
-            
+
             rs.last();
             int[] tierSizes = new int[rs.getRow()];
             rs.beforeFirst();
-            
+
             while (rs.next()) {
                 tierSizes[rs.getRow() - 1] = rs.getInt(1);
             }
-            
+
             rs.close();
             ps.close();
             con.close();
-            
+
             return tierSizes;
         } catch (SQLException e) {
             e.printStackTrace();

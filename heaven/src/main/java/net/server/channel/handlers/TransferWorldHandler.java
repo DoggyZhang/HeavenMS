@@ -20,12 +20,6 @@
 
 package net.server.channel.handlers;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Timestamp;
-
 import client.MapleCharacter;
 import client.MapleClient;
 import config.YamlConfig;
@@ -35,13 +29,14 @@ import tools.DatabaseConnection;
 import tools.MaplePacketCreator;
 import tools.data.input.SeekableLittleEndianAccessor;
 
+import java.sql.*;
+
 /**
- *
  * @author Ronan
  * @author Ubaware
  */
 public final class TransferWorldHandler extends AbstractMaplePacketHandler {
-    
+
     @Override
     public final void handlePacket(SeekableLittleEndianAccessor slea, MapleClient c) {
         slea.readInt(); //cid
@@ -52,30 +47,30 @@ public final class TransferWorldHandler extends AbstractMaplePacketHandler {
             return;
         }
         MapleCharacter chr = c.getPlayer();
-        if(!YamlConfig.config.server.ALLOW_CASHSHOP_WORLD_TRANSFER || Server.getInstance().getWorldsSize() <= 1) {
+        if (!YamlConfig.config.server.ALLOW_CASHSHOP_WORLD_TRANSFER || Server.getInstance().getWorldsSize() <= 1) {
             c.announce(MaplePacketCreator.sendWorldTransferRules(9, c));
             return;
         }
         int worldTransferError = chr.checkWorldTransferEligibility();
-        if(worldTransferError != 0) {
+        if (worldTransferError != 0) {
             c.announce(MaplePacketCreator.sendWorldTransferRules(worldTransferError, c));
             return;
         }
         try (Connection con = DatabaseConnection.getConnection();
-                PreparedStatement ps = con.prepareStatement("SELECT completionTime FROM worldtransfers WHERE characterid=?")) {
+             PreparedStatement ps = con.prepareStatement("SELECT completionTime FROM worldtransfers WHERE characterid=?")) {
             ps.setInt(1, chr.getId());
             ResultSet rs = ps.executeQuery();
-            while(rs.next()) {
+            while (rs.next()) {
                 Timestamp completedTimestamp = rs.getTimestamp("completionTime");
-                if(completedTimestamp == null) { //has pending world transfer
+                if (completedTimestamp == null) { //has pending world transfer
                     c.announce(MaplePacketCreator.sendWorldTransferRules(6, c));
                     return;
-                } else if(completedTimestamp.getTime() + YamlConfig.config.server.WORLD_TRANSFER_COOLDOWN > System.currentTimeMillis()) {
+                } else if (completedTimestamp.getTime() + YamlConfig.config.server.WORLD_TRANSFER_COOLDOWN > System.currentTimeMillis()) {
                     c.announce(MaplePacketCreator.sendWorldTransferRules(7, c));
                     return;
-                };
+                }
             }
-        } catch(SQLException e) {
+        } catch (SQLException e) {
             e.printStackTrace();
             return;
         }

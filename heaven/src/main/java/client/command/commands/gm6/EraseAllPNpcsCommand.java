@@ -23,8 +23,8 @@
 */
 package client.command.commands.gm6;
 
-import client.command.Command;
 import client.MapleClient;
+import client.command.Command;
 import server.life.MaplePlayerNPC;
 
 public class EraseAllPNpcsCommand extends Command {

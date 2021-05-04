@@ -23,9 +23,9 @@
 */
 package client.command.commands.gm3;
 
-import client.command.Command;
-import client.MapleClient;
 import client.MapleCharacter;
+import client.MapleClient;
+import client.command.Command;
 
 public class GiveNxCommand extends Command {
     {
@@ -55,7 +55,7 @@ public class GiveNxCommand extends Command {
                         type = 1;
                 }
                 typeStr = params[0];
-                
+
                 if (params.length > 2) {
                     recv = params[1];
                     value = Integer.parseInt(params[2]);

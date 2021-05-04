@@ -1,10 +1,11 @@
 package server.partyquest;
 
 import client.MapleCharacter;
-import java.util.LinkedList;
-import java.util.List;
 import server.maps.MapleMap;
 import tools.MaplePacketCreator;
+
+import java.util.LinkedList;
+import java.util.List;
 
 /**
  * @author Rob
@@ -12,8 +13,8 @@ import tools.MaplePacketCreator;
 public class MonsterCarnivalParty {
 
     private List<MapleCharacter> members = new LinkedList<>();
-    private MapleCharacter leader;
-    private byte team;
+    private final MapleCharacter leader;
+    private final byte team;
     private short availableCP = 0, totalCP = 0;
     private int summons = 8;
     private boolean winner = false;

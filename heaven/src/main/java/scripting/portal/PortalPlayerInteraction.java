@@ -22,19 +22,20 @@
 package scripting.portal;
 
 import client.MapleClient;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import scripting.AbstractPlayerInteraction;
 import scripting.map.MapScriptManager;
 import server.maps.MaplePortal;
 import tools.DatabaseConnection;
 import tools.MaplePacketCreator;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
 public class PortalPlayerInteraction extends AbstractPlayerInteraction {
 
-    private MaplePortal portal;
+    private final MaplePortal portal;
 
     public PortalPlayerInteraction(MapleClient c, MaplePortal portal) {
         super(c);
@@ -44,7 +45,7 @@ public class PortalPlayerInteraction extends AbstractPlayerInteraction {
     public MaplePortal getPortal() {
         return portal;
     }
-    
+
     public void runMapScript() {
         MapScriptManager msm = MapScriptManager.getInstance();
         msm.runMapScript(c, "onUserEnter/" + portal.getScriptName(), false);
@@ -83,10 +84,10 @@ public class PortalPlayerInteraction extends AbstractPlayerInteraction {
                 ex.printStackTrace();
             }
         }
-        
+
         return getPlayer().getLevel() >= 30;
     }
-    
+
     public void blockPortal() {
         c.getPlayer().blockPortal(getPortal().getScriptName());
     }

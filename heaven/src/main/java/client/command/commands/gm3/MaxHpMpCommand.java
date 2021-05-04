@@ -23,9 +23,9 @@
 */
 package client.command.commands.gm3;
 
-import client.command.Command;
-import client.MapleClient;
 import client.MapleCharacter;
+import client.MapleClient;
+import client.command.Command;
 
 public class MaxHpMpCommand extends Command {
     {
@@ -36,7 +36,7 @@ public class MaxHpMpCommand extends Command {
     public void execute(MapleClient c, String[] params) {
         MapleCharacter player = c.getPlayer();
         MapleCharacter victim = player;
-        
+
         int statUpdate = 1;
         if (params.length >= 2) {
             victim = c.getWorldServer().getPlayerStorage().getCharacterByName(params[0]);
@@ -46,7 +46,7 @@ public class MaxHpMpCommand extends Command {
         } else {
             player.yellowMessage("Syntax: !maxhpmp [<playername>] <value>");
         }
-        
+
         if (victim != null) {
             int extraHp = victim.getCurrentMaxHp() - victim.getClientMaxHp();
             int extraMp = victim.getCurrentMaxMp() - victim.getClientMaxMp();

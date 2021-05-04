@@ -35,35 +35,34 @@ import tools.MaplePacketCreator;
 import tools.data.input.SeekableLittleEndianAccessor;
 
 /**
- *
  * @author Moogra
  * @author Ubaware
  */
 public final class FamilyUseHandler extends AbstractMaplePacketHandler {
     @Override
     public final void handlePacket(SeekableLittleEndianAccessor slea, MapleClient c) {
-        if(!YamlConfig.config.server.USE_FAMILY_SYSTEM) {
+        if (!YamlConfig.config.server.USE_FAMILY_SYSTEM) {
             return;
         }
         MapleFamilyEntitlement type = MapleFamilyEntitlement.values()[slea.readInt()];
         int cost = type.getRepCost();
         MapleFamilyEntry entry = c.getPlayer().getFamilyEntry();
-        if(entry.getReputation() < cost || entry.isEntitlementUsed(type)) {
+        if (entry.getReputation() < cost || entry.isEntitlementUsed(type)) {
             return; // shouldn't even be able to request it
         }
         c.announce(MaplePacketCreator.getFamilyInfo(entry));
         MapleCharacter victim;
-        if(type == MapleFamilyEntitlement.FAMILY_REUINION || type == MapleFamilyEntitlement.SUMMON_FAMILY) {
+        if (type == MapleFamilyEntitlement.FAMILY_REUINION || type == MapleFamilyEntitlement.SUMMON_FAMILY) {
             victim = c.getChannelServer().getPlayerStorage().getCharacterByName(slea.readMapleAsciiString());
-            if(victim != null && victim != c.getPlayer()) {
-                if(victim.getFamily() == c.getPlayer().getFamily()) {
+            if (victim != null && victim != c.getPlayer()) {
+                if (victim.getFamily() == c.getPlayer().getFamily()) {
                     MapleMap targetMap = victim.getMap();
                     MapleMap ownMap = c.getPlayer().getMap();
-                    if(targetMap != null) {
-                        if(type == MapleFamilyEntitlement.FAMILY_REUINION) {
-                            if(!FieldLimit.CANNOTMIGRATE.check(ownMap.getFieldLimit()) && !FieldLimit.CANNOTVIPROCK.check(targetMap.getFieldLimit())
+                    if (targetMap != null) {
+                        if (type == MapleFamilyEntitlement.FAMILY_REUINION) {
+                            if (!FieldLimit.CANNOTMIGRATE.check(ownMap.getFieldLimit()) && !FieldLimit.CANNOTVIPROCK.check(targetMap.getFieldLimit())
                                     && (targetMap.getForcedReturnId() == 999999999 || targetMap.getId() < 100000000) && targetMap.getEventInstance() == null) {
-                                
+
                                 c.getPlayer().changeMap(victim.getMap(), victim.getMap().getPortal(0));
                                 useEntitlement(entry, type);
                             } else {
@@ -71,10 +70,10 @@ public final class FamilyUseHandler extends AbstractMaplePacketHandler {
                                 return;
                             }
                         } else {
-                            if(!FieldLimit.CANNOTMIGRATE.check(targetMap.getFieldLimit()) && !FieldLimit.CANNOTVIPROCK.check(ownMap.getFieldLimit()) 
+                            if (!FieldLimit.CANNOTMIGRATE.check(targetMap.getFieldLimit()) && !FieldLimit.CANNOTVIPROCK.check(ownMap.getFieldLimit())
                                     && (ownMap.getForcedReturnId() == 999999999 || ownMap.getId() < 100000000) && ownMap.getEventInstance() == null) {
-                                
-                                if(MapleInviteCoordinator.hasInvite(InviteType.FAMILY_SUMMON, victim.getId())) {
+
+                                if (MapleInviteCoordinator.hasInvite(InviteType.FAMILY_SUMMON, victim.getId())) {
                                     c.announce(MaplePacketCreator.sendFamilyMessage(74, 0));
                                     return;
                                 }
@@ -91,7 +90,7 @@ public final class FamilyUseHandler extends AbstractMaplePacketHandler {
                     c.announce(MaplePacketCreator.sendFamilyMessage(67, 0));
                 }
             }
-        } else if(type == MapleFamilyEntitlement.FAMILY_BONDING) {
+        } else if (type == MapleFamilyEntitlement.FAMILY_BONDING) {
             //not implemented
         } else {
             boolean party = false;
@@ -99,39 +98,39 @@ public final class FamilyUseHandler extends AbstractMaplePacketHandler {
             float rate = 1.5f;
             int duration = 15;
             do {
-                switch(type) {
-                case PARTY_EXP_2_30MIN:
-                    party = true;
-                    isExp = true;
-                    type = MapleFamilyEntitlement.SELF_EXP_2_30MIN;
-                    continue;
-                case PARTY_DROP_2_30MIN:
-                    party = true;
-                    type = MapleFamilyEntitlement.SELF_DROP_2_30MIN;
-                    continue;
-                case SELF_DROP_2_30MIN:
-                    duration = 30;
-                case SELF_DROP_2:
-                    rate = 2.0f;
-                case SELF_DROP_1_5:
-                    break;
-                case SELF_EXP_2_30MIN:
-                    duration = 30;
-                case SELF_EXP_2:
-                    rate = 2.0f;
-                case SELF_EXP_1_5:
-                    isExp = true;
-                default:
-                    break;
+                switch (type) {
+                    case PARTY_EXP_2_30MIN:
+                        party = true;
+                        isExp = true;
+                        type = MapleFamilyEntitlement.SELF_EXP_2_30MIN;
+                        continue;
+                    case PARTY_DROP_2_30MIN:
+                        party = true;
+                        type = MapleFamilyEntitlement.SELF_DROP_2_30MIN;
+                        continue;
+                    case SELF_DROP_2_30MIN:
+                        duration = 30;
+                    case SELF_DROP_2:
+                        rate = 2.0f;
+                    case SELF_DROP_1_5:
+                        break;
+                    case SELF_EXP_2_30MIN:
+                        duration = 30;
+                    case SELF_EXP_2:
+                        rate = 2.0f;
+                    case SELF_EXP_1_5:
+                        isExp = true;
+                    default:
+                        break;
                 }
                 break;
-            } while(true);
+            } while (true);
             //not implemented
         }
     }
-    
+
     private boolean useEntitlement(MapleFamilyEntry entry, MapleFamilyEntitlement entitlement) {
-        if(entry.useEntitlement(entitlement)) {
+        if (entry.useEntitlement(entitlement)) {
             entry.gainReputation(-entitlement.getRepCost(), false);
             entry.getChr().announce(MaplePacketCreator.getFamilyInfo(entry));
             return true;

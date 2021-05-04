@@ -22,17 +22,23 @@
 package server.life;
 
 import client.MapleCharacter;
-import java.awt.Point;
-import java.util.concurrent.atomic.AtomicInteger;
 import net.server.Server;
 
+import java.awt.Point;
+import java.util.concurrent.atomic.AtomicInteger;
+
 public class SpawnPoint {
-    private int monster, mobTime, team, fh, f;
-    private Point pos;
+    private final int monster;
+    private final int mobTime;
+    private final int team;
+    private final int fh;
+    private final int f;
+    private final Point pos;
     private long nextPossibleSpawn;
     private int mobInterval = 5000;
-    private AtomicInteger spawnedMonsters = new AtomicInteger(0);
-    private boolean immobile, denySpawn = false;
+    private final AtomicInteger spawnedMonsters = new AtomicInteger(0);
+    private final boolean immobile;
+    private boolean denySpawn = false;
 
     public SpawnPoint(final MapleMonster monster, Point pos, boolean immobile, int mobTime, int mobInterval, int team) {
         this.monster = monster.getId();
@@ -45,34 +51,30 @@ public class SpawnPoint {
         this.mobInterval = mobInterval;
         this.nextPossibleSpawn = Server.getInstance().getCurrentTime();
     }
-    
+
     public int getSpawned() {
         return spawnedMonsters.intValue();
     }
-    
+
     public void setDenySpawn(boolean val) {
         denySpawn = val;
     }
-    
+
     public boolean getDenySpawn() {
         return denySpawn;
     }
 
     public boolean shouldSpawn() {
-    	if (denySpawn || mobTime < 0 || spawnedMonsters.get() > 0) {
+        if (denySpawn || mobTime < 0 || spawnedMonsters.get() > 0) {
             return false;
         }
         return nextPossibleSpawn <= Server.getInstance().getCurrentTime();
     }
 
     public boolean shouldForceSpawn() {
-    	if (mobTime < 0 || spawnedMonsters.get() > 0) {
-            return false;
-        }
-       
-        return true;
+        return mobTime >= 0 && spawnedMonsters.get() <= 0;
     }
-    
+
     public MapleMonster getMonster() {
         MapleMonster mob = new MapleMonster(MapleLifeFactory.getMonster(monster));
         mob.setPosition(new Point(pos));
@@ -91,19 +93,21 @@ public class SpawnPoint {
                 }
                 spawnedMonsters.decrementAndGet();
             }
-            
+
             @Override
-            public void monsterDamaged(MapleCharacter from, int trueDmg) {}
-            
+            public void monsterDamaged(MapleCharacter from, int trueDmg) {
+            }
+
             @Override
-            public void monsterHealed(int trueHeal) {}
+            public void monsterHealed(int trueHeal) {
+            }
         });
         if (mobTime == 0) {
             nextPossibleSpawn = Server.getInstance().getCurrentTime() + mobInterval;
         }
         return mob;
     }
-    
+
     public int getMonsterId() {
         return monster;
     }
@@ -119,11 +123,11 @@ public class SpawnPoint {
     public final int getFh() {
         return fh;
     }
-    
+
     public int getMobTime() {
         return mobTime;
     }
-    
+
     public int getTeam() {
         return team;
     }

@@ -24,8 +24,8 @@
 package client.command.commands.gm2;
 
 import client.MapleCharacter;
-import client.command.Command;
 import client.MapleClient;
+import client.command.Command;
 import client.inventory.Item;
 import client.inventory.MapleInventoryType;
 import constants.inventory.ItemConstants;
@@ -41,16 +41,16 @@ public class RechargeCommand extends Command {
         MapleCharacter player = c.getPlayer();
         MapleItemInformationProvider ii = MapleItemInformationProvider.getInstance();
         for (Item torecharge : c.getPlayer().getInventory(MapleInventoryType.USE).list()) {
-            if (ItemConstants.isThrowingStar(torecharge.getItemId())){
+            if (ItemConstants.isThrowingStar(torecharge.getItemId())) {
                 torecharge.setQuantity(ii.getSlotMax(c, torecharge.getItemId()));
                 c.getPlayer().forceUpdateItem(torecharge);
-            } else if (ItemConstants.isArrow(torecharge.getItemId())){
+            } else if (ItemConstants.isArrow(torecharge.getItemId())) {
                 torecharge.setQuantity(ii.getSlotMax(c, torecharge.getItemId()));
                 c.getPlayer().forceUpdateItem(torecharge);
-            } else if (ItemConstants.isBullet(torecharge.getItemId())){
+            } else if (ItemConstants.isBullet(torecharge.getItemId())) {
                 torecharge.setQuantity(ii.getSlotMax(c, torecharge.getItemId()));
                 c.getPlayer().forceUpdateItem(torecharge);
-            } else if (ItemConstants.isConsumable(torecharge.getItemId())){
+            } else if (ItemConstants.isConsumable(torecharge.getItemId())) {
                 torecharge.setQuantity(ii.getSlotMax(c, torecharge.getItemId()));
                 c.getPlayer().forceUpdateItem(torecharge);
             }

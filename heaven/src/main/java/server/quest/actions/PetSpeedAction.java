@@ -19,42 +19,41 @@
 */
 package server.quest.actions;
 
-import client.MapleClient;
 import client.MapleCharacter;
+import client.MapleClient;
 import client.inventory.MaplePet;
 import provider.MapleData;
-import provider.MapleDataTool;
 import server.quest.MapleQuest;
 import server.quest.MapleQuestActionType;
 
 /**
- *
  * @author Ronan
  */
 public class PetSpeedAction extends MapleQuestAction {
-	
-	public PetSpeedAction(MapleQuest quest, MapleData data) {
-		super(MapleQuestActionType.PETTAMENESS, quest);
-		questID = quest.getId();
-	}
-	
-	
-	@Override
-	public void processData(MapleData data) {}
-	
-	@Override
-	public void run(MapleCharacter chr, Integer extSelection) {
-                MapleClient c = chr.getClient();
-                
-                MaplePet pet = chr.getPet(0);   // assuming here only the pet leader will gain owner speed
-                if(pet == null) return;
-            
-                c.lockClient();
-                try {
-                        pet.addPetFlag(c.getPlayer(), MaplePet.PetFlag.OWNER_SPEED);
-                } finally {
-                    c.unlockClient();
-                }
-                
-	}
+
+    public PetSpeedAction(MapleQuest quest, MapleData data) {
+        super(MapleQuestActionType.PETTAMENESS, quest);
+        questID = quest.getId();
+    }
+
+
+    @Override
+    public void processData(MapleData data) {
+    }
+
+    @Override
+    public void run(MapleCharacter chr, Integer extSelection) {
+        MapleClient c = chr.getClient();
+
+        MaplePet pet = chr.getPet(0);   // assuming here only the pet leader will gain owner speed
+        if (pet == null) return;
+
+        c.lockClient();
+        try {
+            pet.addPetFlag(c.getPlayer(), MaplePet.PetFlag.OWNER_SPEED);
+        } finally {
+            c.unlockClient();
+        }
+
+    }
 } 

@@ -23,10 +23,10 @@
 */
 package client.command.commands.gm2;
 
+import client.MapleCharacter;
+import client.MapleClient;
 import client.MapleJob;
 import client.command.Command;
-import client.MapleClient;
-import client.MapleCharacter;
 
 public class JobCommand extends Command {
     {

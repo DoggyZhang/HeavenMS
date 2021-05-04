@@ -37,23 +37,23 @@ public final class MultiChatHandler extends AbstractMaplePacketHandler {
     @Override
     public final void handlePacket(SeekableLittleEndianAccessor slea, MapleClient c) {
         MapleCharacter player = c.getPlayer();
-        if(player.getAutobanManager().getLastSpam(7) + 200 > currentServerTime()) {
-                return;
+        if (player.getAutobanManager().getLastSpam(7) + 200 > currentServerTime()) {
+            return;
         }
-        
+
         int type = slea.readByte(); // 0 for buddys, 1 for partys
         int numRecipients = slea.readByte();
-        int recipients[] = new int[numRecipients];
+        int[] recipients = new int[numRecipients];
         for (int i = 0; i < numRecipients; i++) {
             recipients[i] = slea.readInt();
         }
         String chattext = slea.readMapleAsciiString();
         if (chattext.length() > Byte.MAX_VALUE && !player.isGM()) {
-        	AutobanFactory.PACKET_EDIT.alert(c.getPlayer(), c.getPlayer().getName() + " tried to packet edit chats.");
-        	FilePrinter.printError(FilePrinter.EXPLOITS + c.getPlayer().getName() + ".txt", c.getPlayer().getName() + " tried to send text with length of " + chattext.length());
-        	c.disconnect(true, false);
-        	return;
-        }	
+            AutobanFactory.PACKET_EDIT.alert(c.getPlayer(), c.getPlayer().getName() + " tried to packet edit chats.");
+            FilePrinter.printError(FilePrinter.EXPLOITS + c.getPlayer().getName() + ".txt", c.getPlayer().getName() + " tried to send text with length of " + chattext.length());
+            c.disconnect(true, false);
+            return;
+        }
         World world = c.getWorldServer();
         if (type == 0) {
             world.buddyChat(recipients, player.getId(), player.getName(), chattext);

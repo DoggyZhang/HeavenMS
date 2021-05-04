@@ -23,9 +23,9 @@
 */
 package client.command.commands.gm3;
 
-import client.command.Command;
-import client.MapleClient;
 import client.MapleCharacter;
+import client.MapleClient;
+import client.command.Command;
 import server.maps.MapleMap;
 
 import java.util.Collection;
@@ -42,7 +42,7 @@ public class ReloadMapCommand extends Command {
         int callerid = c.getPlayer().getId();
 
         Collection<MapleCharacter> characters = player.getMap().getAllPlayers();
-        
+
         for (MapleCharacter chr : characters) {
             chr.saveLocationOnWarp();
             chr.changeMap(newMap);

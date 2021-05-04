@@ -21,32 +21,25 @@
 */
 package provider.wz;
 
-import java.io.BufferedInputStream;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.RandomAccessFile;
 import provider.MapleData;
 import provider.MapleDataDirectoryEntry;
 import provider.MapleDataFileEntry;
 import provider.MapleDataProvider;
-import tools.data.input.GenericLittleEndianAccessor;
-import tools.data.input.GenericSeekableLittleEndianAccessor;
-import tools.data.input.InputStreamByteStream;
-import tools.data.input.LittleEndianAccessor;
-import tools.data.input.RandomAccessByteStream;
-import tools.data.input.SeekableLittleEndianAccessor;
+import tools.data.input.*;
+
+import java.io.*;
 
 public class WZFile implements MapleDataProvider {
     static {
         ListWZFile.init();
     }
-    private File wzfile;
-    private LittleEndianAccessor lea;
-    private SeekableLittleEndianAccessor slea;
+
+    private final File wzfile;
+    private final LittleEndianAccessor lea;
+    private final SeekableLittleEndianAccessor slea;
     private int headerSize;
-    private WZDirectoryEntry root;
-    private boolean provideImages;
+    private final WZDirectoryEntry root;
+    private final boolean provideImages;
     private int cOffset;
 
     public WZFile(File wzfile, boolean provideImages) throws IOException {
@@ -116,7 +109,7 @@ public class WZFile implements MapleDataProvider {
     }
 
     public WZIMGFile getImgFile(String path) throws IOException {
-        String segments[] = path.split("/");
+        String[] segments = path.split("/");
         WZDirectoryEntry dir = root;
         for (int x = 0; x < segments.length - 1; x++) {
             dir = (WZDirectoryEntry) dir.getEntry(segments[x]);

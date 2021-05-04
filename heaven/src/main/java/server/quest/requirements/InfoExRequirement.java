@@ -22,44 +22,44 @@
 package server.quest.requirements;
 
 import client.MapleCharacter;
-import java.util.ArrayList;
-import java.util.List;
 import provider.MapleData;
 import provider.MapleDataTool;
 import server.quest.MapleQuest;
 import server.quest.MapleQuestRequirementType;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
- *
  * @author Tyler (Twdtwd)
  */
 public class InfoExRequirement extends MapleQuestRequirement {
-	private List<String> infoExpected = new ArrayList<>();
-	private int questID;
-	
-	
-	public InfoExRequirement(MapleQuest quest, MapleData data) {
-		super(MapleQuestRequirementType.INFO_EX);
-		questID = quest.getId();
-                processData(data);
-	}
-	
-	@Override
-	public void processData(MapleData data) {
-		// Because we have to...
-                for(MapleData infoEx : data.getChildren()) {
-			MapleData value = infoEx.getChildByPath("value");
-			infoExpected.add(MapleDataTool.getString(value, ""));
-		}
-	}
-	
-	
-	@Override
-	public boolean check(MapleCharacter chr, Integer npcid) {
-		return true;
-	}
-	
-	public List<String> getInfo() {
-		return infoExpected;
+    private final List<String> infoExpected = new ArrayList<>();
+    private final int questID;
+
+
+    public InfoExRequirement(MapleQuest quest, MapleData data) {
+        super(MapleQuestRequirementType.INFO_EX);
+        questID = quest.getId();
+        processData(data);
+    }
+
+    @Override
+    public void processData(MapleData data) {
+        // Because we have to...
+        for (MapleData infoEx : data.getChildren()) {
+            MapleData value = infoEx.getChildByPath("value");
+            infoExpected.add(MapleDataTool.getString(value, ""));
         }
+    }
+
+
+    @Override
+    public boolean check(MapleCharacter chr, Integer npcid) {
+        return true;
+    }
+
+    public List<String> getInfo() {
+        return infoExpected;
+    }
 }

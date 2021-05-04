@@ -21,32 +21,26 @@
 */
 package net.server.channel.handlers;
 
-import java.awt.Point;
-
-import config.YamlConfig;
-import net.AbstractMaplePacketHandler;
-import server.MapleStatEffect;
-import server.life.MapleMonster;
-import tools.MaplePacketCreator;
-import tools.data.input.SeekableLittleEndianAccessor;
 import client.MapleCharacter;
 import client.MapleClient;
 import client.Skill;
 import client.SkillFactory;
-import constants.skills.Brawler;
-import constants.skills.Corsair;
-import constants.skills.DarkKnight;
-import constants.skills.Hero;
-import constants.skills.Paladin;
-import constants.skills.Priest;
-import constants.skills.SuperGM;
+import config.YamlConfig;
+import constants.skills.*;
+import net.AbstractMaplePacketHandler;
 import net.server.Server;
+import server.MapleStatEffect;
+import server.life.MapleMonster;
+import tools.MaplePacketCreator;
+import tools.data.input.SeekableLittleEndianAccessor;
+
+import java.awt.Point;
 
 public final class SpecialMoveHandler extends AbstractMaplePacketHandler {
-    
+
     @Override
     public final void handlePacket(SeekableLittleEndianAccessor slea, MapleClient c) {
-    	MapleCharacter chr = c.getPlayer();
+        MapleCharacter chr = c.getPlayer();
         slea.readInt();
         chr.getAutobanManager().setTimestamp(4, Server.getInstance().getCurrentTimestamp(), 28);
         int skillid = slea.readInt();
@@ -59,7 +53,7 @@ public final class SpecialMoveHandler extends AbstractMaplePacketHandler {
             return;
         }
         */
-        
+
         Point pos = null;
         int __skillLevel = slea.readByte();
         Skill skill = SkillFactory.getSkill(skillid);
@@ -74,17 +68,17 @@ public final class SpecialMoveHandler extends AbstractMaplePacketHandler {
             c.announce(MaplePacketCreator.serverNotice(5, "As you used the secret skill, your energy bar has been reset."));
         }
         if (skillLevel == 0 || skillLevel != __skillLevel) return;
-        
+
         MapleStatEffect effect = skill.getEffect(skillLevel);
         if (effect.getCooldown() > 0) {
             if (chr.skillIsCooling(skillid)) {
                 return;
             } else if (skillid != Corsair.BATTLE_SHIP) {
                 int cooldownTime = effect.getCooldown();
-                if(MapleStatEffect.isHerosWill(skillid) && YamlConfig.config.server.USE_FAST_REUSE_HERO_WILL) {
+                if (MapleStatEffect.isHerosWill(skillid) && YamlConfig.config.server.USE_FAST_REUSE_HERO_WILL) {
                     cooldownTime /= 60;
                 }
-                
+
                 c.announce(MaplePacketCreator.skillCooldown(skillid, cooldownTime));
                 chr.addCooldown(skillid, currentServerTime(), cooldownTime * 1000);
             }
@@ -100,7 +94,7 @@ public final class SpecialMoveHandler extends AbstractMaplePacketHandler {
                     if (!monster.isBoss()) {
                         monster.aggroClearDamages();
                         monster.aggroMonsterDamage(chr, 1);
-                        
+
                         // thanks onechord for pointing out Magnet crashing the caster (issue would actually happen upon failing to catch mob)
                         // thanks Conrad for noticing Magnet crashing when trying to pull bosses and fixed mobs
                         monster.aggroSwitchController(chr, true);
@@ -114,7 +108,7 @@ public final class SpecialMoveHandler extends AbstractMaplePacketHandler {
         } else if (skillid == Brawler.MP_RECOVERY) {// MP Recovery
             Skill s = SkillFactory.getSkill(skillid);
             MapleStatEffect ef = s.getEffect(chr.getSkillLevel(s));
-            
+
             int lose = chr.safeAddHP(-1 * (chr.getCurrentMaxHp() / ef.getX()));
             int gain = -lose * (ef.getY() / 100);
             chr.addMP(gain);
@@ -124,7 +118,7 @@ public final class SpecialMoveHandler extends AbstractMaplePacketHandler {
         } else if (skillid % 10000000 == 1004) {
             slea.readShort();
         }
-        
+
         if (slea.available() == 5) {
             pos = new Point(slea.readShort(), slea.readShort());
         }
@@ -148,7 +142,7 @@ public final class SpecialMoveHandler extends AbstractMaplePacketHandler {
                         c.releaseClient();
                     }
                 }
-                
+
                 c.announce(MaplePacketCreator.enableActions());
             }
         } else {

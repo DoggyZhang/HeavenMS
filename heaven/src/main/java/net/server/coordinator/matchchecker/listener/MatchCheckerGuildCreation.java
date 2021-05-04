@@ -22,21 +22,21 @@ package net.server.coordinator.matchchecker.listener;
 import client.MapleCharacter;
 import config.YamlConfig;
 import constants.game.GameConstants;
+import net.server.Server;
 import net.server.coordinator.matchchecker.AbstractMatchCheckerListener;
 import net.server.coordinator.matchchecker.MatchCheckerListenerRecipe;
 import net.server.guild.MapleGuild;
 import net.server.guild.MapleGuildCharacter;
-import java.util.Set;
-import net.server.Server;
 import net.server.world.MapleParty;
 import tools.MaplePacketCreator;
 
+import java.util.Set;
+
 /**
- *
  * @author Ronan
  */
 public class MatchCheckerGuildCreation implements MatchCheckerListenerRecipe {
-    
+
     private static void broadcastGuildCreationDismiss(Set<MapleCharacter> nonLeaderMatchPlayers) {
         for (MapleCharacter chr : nonLeaderMatchPlayers) {
             if (chr.isLoggedinWorld()) {
@@ -44,26 +44,26 @@ public class MatchCheckerGuildCreation implements MatchCheckerListenerRecipe {
             }
         }
     }
-    
+
     public static AbstractMatchCheckerListener loadListener() {
         return (new MatchCheckerGuildCreation()).getListener();
     }
-    
+
     @Override
     public AbstractMatchCheckerListener getListener() {
         return new AbstractMatchCheckerListener() {
-            
+
             @Override
             public void onMatchCreated(MapleCharacter leader, Set<MapleCharacter> nonLeaderMatchPlayers, String message) {
                 byte[] createGuildPacket = MaplePacketCreator.createGuildMessage(leader.getName(), message);
-                
+
                 for (MapleCharacter chr : nonLeaderMatchPlayers) {
                     if (chr.isLoggedinWorld()) {
                         chr.announce(createGuildPacket);
                     }
                 }
             }
-            
+
             @Override
             public void onMatchAccepted(int leaderid, Set<MapleCharacter> matchPlayers, String message) {
                 MapleCharacter leader = null;
@@ -73,13 +73,13 @@ public class MatchCheckerGuildCreation implements MatchCheckerListenerRecipe {
                         break;
                     }
                 }
-                
+
                 if (leader == null || !leader.isLoggedinWorld()) {
                     broadcastGuildCreationDismiss(matchPlayers);
                     return;
                 }
                 matchPlayers.remove(leader);
-                
+
                 if (leader.getGuildId() > 0) {
                     leader.dropMessage(1, "You cannot create a new Guild while in one.");
                     broadcastGuildCreationDismiss(matchPlayers);
@@ -108,7 +108,7 @@ public class MatchCheckerGuildCreation implements MatchCheckerListenerRecipe {
                     broadcastGuildCreationDismiss(matchPlayers);
                     return;
                 }
-                
+
                 int gid = Server.getInstance().createGuild(leader.getId(), message);
                 if (gid == 0) {
                     leader.announce(MaplePacketCreator.genericGuildMessage((byte) 0x23));
@@ -116,57 +116,57 @@ public class MatchCheckerGuildCreation implements MatchCheckerListenerRecipe {
                     return;
                 }
                 leader.gainMeso(-YamlConfig.config.server.CREATE_GUILD_COST, true, false, true);
-                
+
                 leader.getMGC().setGuildId(gid);
                 MapleGuild guild = Server.getInstance().getGuild(leader.getGuildId(), leader.getWorld(), leader);  // initialize guild structure
                 Server.getInstance().changeRank(gid, leader.getId(), 1);
-                
+
                 leader.announce(MaplePacketCreator.showGuildInfo(leader));
                 leader.dropMessage(1, "You have successfully created a Guild.");
-                
+
                 for (MapleCharacter chr : matchPlayers) {
                     boolean cofounder = chr.getPartyId() == partyid;
-                    
+
                     MapleGuildCharacter mgc = chr.getMGC();
                     mgc.setGuildId(gid);
                     mgc.setGuildRank(cofounder ? 2 : 5);
                     mgc.setAllianceRank(5);
 
                     Server.getInstance().addGuildMember(mgc, chr);
-                    
+
                     if (chr.isLoggedinWorld()) {
                         chr.announce(MaplePacketCreator.showGuildInfo(chr));
-                        
+
                         if (cofounder) {
                             chr.dropMessage(1, "You have successfully cofounded a Guild.");
                         } else {
                             chr.dropMessage(1, "You have successfully joined the new Guild.");
                         }
                     }
-                    
+
                     chr.saveGuildStatus(); // update database
                 }
-                
+
                 guild.broadcastNameChanged();
                 guild.broadcastEmblemChanged();
             }
-            
+
             @Override
             public void onMatchDeclined(int leaderid, Set<MapleCharacter> matchPlayers, String message) {
                 for (MapleCharacter chr : matchPlayers) {
                     if (chr.getId() == leaderid && chr.getClient() != null) {
                         MapleParty.leaveParty(chr.getParty(), chr.getClient());
                     }
-                    
+
                     if (chr.isLoggedinWorld()) {
-                        chr.announce(MaplePacketCreator.genericGuildMessage((byte)0x26));
+                        chr.announce(MaplePacketCreator.genericGuildMessage((byte) 0x26));
                     }
                 }
             }
-            
+
             @Override
             public void onMatchDismissed(int leaderid, Set<MapleCharacter> matchPlayers, String message) {
-                
+
                 MapleCharacter leader = null;
                 for (MapleCharacter chr : matchPlayers) {
                     if (chr.getId() == leaderid) {
@@ -174,22 +174,22 @@ public class MatchCheckerGuildCreation implements MatchCheckerListenerRecipe {
                         break;
                     }
                 }
-                
+
                 String msg;
                 if (leader != null && leader.getParty() == null) {
                     msg = "The Guild creation has been dismissed since the leader left the founding party.";
                 } else {
                     msg = "The Guild creation has been dismissed since a member was already in a party when they answered.";
                 }
-                
+
                 for (MapleCharacter chr : matchPlayers) {
                     if (chr.getId() == leaderid && chr.getClient() != null) {
                         MapleParty.leaveParty(chr.getParty(), chr.getClient());
                     }
-                    
+
                     if (chr.isLoggedinWorld()) {
                         chr.message(msg);
-                        chr.announce(MaplePacketCreator.genericGuildMessage((byte)0x26));
+                        chr.announce(MaplePacketCreator.genericGuildMessage((byte) 0x26));
                     }
                 }
             }

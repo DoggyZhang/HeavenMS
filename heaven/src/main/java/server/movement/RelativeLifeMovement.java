@@ -21,8 +21,9 @@
 */
 package server.movement;
 
-import java.awt.Point;
 import tools.data.output.LittleEndianWriter;
+
+import java.awt.Point;
 
 public class RelativeLifeMovement extends AbstractLifeMovement {
     public RelativeLifeMovement(int type, Point position, int duration, int newstate) {

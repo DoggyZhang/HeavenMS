@@ -19,23 +19,22 @@
 */
 package net.server.channel.handlers;
 
-import config.YamlConfig;
 import client.MapleCharacter;
 import client.MapleClient;
+import config.YamlConfig;
 import net.AbstractMaplePacketHandler;
 import tools.MaplePacketCreator;
 import tools.data.input.SeekableLittleEndianAccessor;
 
 /**
- *
  * @author Ubaware
  */
 public final class OpenFamilyPedigreeHandler extends AbstractMaplePacketHandler {
     @Override
     public final void handlePacket(SeekableLittleEndianAccessor slea, MapleClient c) {
-        if(!YamlConfig.config.server.USE_FAMILY_SYSTEM) return;
+        if (!YamlConfig.config.server.USE_FAMILY_SYSTEM) return;
         MapleCharacter target = c.getChannelServer().getPlayerStorage().getCharacterByName(slea.readMapleAsciiString());
-        if(target != null && target.getFamily() != null) {
+        if (target != null && target.getFamily() != null) {
             c.announce(MaplePacketCreator.showPedigree(target.getFamilyEntry()));
         }
     }

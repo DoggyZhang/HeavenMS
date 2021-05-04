@@ -9,13 +9,12 @@ import client.MapleCharacter;
 import client.SkillFactory;
 
 /**
- *
  * @author kevintjuh93
  */
 public class RescueGaga extends MapleEvents {
-    
+
     private int completed;
-    
+
     public RescueGaga(int completed) {
         super();
         this.completed = completed;
@@ -33,7 +32,7 @@ public class RescueGaga extends MapleEvents {
     public int getInfo() {
         return getCompleted();
     }
-    
+
     public void giveSkill(MapleCharacter chr) {
         int skillid = 0;
         switch (chr.getJobType()) {
@@ -44,7 +43,7 @@ public class RescueGaga extends MapleEvents {
             case 2:
                 skillid = 10001014;
         }
-        
+
         long expiration = (System.currentTimeMillis() + 3600 * 24 * 20 * 1000);//20 days
         if (completed < 20) {
             chr.changeSkillLevel(SkillFactory.getSkill(skillid), (byte) 1, 1, expiration);
@@ -54,5 +53,5 @@ public class RescueGaga extends MapleEvents {
             chr.changeSkillLevel(SkillFactory.getSkill(skillid), (byte) 2, 2, chr.getSkillExpiration(skillid));
         }
     }
-    
+
 }

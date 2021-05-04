@@ -23,19 +23,18 @@ package net.server.channel.handlers;
 
 import client.MapleCharacter;
 import client.MapleClient;
-import client.inventory.MapleInventory;
 import client.inventory.Item;
+import client.inventory.MapleInventory;
 import client.inventory.MapleInventoryType;
-import net.AbstractMaplePacketHandler;
 import client.inventory.manipulator.MapleInventoryManipulator;
+import net.AbstractMaplePacketHandler;
 import server.MapleItemInformationProvider;
 import tools.MaplePacketCreator;
 import tools.data.input.SeekableLittleEndianAccessor;
 
 /**
- *
  * @author XoticStory
- * 
+ * <p>
  * Modified by -- kevintjuh93, Ronan
  */
 public final class UseSolomonHandler extends AbstractMaplePacketHandler {
@@ -46,7 +45,7 @@ public final class UseSolomonHandler extends AbstractMaplePacketHandler {
         short slot = slea.readShort();
         int itemId = slea.readInt();
         MapleItemInformationProvider ii = MapleItemInformationProvider.getInstance();
-        
+
         if (c.tryacquireClient()) {
             try {
                 MapleCharacter chr = c.getPlayer();
@@ -57,7 +56,7 @@ public final class UseSolomonHandler extends AbstractMaplePacketHandler {
                     if (slotItem == null) {
                         return;
                     }
-                    
+
                     long gachaexp = ii.getExpById(itemId);
                     if (slotItem.getItemId() != itemId || slotItem.getQuantity() <= 0 || chr.getLevel() > ii.getMaxLevelById(itemId)) {
                         return;
@@ -74,7 +73,7 @@ public final class UseSolomonHandler extends AbstractMaplePacketHandler {
                 c.releaseClient();
             }
         }
-        
+
         c.announce(MaplePacketCreator.enableActions());
     }
 }

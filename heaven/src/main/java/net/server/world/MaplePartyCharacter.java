@@ -25,7 +25,7 @@ import client.MapleCharacter;
 import client.MapleJob;
 
 public class MaplePartyCharacter {
-    private String name;
+    private final String name;
     private int id;
     private int level;
     private int channel, world;
@@ -34,10 +34,10 @@ public class MaplePartyCharacter {
     private boolean online;
     private MapleJob job;
     private MapleCharacter character;
-    
+
     public MaplePartyCharacter(MapleCharacter maplechar) {
         this.character = maplechar;
-    	this.name = maplechar.getName();
+        this.name = maplechar.getName();
         this.level = maplechar.getLevel();
         this.channel = maplechar.getClient().getChannel();
         this.world = maplechar.getWorld();
@@ -51,9 +51,9 @@ public class MaplePartyCharacter {
     public MaplePartyCharacter() {
         this.name = "";
     }
-    
+
     public MapleCharacter getPlayer() {
-    	return character;
+        return character;
     }
 
     public MapleJob getJob() {
@@ -71,7 +71,7 @@ public class MaplePartyCharacter {
     public void setChannel(int channel) {
         this.channel = channel;
     }
-    
+
     public boolean isLeader() {
         return getPlayer().isPartyLeader();
     }
@@ -106,11 +106,11 @@ public class MaplePartyCharacter {
     public int getJobId() {
         return jobid;
     }
-    
+
     public int getGuildId() {
         return character.getGuildId();
     }
-    
+
     @Override
     public int hashCode() {
         final int prime = 31;
@@ -132,17 +132,12 @@ public class MaplePartyCharacter {
         }
         final MaplePartyCharacter other = (MaplePartyCharacter) obj;
         if (name == null) {
-            if (other.name != null) {
-                return false;
-            }
-        } else if (!name.equals(other.name)) {
-            return false;
-        }
-        return true;
+            return other.name == null;
+        } else return name.equals(other.name);
     }
 
     public int getWorld() {
         return world;
     }
-    
+
 }

@@ -23,25 +23,25 @@
 */
 package client.command.commands.gm5;
 
-import client.command.Command;
-import client.MapleClient;
 import client.MapleCharacter;
+import client.MapleClient;
+import client.command.Command;
 import net.server.Server;
-import server.maps.MaplePortal;
 import server.TimerManager;
 import server.life.MapleMonster;
 import server.life.SpawnPoint;
 import server.maps.MapleMapObject;
 import server.maps.MapleMapObjectType;
+import server.maps.MaplePortal;
 import server.maps.MapleReactor;
 
-import java.awt.*;
+import java.awt.Rectangle;
 import java.util.Arrays;
 import java.util.List;
 
 public class DebugCommand extends Command {
-    private final static String debugTypes[] = {"monster", "packet", "portal", "spawnpoint", "pos", "map", "mobsp", "event", "areas", "reactors", "servercoupons", "playercoupons", "timer", "marriage", "buff", ""};
-    
+    private final static String[] debugTypes = {"monster", "packet", "portal", "spawnpoint", "pos", "map", "mobsp", "event", "areas", "reactors", "servercoupons", "playercoupons", "timer", "marriage", "buff", ""};
+
     {
         setDescription("");
     }
@@ -59,13 +59,13 @@ public class DebugCommand extends Command {
             case "type":
             case "help":
                 String msgTypes = "Available #bdebug types#k:\r\n\r\n";
-                for(int i = 0; i < debugTypes.length; i++) {
+                for (int i = 0; i < debugTypes.length; i++) {
                     msgTypes += ("#L" + i + "#" + debugTypes[i] + "#l\r\n");
                 }
-                
+
                 c.getAbstractPlayerInteraction().npcTalk(9201143, msgTypes);
                 break;
-            
+
             case "monster":
                 List<MapleMapObject> monsters = player.getMap().getMapObjectsInRange(player.getPosition(), Double.POSITIVE_INFINITY, Arrays.asList(MapleMapObjectType.MONSTER));
                 for (MapleMapObject monstermo : monsters) {
@@ -156,7 +156,7 @@ public class DebugCommand extends Command {
             case "marriage":
                 c.getChannelServer().debugMarriageStatus();
                 break;
-            
+
             case "buff":
                 c.getPlayer().debugListAllBuffs();
                 break;

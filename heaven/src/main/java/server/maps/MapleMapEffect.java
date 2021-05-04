@@ -25,9 +25,9 @@ import client.MapleClient;
 import tools.MaplePacketCreator;
 
 public class MapleMapEffect {
-    private String msg;
-    private int itemId;
-    private boolean active = true;
+    private final String msg;
+    private final int itemId;
+    private final boolean active = true;
 
     public MapleMapEffect(String msg, int itemId) {
         this.msg = msg;

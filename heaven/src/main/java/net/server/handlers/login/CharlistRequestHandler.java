@@ -35,20 +35,20 @@ public final class CharlistRequestHandler extends AbstractMaplePacketHandler {
     public final void handlePacket(SeekableLittleEndianAccessor slea, MapleClient c) {
         slea.readByte();
         int world = slea.readByte();
-        
+
         World wserv = Server.getInstance().getWorld(world);
-        if(wserv == null || wserv.isWorldCapacityFull()) {
+        if (wserv == null || wserv.isWorldCapacityFull()) {
             c.announce(MaplePacketCreator.getServerStatus(2));
             return;
         }
-        
+
         int channel = slea.readByte() + 1;
         Channel ch = wserv.getChannel(channel);
-        if(ch == null) {
+        if (ch == null) {
             c.announce(MaplePacketCreator.getServerStatus(2));
             return;
         }
-        
+
         c.setWorld(world);
         c.setChannel(channel);
         c.sendCharList(world);

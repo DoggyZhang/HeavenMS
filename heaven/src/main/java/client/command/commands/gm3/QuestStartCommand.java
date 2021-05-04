@@ -23,9 +23,9 @@
 */
 package client.command.commands.gm3;
 
-import client.command.Command;
-import client.MapleClient;
 import client.MapleCharacter;
+import client.MapleClient;
+import client.command.Command;
 import server.quest.MapleQuest;
 
 public class QuestStartCommand extends Command {
@@ -36,8 +36,8 @@ public class QuestStartCommand extends Command {
     @Override
     public void execute(MapleClient c, String[] params) {
         MapleCharacter player = c.getPlayer();
-        
-        if (params.length < 1){
+
+        if (params.length < 1) {
             player.yellowMessage("Syntax: !startquest <questid>");
             return;
         }
@@ -51,7 +51,7 @@ public class QuestStartCommand extends Command {
             } else {
                 c.getAbstractPlayerInteraction().forceStartQuest(questid);
             }
-            
+
             player.dropMessage(5, "QUEST " + questid + " started.");
         } else {
             player.dropMessage(5, "QUESTID " + questid + " already started/completed.");

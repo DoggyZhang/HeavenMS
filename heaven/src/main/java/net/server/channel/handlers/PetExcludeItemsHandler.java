@@ -21,8 +21,8 @@
 */
 package net.server.channel.handlers;
 
-import client.MapleClient;
 import client.MapleCharacter;
+import client.MapleClient;
 import client.inventory.MaplePet;
 import net.AbstractMaplePacketHandler;
 import tools.data.input.SeekableLittleEndianAccessor;
@@ -33,21 +33,21 @@ import tools.data.input.SeekableLittleEndianAccessor;
  * @author Ronan
  */
 public final class PetExcludeItemsHandler extends AbstractMaplePacketHandler {
-    
+
     @Override
     public final void handlePacket(SeekableLittleEndianAccessor slea, MapleClient c) {
         final int petId = slea.readInt();
         slea.skip(4);
-        
+
         MapleCharacter chr = c.getPlayer();
-        byte petIndex = (byte)chr.getPetIndex(petId);
+        byte petIndex = chr.getPetIndex(petId);
         if (petIndex < 0) return;
-        
+
         final MaplePet pet = chr.getPet(petIndex);
         if (pet == null) {
             return;
         }
-        
+
         chr.resetExcluded(petId);
         byte amount = slea.readByte();
         for (int i = 0; i < amount; i++) {

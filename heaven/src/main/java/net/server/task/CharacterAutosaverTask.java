@@ -19,28 +19,28 @@
 */
 package net.server.task;
 
-import config.YamlConfig;
-import net.server.world.World;
 import client.MapleCharacter;
+import config.YamlConfig;
 import net.server.PlayerStorage;
+import net.server.world.World;
 
 /**
  * @author Ronan
  */
 public class CharacterAutosaverTask extends BaseTask implements Runnable {  // thanks Alex09 (Alex-0000) for noticing these runnable classes are tasks, "workers" runs them
-    
+
     @Override
     public void run() {
-        if(!YamlConfig.config.server.USE_AUTOSAVE) return;
-        
+        if (!YamlConfig.config.server.USE_AUTOSAVE) return;
+
         PlayerStorage ps = wserv.getPlayerStorage();
-        for(MapleCharacter chr: ps.getAllCharacters()) {
-            if(chr != null && chr.isLoggedin()) {
+        for (MapleCharacter chr : ps.getAllCharacters()) {
+            if (chr != null && chr.isLoggedin()) {
                 chr.saveCharToDB(false);
             }
         }
     }
-    
+
     public CharacterAutosaverTask(World world) {
         super(world);
     }

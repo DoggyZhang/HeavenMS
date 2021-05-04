@@ -23,9 +23,8 @@
 */
 package client.command.commands.gm2;
 
-import client.command.Command;
 import client.MapleClient;
-import client.MapleCharacter;
+import client.command.Command;
 import server.MapleShopFactory;
 
 public class GmShopCommand extends Command {

@@ -3,7 +3,6 @@ package server.partyquest;
 import java.awt.Point;
 
 /**
- *
  * @author David
  */
 public class GuardianSpawnPoint {

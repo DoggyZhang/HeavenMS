@@ -21,25 +21,25 @@
 */
 package net.server.channel.handlers;
 
+import client.MapleCharacter;
+import client.MapleClient;
 import config.YamlConfig;
 import net.AbstractMaplePacketHandler;
+import net.server.coordinator.world.MapleInviteCoordinator;
+import net.server.coordinator.world.MapleInviteCoordinator.InviteResult;
+import net.server.coordinator.world.MapleInviteCoordinator.InviteType;
+import net.server.coordinator.world.MapleInviteCoordinator.MapleInviteResult;
 import net.server.world.MapleParty;
 import net.server.world.MaplePartyCharacter;
 import net.server.world.PartyOperation;
 import net.server.world.World;
 import tools.MaplePacketCreator;
 import tools.data.input.SeekableLittleEndianAccessor;
-import client.MapleCharacter;
-import client.MapleClient;
-import net.server.coordinator.world.MapleInviteCoordinator;
-import net.server.coordinator.world.MapleInviteCoordinator.InviteResult;
-import net.server.coordinator.world.MapleInviteCoordinator.InviteType;
-import net.server.coordinator.world.MapleInviteCoordinator.MapleInviteResult;
 
 import java.util.List;
 
 public final class PartyOperationHandler extends AbstractMaplePacketHandler {
-    
+
     @Override
     public final void handlePacket(SeekableLittleEndianAccessor slea, MapleClient c) {
         int operation = slea.readByte();
@@ -48,7 +48,7 @@ public final class PartyOperationHandler extends AbstractMaplePacketHandler {
         MapleParty party = player.getParty();
         switch (operation) {
             case 1: { // create
-               	MapleParty.createParty(player, false);
+                MapleParty.createParty(player, false);
                 break;
             }
             case 2: { // leave/disband
@@ -63,7 +63,7 @@ public final class PartyOperationHandler extends AbstractMaplePacketHandler {
             }
             case 3: { // join
                 int partyid = slea.readInt();
-                
+
                 MapleInviteResult inviteRes = MapleInviteCoordinator.answerInvite(InviteType.PARTY, player.getId(), partyid, true);
                 InviteResult res = inviteRes.result;
                 if (res == InviteResult.ACCEPTED) {
@@ -77,21 +77,21 @@ public final class PartyOperationHandler extends AbstractMaplePacketHandler {
                 String name = slea.readMapleAsciiString();
                 MapleCharacter invited = world.getPlayerStorage().getCharacterByName(name);
                 if (invited != null) {
-                    if(invited.getLevel() < 10 && (!YamlConfig.config.server.USE_PARTY_FOR_STARTERS || player.getLevel() >= 10)) { //min requirement is level 10
+                    if (invited.getLevel() < 10 && (!YamlConfig.config.server.USE_PARTY_FOR_STARTERS || player.getLevel() >= 10)) { //min requirement is level 10
                         c.announce(MaplePacketCreator.serverNotice(5, "The player you have invited does not meet the requirements."));
                         return;
                     }
-                    if(YamlConfig.config.server.USE_PARTY_FOR_STARTERS && invited.getLevel() >= 10 && player.getLevel() < 10) {    //trying to invite high level
+                    if (YamlConfig.config.server.USE_PARTY_FOR_STARTERS && invited.getLevel() >= 10 && player.getLevel() < 10) {    //trying to invite high level
                         c.announce(MaplePacketCreator.serverNotice(5, "The player you have invited does not meet the requirements."));
                         return;
                     }
-                    
+
                     if (invited.getParty() == null) {
                         if (party == null) {
                             if (!MapleParty.createParty(player, false)) {
                                 return;
                             }
-                            
+
                             party = player.getParty();
                         }
                         if (party.getMembers().size() < 6) {
@@ -122,6 +122,6 @@ public final class PartyOperationHandler extends AbstractMaplePacketHandler {
                 world.updateParty(party.getId(), PartyOperation.CHANGE_LEADER, newLeadr);
                 break;
             }
-        }    
+        }
     }
 }

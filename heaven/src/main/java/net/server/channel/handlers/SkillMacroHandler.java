@@ -23,11 +23,11 @@ package net.server.channel.handlers;
 
 import client.MapleClient;
 import client.SkillMacro;
-import tools.data.input.SeekableLittleEndianAccessor;
 import net.AbstractMaplePacketHandler;
+import tools.data.input.SeekableLittleEndianAccessor;
 
 public final class SkillMacroHandler extends AbstractMaplePacketHandler {
-    
+
     @Override
     public final void handlePacket(SeekableLittleEndianAccessor slea, MapleClient c) {
         int num = slea.readByte();

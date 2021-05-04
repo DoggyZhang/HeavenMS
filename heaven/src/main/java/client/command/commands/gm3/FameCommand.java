@@ -23,10 +23,10 @@
 */
 package client.command.commands.gm3;
 
+import client.MapleCharacter;
+import client.MapleClient;
 import client.MapleStat;
 import client.command.Command;
-import client.MapleClient;
-import client.MapleCharacter;
 
 public class FameCommand extends Command {
     {

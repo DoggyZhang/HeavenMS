@@ -24,12 +24,10 @@ package net.server.channel.handlers;
 import client.MapleCharacter;
 import client.MapleClient;
 import client.processor.npc.FredrickProcessor;
-
 import net.AbstractMaplePacketHandler;
 import tools.data.input.SeekableLittleEndianAccessor;
 
 /**
- *
  * @author kevintjuh93
  */
 public class FredrickHandler extends AbstractMaplePacketHandler {

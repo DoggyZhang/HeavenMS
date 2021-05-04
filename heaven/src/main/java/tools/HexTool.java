@@ -22,6 +22,7 @@
 package tools;
 
 import constants.string.CharsetConstants;
+
 import java.io.ByteArrayOutputStream;
 
 public class HexTool {
@@ -41,7 +42,7 @@ public class HexTool {
         }
         return hexed.substring(0, hexed.length() - 1);
     }
-    
+
     public static String toCompressedString(byte[] bytes) {
         StringBuilder hexed = new StringBuilder();
         for (int i = 0; i < bytes.length; i++) {
@@ -56,7 +57,7 @@ public class HexTool {
         int nextb = 0;
         boolean highoc = true;
         outer:
-        for (;;) {
+        for (; ; ) {
             int number = -1;
             while (number == -1) {
                 if (nexti == hex.length()) {
@@ -85,7 +86,7 @@ public class HexTool {
         }
         return baos.toByteArray();
     }
-    
+
     public static final String toStringFromAscii(final byte[] bytes) {
         byte[] ret = new byte[bytes.length];
         for (int x = 0; x < bytes.length; x++) {
@@ -100,7 +101,8 @@ public class HexTool {
         try {
             String str = new String(ret, encode);
             return str;
-        } catch (Exception e) {}
+        } catch (Exception e) {
+        }
         return "";
     }
 

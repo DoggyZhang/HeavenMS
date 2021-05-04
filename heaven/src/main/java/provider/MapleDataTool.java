@@ -21,9 +21,10 @@
 */
 package provider;
 
+import provider.wz.MapleDataType;
+
 import java.awt.Point;
 import java.awt.image.BufferedImage;
-import provider.wz.MapleDataType;
 
 public class MapleDataTool {
     public static String getString(MapleData data) {
@@ -72,16 +73,16 @@ public class MapleDataTool {
             return getInt(data);
         }
     }
-    
+
     public static int getIntConvert(MapleData data, int def) {
         if (data == null) {
             return def;
         }
         if (data.getType() == MapleDataType.STRING) {
-	    String dd = getString(data);
-	    if (dd.endsWith("%")) {
-		dd = dd.substring(0, dd.length() - 1);
-	    }
+            String dd = getString(data);
+            if (dd.endsWith("%")) {
+                dd = dd.substring(0, dd.length() - 1);
+            }
             try {
                 return Integer.parseInt(dd);
             } catch (NumberFormatException nfe) {
@@ -103,7 +104,7 @@ public class MapleDataTool {
 
     public static int getInt(MapleData data, int def) {
         if (data == null || data.getData() == null) {
-            return  def;
+            return def;
         } else if (data.getType() == MapleDataType.STRING) {
             return Integer.parseInt(getString(data));
         } else {

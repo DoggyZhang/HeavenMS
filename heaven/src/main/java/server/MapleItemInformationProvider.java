@@ -21,60 +21,32 @@
  */
 package server;
 
-import java.io.File;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.LinkedHashMap;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-import java.util.Set;
-import java.util.HashSet;
-
-import config.YamlConfig;
-import net.server.Server;
-import provider.MapleData;
-import provider.MapleDataDirectoryEntry;
-import provider.MapleDataFileEntry;
-import provider.MapleDataProvider;
-import provider.MapleDataProviderFactory;
-import provider.MapleDataTool;
-import tools.DatabaseConnection;
-import tools.FilePrinter;
-import tools.MaplePacketCreator;
-import tools.Pair;
-import tools.Randomizer;
-import client.MapleCharacter;
-import client.MapleClient;
-import client.MapleJob;
-import client.Skill;
-import client.SkillFactory;
+import client.*;
 import client.autoban.AutobanFactory;
-import client.inventory.Equip;
-import client.inventory.Item;
-import client.inventory.MapleInventory;
-import client.inventory.MapleInventoryType;
-import client.inventory.MapleWeaponType;
+import client.inventory.*;
+import config.YamlConfig;
 import constants.inventory.EquipSlot;
 import constants.inventory.ItemConstants;
 import constants.skills.Assassin;
 import constants.skills.Gunslinger;
 import constants.skills.NightWalker;
-import java.sql.Connection;
+import net.server.Server;
+import provider.*;
 import server.MakerItemFactory.MakerItemCreateEntry;
-import server.life.MapleMonsterInformationProvider;
 import server.life.MapleLifeFactory;
-import tools.StringUtil;
+import server.life.MapleMonsterInformationProvider;
+import tools.*;
+
+import java.io.File;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.*;
+import java.util.Map.Entry;
 
 /**
- *
  * @author Matze
- *
  */
 public class MapleItemInformationProvider {
     private final static MapleItemInformationProvider instance = new MapleItemInformationProvider();
@@ -295,7 +267,7 @@ public class MapleItemInformationProvider {
 
     private MapleData getItemData(int itemId) {
         MapleData ret = null;
-        String idStr = "0" + String.valueOf(itemId);
+        String idStr = "0" + itemId;
         MapleDataDirectoryEntry root = itemData.getRoot();
         for (MapleDataDirectoryEntry topDir : root.getSubdirectories()) {
             for (MapleDataFileEntry iFile : topDir.getFiles()) {
@@ -325,16 +297,15 @@ public class MapleItemInformationProvider {
     public List<Integer> getItemIdsInRange(int minId, int maxId, boolean ignoreCashItem) {
         List<Integer> list = new ArrayList<>();
 
-        if(ignoreCashItem) {
-            for(int i = minId; i <= maxId; i++) {
-                if(getItemData(i) != null && !isCash(i)) {
+        if (ignoreCashItem) {
+            for (int i = minId; i <= maxId; i++) {
+                if (getItemData(i) != null && !isCash(i)) {
                     list.add(i);
                 }
             }
-        }
-        else {
-            for(int i = minId; i <= maxId; i++) {
-                if(getItemData(i) != null) {
+        } else {
+            for (int i = minId; i <= maxId; i++) {
+                if (getItemData(i) != null) {
                     list.add(i);
                 }
             }
@@ -349,7 +320,7 @@ public class MapleItemInformationProvider {
 
         // thanks GMChuck for detecting player sensitive data being cached into getSlotMax
         if (ItemConstants.isThrowingStar(itemId)) {
-            if(c.getPlayer().getJob().isA(MapleJob.NIGHTWALKER1)) {
+            if (c.getPlayer().getJob().isA(MapleJob.NIGHTWALKER1)) {
                 ret += c.getPlayer().getSkillLevel(SkillFactory.getSkill(NightWalker.CLAW_MASTERY)) * 10;
             } else {
                 ret += c.getPlayer().getSkillLevel(SkillFactory.getSkill(Assassin.CLAW_MASTERY)) * 10;
@@ -364,7 +335,7 @@ public class MapleItemInformationProvider {
     public short getSlotMax(MapleClient c, int itemId) {
         Short slotMax = slotMaxCache.get(itemId);
         if (slotMax != null) {
-            return (short)(slotMax + getExtraSlotMaxFromPlayer(c, itemId));
+            return (short) (slotMax + getExtraSlotMaxFromPlayer(c, itemId));
         }
         short ret = 0;
         MapleData item = getItemData(itemId);
@@ -382,7 +353,7 @@ public class MapleItemInformationProvider {
         }
 
         slotMaxCache.put(itemId, ret);
-        return (short)(ret + getExtraSlotMaxFromPlayer(c, itemId));
+        return (short) (ret + getExtraSlotMaxFromPlayer(c, itemId));
     }
 
     public int getMeso(int itemId) {
@@ -406,7 +377,7 @@ public class MapleItemInformationProvider {
     private static double getRoundedUnitPrice(double unitPrice, int max) {
         double intPart = Math.floor(unitPrice);
         double fractPart = unitPrice - intPart;
-        if(fractPart == 0.0) return intPart;
+        if (fractPart == 0.0) return intPart;
 
         double fractMask = 0.0;
         double lastFract, curFract = 1.0;
@@ -416,22 +387,22 @@ public class MapleItemInformationProvider {
             lastFract = curFract;
             curFract /= 2;
 
-            if(fractPart == curFract) {
+            if (fractPart == curFract) {
                 break;
-            } else if(fractPart > curFract) {
+            } else if (fractPart > curFract) {
                 fractMask += curFract;
                 fractPart -= curFract;
             }
 
             i++;
-        } while(i <= max);
+        } while (i <= max);
 
-        if(i > max) {
+        if (i > max) {
             lastFract = curFract;
             curFract = 0.0;
         }
 
-        if(Math.abs(fractPart - curFract) < Math.abs(fractPart - lastFract)) {
+        if (Math.abs(fractPart - curFract) < Math.abs(fractPart - lastFract)) {
             return intPart + fractMask + curFract;
         } else {
             return intPart + fractMask + lastFract;
@@ -458,7 +429,7 @@ public class MapleItemInformationProvider {
             try {
                 fEntry = getRoundedUnitPrice(MapleDataTool.getDouble(pData), 5);
             } catch (Exception e) {
-                fEntry = (double) MapleDataTool.getInt(pData);
+                fEntry = MapleDataTool.getInt(pData);
             }
         }
 
@@ -485,11 +456,11 @@ public class MapleItemInformationProvider {
 
     public int getPrice(int itemId, int quantity) {
         int retPrice = getWholePrice(itemId);
-        if(retPrice == -1) {
+        if (retPrice == -1) {
             return -1;
         }
 
-        if(!ItemConstants.isRechargeable(itemId)) {
+        if (!ItemConstants.isRechargeable(itemId)) {
             retPrice *= quantity;
         } else {
             retPrice += Math.ceil(quantity * getUnitPrice(itemId));
@@ -597,7 +568,7 @@ public class MapleItemInformationProvider {
         if (scrollReqsCache.containsKey(itemId)) {
             return scrollReqsCache.get(itemId);
         }
-        
+
         List<Integer> ret = new ArrayList<>();
         MapleData data = getItemData(itemId);
         data = data.getChildByPath("req");
@@ -606,7 +577,7 @@ public class MapleItemInformationProvider {
                 ret.add(MapleDataTool.getInt(req));
             }
         }
-        
+
         scrollReqsCache.put(itemId, ret);
         return ret;
     }
@@ -644,74 +615,95 @@ public class MapleItemInformationProvider {
         // option: watk, matk, wdef, mdef, spd, jump, hp, mp
         //   stat: dex, luk, str, int, avoid, acc
 
-        if(!option) {
+        if (!option) {
             if (nEquip.getStr() > 0) {
-                if(YamlConfig.config.server.USE_ENHANCED_CHSCROLL) nEquip.setStr(getMaximumShortMaxIfOverflow(nEquip.getStr(), (nEquip.getStr() + chscrollRandomizedStat(range))));
+                if (YamlConfig.config.server.USE_ENHANCED_CHSCROLL)
+                    nEquip.setStr(getMaximumShortMaxIfOverflow(nEquip.getStr(), (nEquip.getStr() + chscrollRandomizedStat(range))));
                 else nEquip.setStr(getMaximumShortMaxIfOverflow(0, (nEquip.getStr() + chscrollRandomizedStat(range))));
             }
             if (nEquip.getDex() > 0) {
-                if(YamlConfig.config.server.USE_ENHANCED_CHSCROLL) nEquip.setDex(getMaximumShortMaxIfOverflow(nEquip.getDex(), (nEquip.getDex() + chscrollRandomizedStat(range))));
+                if (YamlConfig.config.server.USE_ENHANCED_CHSCROLL)
+                    nEquip.setDex(getMaximumShortMaxIfOverflow(nEquip.getDex(), (nEquip.getDex() + chscrollRandomizedStat(range))));
                 else nEquip.setDex(getMaximumShortMaxIfOverflow(0, (nEquip.getDex() + chscrollRandomizedStat(range))));
             }
             if (nEquip.getInt() > 0) {
-                if(YamlConfig.config.server.USE_ENHANCED_CHSCROLL) nEquip.setInt(getMaximumShortMaxIfOverflow(nEquip.getInt(), (nEquip.getInt() + chscrollRandomizedStat(range))));
+                if (YamlConfig.config.server.USE_ENHANCED_CHSCROLL)
+                    nEquip.setInt(getMaximumShortMaxIfOverflow(nEquip.getInt(), (nEquip.getInt() + chscrollRandomizedStat(range))));
                 else nEquip.setInt(getMaximumShortMaxIfOverflow(0, (nEquip.getInt() + chscrollRandomizedStat(range))));
             }
             if (nEquip.getLuk() > 0) {
-                if(YamlConfig.config.server.USE_ENHANCED_CHSCROLL) nEquip.setLuk(getMaximumShortMaxIfOverflow(nEquip.getLuk(), (nEquip.getLuk() + chscrollRandomizedStat(range))));
+                if (YamlConfig.config.server.USE_ENHANCED_CHSCROLL)
+                    nEquip.setLuk(getMaximumShortMaxIfOverflow(nEquip.getLuk(), (nEquip.getLuk() + chscrollRandomizedStat(range))));
                 else nEquip.setLuk(getMaximumShortMaxIfOverflow(0, (nEquip.getLuk() + chscrollRandomizedStat(range))));
             }
             if (nEquip.getAcc() > 0) {
-                if(YamlConfig.config.server.USE_ENHANCED_CHSCROLL) nEquip.setAcc(getMaximumShortMaxIfOverflow(nEquip.getAcc(), (nEquip.getAcc() + chscrollRandomizedStat(range))));
+                if (YamlConfig.config.server.USE_ENHANCED_CHSCROLL)
+                    nEquip.setAcc(getMaximumShortMaxIfOverflow(nEquip.getAcc(), (nEquip.getAcc() + chscrollRandomizedStat(range))));
                 else nEquip.setAcc(getMaximumShortMaxIfOverflow(0, (nEquip.getAcc() + chscrollRandomizedStat(range))));
             }
             if (nEquip.getAvoid() > 0) {
-                if(YamlConfig.config.server.USE_ENHANCED_CHSCROLL) nEquip.setAvoid(getMaximumShortMaxIfOverflow(nEquip.getAvoid(), (nEquip.getAvoid() + chscrollRandomizedStat(range))));
-                else nEquip.setAvoid(getMaximumShortMaxIfOverflow(0, (nEquip.getAvoid() + chscrollRandomizedStat(range))));
+                if (YamlConfig.config.server.USE_ENHANCED_CHSCROLL)
+                    nEquip.setAvoid(getMaximumShortMaxIfOverflow(nEquip.getAvoid(), (nEquip.getAvoid() + chscrollRandomizedStat(range))));
+                else
+                    nEquip.setAvoid(getMaximumShortMaxIfOverflow(0, (nEquip.getAvoid() + chscrollRandomizedStat(range))));
             }
         } else {
             if (nEquip.getWatk() > 0) {
-                if(YamlConfig.config.server.USE_ENHANCED_CHSCROLL) nEquip.setWatk(getMaximumShortMaxIfOverflow(nEquip.getWatk(), (nEquip.getWatk() + chscrollRandomizedStat(range))));
-                else nEquip.setWatk(getMaximumShortMaxIfOverflow(0, (nEquip.getWatk() + chscrollRandomizedStat(range))));
+                if (YamlConfig.config.server.USE_ENHANCED_CHSCROLL)
+                    nEquip.setWatk(getMaximumShortMaxIfOverflow(nEquip.getWatk(), (nEquip.getWatk() + chscrollRandomizedStat(range))));
+                else
+                    nEquip.setWatk(getMaximumShortMaxIfOverflow(0, (nEquip.getWatk() + chscrollRandomizedStat(range))));
             }
             if (nEquip.getWdef() > 0) {
-                if(YamlConfig.config.server.USE_ENHANCED_CHSCROLL) nEquip.setWdef(getMaximumShortMaxIfOverflow(nEquip.getWdef(), (nEquip.getWdef() + chscrollRandomizedStat(range))));
-                else nEquip.setWdef(getMaximumShortMaxIfOverflow(0, (nEquip.getWdef() + chscrollRandomizedStat(range))));
+                if (YamlConfig.config.server.USE_ENHANCED_CHSCROLL)
+                    nEquip.setWdef(getMaximumShortMaxIfOverflow(nEquip.getWdef(), (nEquip.getWdef() + chscrollRandomizedStat(range))));
+                else
+                    nEquip.setWdef(getMaximumShortMaxIfOverflow(0, (nEquip.getWdef() + chscrollRandomizedStat(range))));
             }
             if (nEquip.getMatk() > 0) {
-                if(YamlConfig.config.server.USE_ENHANCED_CHSCROLL) nEquip.setMatk(getMaximumShortMaxIfOverflow(nEquip.getMatk(), (nEquip.getMatk() + chscrollRandomizedStat(range))));
-                else nEquip.setMatk(getMaximumShortMaxIfOverflow(0, (nEquip.getMatk() + chscrollRandomizedStat(range))));
+                if (YamlConfig.config.server.USE_ENHANCED_CHSCROLL)
+                    nEquip.setMatk(getMaximumShortMaxIfOverflow(nEquip.getMatk(), (nEquip.getMatk() + chscrollRandomizedStat(range))));
+                else
+                    nEquip.setMatk(getMaximumShortMaxIfOverflow(0, (nEquip.getMatk() + chscrollRandomizedStat(range))));
             }
             if (nEquip.getMdef() > 0) {
-                if(YamlConfig.config.server.USE_ENHANCED_CHSCROLL) nEquip.setMdef(getMaximumShortMaxIfOverflow(nEquip.getMdef(), (nEquip.getMdef() + chscrollRandomizedStat(range))));
-                else nEquip.setMdef(getMaximumShortMaxIfOverflow(0, (nEquip.getMdef() + chscrollRandomizedStat(range))));
+                if (YamlConfig.config.server.USE_ENHANCED_CHSCROLL)
+                    nEquip.setMdef(getMaximumShortMaxIfOverflow(nEquip.getMdef(), (nEquip.getMdef() + chscrollRandomizedStat(range))));
+                else
+                    nEquip.setMdef(getMaximumShortMaxIfOverflow(0, (nEquip.getMdef() + chscrollRandomizedStat(range))));
             }
 
             if (nEquip.getSpeed() > 0) {
-                if(YamlConfig.config.server.USE_ENHANCED_CHSCROLL) nEquip.setSpeed(getMaximumShortMaxIfOverflow(nEquip.getSpeed(), (nEquip.getSpeed() + chscrollRandomizedStat(range))));
-                else nEquip.setSpeed(getMaximumShortMaxIfOverflow(0, (nEquip.getSpeed() + chscrollRandomizedStat(range))));
+                if (YamlConfig.config.server.USE_ENHANCED_CHSCROLL)
+                    nEquip.setSpeed(getMaximumShortMaxIfOverflow(nEquip.getSpeed(), (nEquip.getSpeed() + chscrollRandomizedStat(range))));
+                else
+                    nEquip.setSpeed(getMaximumShortMaxIfOverflow(0, (nEquip.getSpeed() + chscrollRandomizedStat(range))));
             }
             if (nEquip.getJump() > 0) {
-                if(YamlConfig.config.server.USE_ENHANCED_CHSCROLL) nEquip.setJump(getMaximumShortMaxIfOverflow(nEquip.getJump(), (nEquip.getJump() + chscrollRandomizedStat(range))));
-                else nEquip.setJump(getMaximumShortMaxIfOverflow(0, (nEquip.getJump() + chscrollRandomizedStat(range))));
+                if (YamlConfig.config.server.USE_ENHANCED_CHSCROLL)
+                    nEquip.setJump(getMaximumShortMaxIfOverflow(nEquip.getJump(), (nEquip.getJump() + chscrollRandomizedStat(range))));
+                else
+                    nEquip.setJump(getMaximumShortMaxIfOverflow(0, (nEquip.getJump() + chscrollRandomizedStat(range))));
             }
             if (nEquip.getHp() > 0) {
-                if(YamlConfig.config.server.USE_ENHANCED_CHSCROLL) nEquip.setHp(getMaximumShortMaxIfOverflow(nEquip.getHp(), (nEquip.getHp() + chscrollRandomizedStat(range))));
+                if (YamlConfig.config.server.USE_ENHANCED_CHSCROLL)
+                    nEquip.setHp(getMaximumShortMaxIfOverflow(nEquip.getHp(), (nEquip.getHp() + chscrollRandomizedStat(range))));
                 else nEquip.setHp(getMaximumShortMaxIfOverflow(0, (nEquip.getHp() + chscrollRandomizedStat(range))));
             }
             if (nEquip.getMp() > 0) {
-                if(YamlConfig.config.server.USE_ENHANCED_CHSCROLL) nEquip.setMp(getMaximumShortMaxIfOverflow(nEquip.getMp(), (nEquip.getMp() + chscrollRandomizedStat(range))));
+                if (YamlConfig.config.server.USE_ENHANCED_CHSCROLL)
+                    nEquip.setMp(getMaximumShortMaxIfOverflow(nEquip.getMp(), (nEquip.getMp() + chscrollRandomizedStat(range))));
                 else nEquip.setMp(getMaximumShortMaxIfOverflow(0, (nEquip.getMp() + chscrollRandomizedStat(range))));
             }
         }
     }
 
     private void scrollEquipWithChaos(Equip nEquip, int range) {
-        if(YamlConfig.config.server.CHSCROLL_STAT_RATE > 0) {
+        if (YamlConfig.config.server.CHSCROLL_STAT_RATE > 0) {
             int temp;
             short curStr, curDex, curInt, curLuk, curWatk, curWdef, curMatk, curMdef, curAcc, curAvoid, curSpeed, curJump, curHp, curMp;
 
-            if(YamlConfig.config.server.USE_ENHANCED_CHSCROLL) {
+            if (YamlConfig.config.server.USE_ENHANCED_CHSCROLL) {
                 curStr = nEquip.getStr();
                 curDex = nEquip.getDex();
                 curInt = nEquip.getInt();
@@ -743,100 +735,100 @@ public class MapleItemInformationProvider {
                 curMp = Short.MIN_VALUE;
             }
 
-            for(int i = 0; i < YamlConfig.config.server.CHSCROLL_STAT_RATE; i++) {
+            for (int i = 0; i < YamlConfig.config.server.CHSCROLL_STAT_RATE; i++) {
                 if (nEquip.getStr() > 0) {
-                    if(YamlConfig.config.server.USE_ENHANCED_CHSCROLL) temp = curStr + chscrollRandomizedStat(range);
+                    if (YamlConfig.config.server.USE_ENHANCED_CHSCROLL) temp = curStr + chscrollRandomizedStat(range);
                     else temp = nEquip.getStr() + chscrollRandomizedStat(range);
 
                     curStr = getMaximumShortMaxIfOverflow(temp, curStr);
                 }
 
                 if (nEquip.getDex() > 0) {
-                    if(YamlConfig.config.server.USE_ENHANCED_CHSCROLL) temp = curDex + chscrollRandomizedStat(range);
+                    if (YamlConfig.config.server.USE_ENHANCED_CHSCROLL) temp = curDex + chscrollRandomizedStat(range);
                     else temp = nEquip.getDex() + chscrollRandomizedStat(range);
 
                     curDex = getMaximumShortMaxIfOverflow(temp, curDex);
                 }
 
                 if (nEquip.getInt() > 0) {
-                    if(YamlConfig.config.server.USE_ENHANCED_CHSCROLL) temp = curInt + chscrollRandomizedStat(range);
+                    if (YamlConfig.config.server.USE_ENHANCED_CHSCROLL) temp = curInt + chscrollRandomizedStat(range);
                     else temp = nEquip.getInt() + chscrollRandomizedStat(range);
 
                     curInt = getMaximumShortMaxIfOverflow(temp, curInt);
                 }
 
                 if (nEquip.getLuk() > 0) {
-                    if(YamlConfig.config.server.USE_ENHANCED_CHSCROLL) temp = curLuk + chscrollRandomizedStat(range);
+                    if (YamlConfig.config.server.USE_ENHANCED_CHSCROLL) temp = curLuk + chscrollRandomizedStat(range);
                     else temp = nEquip.getLuk() + chscrollRandomizedStat(range);
 
                     curLuk = getMaximumShortMaxIfOverflow(temp, curLuk);
                 }
 
                 if (nEquip.getWatk() > 0) {
-                    if(YamlConfig.config.server.USE_ENHANCED_CHSCROLL) temp = curWatk + chscrollRandomizedStat(range);
+                    if (YamlConfig.config.server.USE_ENHANCED_CHSCROLL) temp = curWatk + chscrollRandomizedStat(range);
                     else temp = nEquip.getWatk() + chscrollRandomizedStat(range);
 
                     curWatk = getMaximumShortMaxIfOverflow(temp, curWatk);
                 }
 
                 if (nEquip.getWdef() > 0) {
-                    if(YamlConfig.config.server.USE_ENHANCED_CHSCROLL) temp = curWdef + chscrollRandomizedStat(range);
+                    if (YamlConfig.config.server.USE_ENHANCED_CHSCROLL) temp = curWdef + chscrollRandomizedStat(range);
                     else temp = nEquip.getWdef() + chscrollRandomizedStat(range);
 
                     curWdef = getMaximumShortMaxIfOverflow(temp, curWdef);
                 }
 
                 if (nEquip.getMatk() > 0) {
-                    if(YamlConfig.config.server.USE_ENHANCED_CHSCROLL) temp = curMatk + chscrollRandomizedStat(range);
+                    if (YamlConfig.config.server.USE_ENHANCED_CHSCROLL) temp = curMatk + chscrollRandomizedStat(range);
                     else temp = nEquip.getMatk() + chscrollRandomizedStat(range);
 
                     curMatk = getMaximumShortMaxIfOverflow(temp, curMatk);
                 }
 
                 if (nEquip.getMdef() > 0) {
-                    if(YamlConfig.config.server.USE_ENHANCED_CHSCROLL) temp = curMdef + chscrollRandomizedStat(range);
+                    if (YamlConfig.config.server.USE_ENHANCED_CHSCROLL) temp = curMdef + chscrollRandomizedStat(range);
                     else temp = nEquip.getMdef() + chscrollRandomizedStat(range);
 
                     curMdef = getMaximumShortMaxIfOverflow(temp, curMdef);
                 }
 
                 if (nEquip.getAcc() > 0) {
-                    if(YamlConfig.config.server.USE_ENHANCED_CHSCROLL) temp = curAcc + chscrollRandomizedStat(range);
+                    if (YamlConfig.config.server.USE_ENHANCED_CHSCROLL) temp = curAcc + chscrollRandomizedStat(range);
                     else temp = nEquip.getAcc() + chscrollRandomizedStat(range);
 
                     curAcc = getMaximumShortMaxIfOverflow(temp, curAcc);
                 }
 
                 if (nEquip.getAvoid() > 0) {
-                    if(YamlConfig.config.server.USE_ENHANCED_CHSCROLL) temp = curAvoid + chscrollRandomizedStat(range);
+                    if (YamlConfig.config.server.USE_ENHANCED_CHSCROLL) temp = curAvoid + chscrollRandomizedStat(range);
                     else temp = nEquip.getAvoid() + chscrollRandomizedStat(range);
 
                     curAvoid = getMaximumShortMaxIfOverflow(temp, curAvoid);
                 }
 
                 if (nEquip.getSpeed() > 0) {
-                    if(YamlConfig.config.server.USE_ENHANCED_CHSCROLL) temp = curSpeed + chscrollRandomizedStat(range);
+                    if (YamlConfig.config.server.USE_ENHANCED_CHSCROLL) temp = curSpeed + chscrollRandomizedStat(range);
                     else temp = nEquip.getSpeed() + chscrollRandomizedStat(range);
 
                     curSpeed = getMaximumShortMaxIfOverflow(temp, curSpeed);
                 }
 
                 if (nEquip.getJump() > 0) {
-                    if(YamlConfig.config.server.USE_ENHANCED_CHSCROLL) temp = curJump + chscrollRandomizedStat(range);
+                    if (YamlConfig.config.server.USE_ENHANCED_CHSCROLL) temp = curJump + chscrollRandomizedStat(range);
                     else temp = nEquip.getJump() + chscrollRandomizedStat(range);
 
                     curJump = getMaximumShortMaxIfOverflow(temp, curJump);
                 }
 
                 if (nEquip.getHp() > 0) {
-                    if(YamlConfig.config.server.USE_ENHANCED_CHSCROLL) temp = curHp + chscrollRandomizedStat(range);
+                    if (YamlConfig.config.server.USE_ENHANCED_CHSCROLL) temp = curHp + chscrollRandomizedStat(range);
                     else temp = nEquip.getHp() + chscrollRandomizedStat(range);
 
                     curHp = getMaximumShortMaxIfOverflow(temp, curHp);
                 }
 
                 if (nEquip.getMp() > 0) {
-                    if(YamlConfig.config.server.USE_ENHANCED_CHSCROLL) temp = curMp + chscrollRandomizedStat(range);
+                    if (YamlConfig.config.server.USE_ENHANCED_CHSCROLL) temp = curMp + chscrollRandomizedStat(range);
                     else temp = nEquip.getMp() + chscrollRandomizedStat(range);
 
                     curMp = getMaximumShortMaxIfOverflow(temp, curMp);
@@ -857,68 +849,87 @@ public class MapleItemInformationProvider {
             nEquip.setJump((short) Math.max(0, curJump));
             nEquip.setHp((short) Math.max(0, curHp));
             nEquip.setMp((short) Math.max(0, curMp));
-        }
-
-        else {
+        } else {
             if (nEquip.getStr() > 0) {
-                if(YamlConfig.config.server.USE_ENHANCED_CHSCROLL) nEquip.setStr(getMaximumShortMaxIfOverflow(nEquip.getStr(), (nEquip.getStr() + chscrollRandomizedStat(range))));
+                if (YamlConfig.config.server.USE_ENHANCED_CHSCROLL)
+                    nEquip.setStr(getMaximumShortMaxIfOverflow(nEquip.getStr(), (nEquip.getStr() + chscrollRandomizedStat(range))));
                 else nEquip.setStr(getMaximumShortMaxIfOverflow(0, (nEquip.getStr() + chscrollRandomizedStat(range))));
             }
             if (nEquip.getDex() > 0) {
-                if(YamlConfig.config.server.USE_ENHANCED_CHSCROLL) nEquip.setDex(getMaximumShortMaxIfOverflow(nEquip.getDex(), (nEquip.getDex() + chscrollRandomizedStat(range))));
+                if (YamlConfig.config.server.USE_ENHANCED_CHSCROLL)
+                    nEquip.setDex(getMaximumShortMaxIfOverflow(nEquip.getDex(), (nEquip.getDex() + chscrollRandomizedStat(range))));
                 else nEquip.setDex(getMaximumShortMaxIfOverflow(0, (nEquip.getDex() + chscrollRandomizedStat(range))));
             }
             if (nEquip.getInt() > 0) {
-                if(YamlConfig.config.server.USE_ENHANCED_CHSCROLL) nEquip.setInt(getMaximumShortMaxIfOverflow(nEquip.getInt(), (nEquip.getInt() + chscrollRandomizedStat(range))));
+                if (YamlConfig.config.server.USE_ENHANCED_CHSCROLL)
+                    nEquip.setInt(getMaximumShortMaxIfOverflow(nEquip.getInt(), (nEquip.getInt() + chscrollRandomizedStat(range))));
                 else nEquip.setInt(getMaximumShortMaxIfOverflow(0, (nEquip.getInt() + chscrollRandomizedStat(range))));
             }
             if (nEquip.getLuk() > 0) {
-                if(YamlConfig.config.server.USE_ENHANCED_CHSCROLL) nEquip.setLuk(getMaximumShortMaxIfOverflow(nEquip.getLuk(), (nEquip.getLuk() + chscrollRandomizedStat(range))));
+                if (YamlConfig.config.server.USE_ENHANCED_CHSCROLL)
+                    nEquip.setLuk(getMaximumShortMaxIfOverflow(nEquip.getLuk(), (nEquip.getLuk() + chscrollRandomizedStat(range))));
                 else nEquip.setLuk(getMaximumShortMaxIfOverflow(0, (nEquip.getLuk() + chscrollRandomizedStat(range))));
             }
             if (nEquip.getWatk() > 0) {
-                if(YamlConfig.config.server.USE_ENHANCED_CHSCROLL) nEquip.setWatk(getMaximumShortMaxIfOverflow(nEquip.getWatk(), (nEquip.getWatk() + chscrollRandomizedStat(range))));
-                else nEquip.setWatk(getMaximumShortMaxIfOverflow(0, (nEquip.getWatk() + chscrollRandomizedStat(range))));
+                if (YamlConfig.config.server.USE_ENHANCED_CHSCROLL)
+                    nEquip.setWatk(getMaximumShortMaxIfOverflow(nEquip.getWatk(), (nEquip.getWatk() + chscrollRandomizedStat(range))));
+                else
+                    nEquip.setWatk(getMaximumShortMaxIfOverflow(0, (nEquip.getWatk() + chscrollRandomizedStat(range))));
             }
             if (nEquip.getWdef() > 0) {
-                if(YamlConfig.config.server.USE_ENHANCED_CHSCROLL) nEquip.setWdef(getMaximumShortMaxIfOverflow(nEquip.getWdef(), (nEquip.getWdef() + chscrollRandomizedStat(range))));
-                else nEquip.setWdef(getMaximumShortMaxIfOverflow(0, (nEquip.getWdef() + chscrollRandomizedStat(range))));
+                if (YamlConfig.config.server.USE_ENHANCED_CHSCROLL)
+                    nEquip.setWdef(getMaximumShortMaxIfOverflow(nEquip.getWdef(), (nEquip.getWdef() + chscrollRandomizedStat(range))));
+                else
+                    nEquip.setWdef(getMaximumShortMaxIfOverflow(0, (nEquip.getWdef() + chscrollRandomizedStat(range))));
             }
             if (nEquip.getMatk() > 0) {
-                if(YamlConfig.config.server.USE_ENHANCED_CHSCROLL) nEquip.setMatk(getMaximumShortMaxIfOverflow(nEquip.getMatk(), (nEquip.getMatk() + chscrollRandomizedStat(range))));
-                else nEquip.setMatk(getMaximumShortMaxIfOverflow(0, (nEquip.getMatk() + chscrollRandomizedStat(range))));
+                if (YamlConfig.config.server.USE_ENHANCED_CHSCROLL)
+                    nEquip.setMatk(getMaximumShortMaxIfOverflow(nEquip.getMatk(), (nEquip.getMatk() + chscrollRandomizedStat(range))));
+                else
+                    nEquip.setMatk(getMaximumShortMaxIfOverflow(0, (nEquip.getMatk() + chscrollRandomizedStat(range))));
             }
             if (nEquip.getMdef() > 0) {
-                if(YamlConfig.config.server.USE_ENHANCED_CHSCROLL) nEquip.setMdef(getMaximumShortMaxIfOverflow(nEquip.getMdef(), (nEquip.getMdef() + chscrollRandomizedStat(range))));
-                else nEquip.setMdef(getMaximumShortMaxIfOverflow(0, (nEquip.getMdef() + chscrollRandomizedStat(range))));
+                if (YamlConfig.config.server.USE_ENHANCED_CHSCROLL)
+                    nEquip.setMdef(getMaximumShortMaxIfOverflow(nEquip.getMdef(), (nEquip.getMdef() + chscrollRandomizedStat(range))));
+                else
+                    nEquip.setMdef(getMaximumShortMaxIfOverflow(0, (nEquip.getMdef() + chscrollRandomizedStat(range))));
             }
             if (nEquip.getAcc() > 0) {
-                if(YamlConfig.config.server.USE_ENHANCED_CHSCROLL) nEquip.setAcc(getMaximumShortMaxIfOverflow(nEquip.getAcc(), (nEquip.getAcc() + chscrollRandomizedStat(range))));
+                if (YamlConfig.config.server.USE_ENHANCED_CHSCROLL)
+                    nEquip.setAcc(getMaximumShortMaxIfOverflow(nEquip.getAcc(), (nEquip.getAcc() + chscrollRandomizedStat(range))));
                 else nEquip.setAcc(getMaximumShortMaxIfOverflow(0, (nEquip.getAcc() + chscrollRandomizedStat(range))));
             }
             if (nEquip.getAvoid() > 0) {
-                if(YamlConfig.config.server.USE_ENHANCED_CHSCROLL) nEquip.setAvoid(getMaximumShortMaxIfOverflow(nEquip.getAvoid(), (nEquip.getAvoid() + chscrollRandomizedStat(range))));
-                else nEquip.setAvoid(getMaximumShortMaxIfOverflow(0, (nEquip.getAvoid() + chscrollRandomizedStat(range))));
+                if (YamlConfig.config.server.USE_ENHANCED_CHSCROLL)
+                    nEquip.setAvoid(getMaximumShortMaxIfOverflow(nEquip.getAvoid(), (nEquip.getAvoid() + chscrollRandomizedStat(range))));
+                else
+                    nEquip.setAvoid(getMaximumShortMaxIfOverflow(0, (nEquip.getAvoid() + chscrollRandomizedStat(range))));
             }
             if (nEquip.getSpeed() > 0) {
-                if(YamlConfig.config.server.USE_ENHANCED_CHSCROLL) nEquip.setSpeed(getMaximumShortMaxIfOverflow(nEquip.getSpeed(), (nEquip.getSpeed() + chscrollRandomizedStat(range))));
-                else nEquip.setSpeed(getMaximumShortMaxIfOverflow(0, (nEquip.getSpeed() + chscrollRandomizedStat(range))));
+                if (YamlConfig.config.server.USE_ENHANCED_CHSCROLL)
+                    nEquip.setSpeed(getMaximumShortMaxIfOverflow(nEquip.getSpeed(), (nEquip.getSpeed() + chscrollRandomizedStat(range))));
+                else
+                    nEquip.setSpeed(getMaximumShortMaxIfOverflow(0, (nEquip.getSpeed() + chscrollRandomizedStat(range))));
             }
             if (nEquip.getJump() > 0) {
-                if(YamlConfig.config.server.USE_ENHANCED_CHSCROLL) nEquip.setJump(getMaximumShortMaxIfOverflow(nEquip.getJump(), (nEquip.getJump() + chscrollRandomizedStat(range))));
-                else nEquip.setJump(getMaximumShortMaxIfOverflow(0, (nEquip.getJump() + chscrollRandomizedStat(range))));
+                if (YamlConfig.config.server.USE_ENHANCED_CHSCROLL)
+                    nEquip.setJump(getMaximumShortMaxIfOverflow(nEquip.getJump(), (nEquip.getJump() + chscrollRandomizedStat(range))));
+                else
+                    nEquip.setJump(getMaximumShortMaxIfOverflow(0, (nEquip.getJump() + chscrollRandomizedStat(range))));
             }
             if (nEquip.getHp() > 0) {
-                if(YamlConfig.config.server.USE_ENHANCED_CHSCROLL) nEquip.setHp(getMaximumShortMaxIfOverflow(nEquip.getHp(), (nEquip.getHp() + chscrollRandomizedStat(range))));
+                if (YamlConfig.config.server.USE_ENHANCED_CHSCROLL)
+                    nEquip.setHp(getMaximumShortMaxIfOverflow(nEquip.getHp(), (nEquip.getHp() + chscrollRandomizedStat(range))));
                 else nEquip.setHp(getMaximumShortMaxIfOverflow(0, (nEquip.getHp() + chscrollRandomizedStat(range))));
             }
             if (nEquip.getMp() > 0) {
-                if(YamlConfig.config.server.USE_ENHANCED_CHSCROLL) nEquip.setMp(getMaximumShortMaxIfOverflow(nEquip.getMp(), (nEquip.getMp() + chscrollRandomizedStat(range))));
+                if (YamlConfig.config.server.USE_ENHANCED_CHSCROLL)
+                    nEquip.setMp(getMaximumShortMaxIfOverflow(nEquip.getMp(), (nEquip.getMp() + chscrollRandomizedStat(range))));
                 else nEquip.setMp(getMaximumShortMaxIfOverflow(0, (nEquip.getMp() + chscrollRandomizedStat(range))));
             }
         }
     }
-    
+
     /*
         Issue with clean slate found thanks to Masterrulax
         Vicious added in the clean slate check thanks to Crypter (CrypterDEV)
@@ -938,23 +949,23 @@ public class MapleItemInformationProvider {
             if (((nEquip.getUpgradeSlots() > 0 || ItemConstants.isCleanSlate(scrollId))) || assertGM) {
                 double prop = (double) stats.get("success");
 
-                switch(vegaItemId) {
-                  case 5610000:
-                    if (prop == 10.0f) {
-                      prop = 30.0f;
-                    }
-                    break;
-                  case 5610001:
-                    if (prop == 60.0f) {
-                      prop = 90.0f;
-                    }
-                    break;
-                  case 2049100:
-                    prop = 100.0f;
-                    break;
+                switch (vegaItemId) {
+                    case 5610000:
+                        if (prop == 10.0f) {
+                            prop = 30.0f;
+                        }
+                        break;
+                    case 5610001:
+                        if (prop == 60.0f) {
+                            prop = 90.0f;
+                        }
+                        break;
+                    case 2049100:
+                        prop = 100.0f;
+                        break;
                 }
 
-                if(assertGM || rollSuccessChance(prop)) {
+                if (assertGM || rollSuccessChance(prop)) {
                     short flag = nEquip.getFlag();
                     switch (scrollId) {
                         case 2040727:
@@ -1231,7 +1242,7 @@ public class MapleItemInformationProvider {
         }
 
         boolean bRestricted = false;
-        if(itemId != 0) {
+        if (itemId != 0) {
             MapleData data = getItemData(itemId);
             if (data != null) {
                 bRestricted = MapleDataTool.getIntConvert("info/tradeBlock", data, 0) == 1;
@@ -1241,14 +1252,14 @@ public class MapleItemInformationProvider {
         untradeableCache.put(itemId, bRestricted);
         return bRestricted;
     }
-    
+
     public boolean isAccountRestricted(int itemId) {
         if (accountItemRestrictionCache.containsKey(itemId)) {
             return accountItemRestrictionCache.get(itemId);
         }
 
         boolean bRestricted = false;
-        if(itemId != 0) {
+        if (itemId != 0) {
             MapleData data = getItemData(itemId);
             if (data != null) {
                 bRestricted = MapleDataTool.getIntConvert("info/accountSharable", data, 0) == 1;
@@ -1265,7 +1276,7 @@ public class MapleItemInformationProvider {
         }
 
         boolean bRestricted = false;
-        if(itemId != 0) {
+        if (itemId != 0) {
             MapleData data = getItemData(itemId);
             if (data != null) {
                 bRestricted = MapleDataTool.getIntConvert("info/tradeBlock", data, 0) == 1;
@@ -1289,7 +1300,7 @@ public class MapleItemInformationProvider {
         }
 
         boolean bRestricted = false;
-        if(itemId != 0) {
+        if (itemId != 0) {
             MapleData data = getItemData(itemId);
             if (data != null) {
                 bRestricted = MapleDataTool.getIntConvert("info/only", data, 0) == 1;
@@ -1304,7 +1315,7 @@ public class MapleItemInformationProvider {
         Map<String, Integer> ret = skillUpgradeCache.get(itemId);
         MapleData retSkill = skillUpgradeInfoCache.get(itemId);
 
-        if(ret != null) return new Pair<>(ret, retSkill);
+        if (ret != null) return new Pair<>(ret, retSkill);
 
         retSkill = null;
         ret = new LinkedHashMap<>();
@@ -1332,7 +1343,7 @@ public class MapleItemInformationProvider {
 
     public Map<String, Integer> getSkillStats(int itemId, double playerJob) {
         Pair<Map<String, Integer>, MapleData> retData = getSkillStatsInternal(itemId);
-        if(retData.getLeft().isEmpty()) return null;
+        if (retData.getLeft().isEmpty()) return null;
 
         Map<String, Integer> ret = new LinkedHashMap<>(retData.getLeft());
         MapleData skill = retData.getRight();
@@ -1356,14 +1367,14 @@ public class MapleItemInformationProvider {
     public Pair<Integer, Boolean> canPetConsume(Integer petId, Integer itemId) {
         Pair<Integer, Set<Integer>> foodData = cashPetFoodCache.get(itemId);
 
-        if(foodData == null) {
+        if (foodData == null) {
             Set<Integer> pets = new HashSet<>(4);
             int inc = 1;
 
             MapleData data = getItemData(itemId);
-            if(data != null) {
+            if (data != null) {
                 MapleData specData = data.getChildByPath("spec");
-                for(MapleData specItem : specData.getChildren()) {
+                for (MapleData specItem : specData.getChildren()) {
                     String itemName = specItem.getName();
 
                     try {
@@ -1371,8 +1382,8 @@ public class MapleItemInformationProvider {
 
                         Integer petid = MapleDataTool.getInt(specItem, 0);
                         pets.add(petid);
-                    } catch(NumberFormatException npe) {
-                        if(itemName.contentEquals("inc")) {
+                    } catch (NumberFormatException npe) {
+                        if (itemName.contentEquals("inc")) {
                             inc = MapleDataTool.getInt(specItem, 1);
                         }
                     }
@@ -1461,8 +1472,8 @@ public class MapleItemInformationProvider {
         }
         MapleData itemInfo = getItemData(itemId);
         ScriptedItem script = new ScriptedItem(MapleDataTool.getInt("spec/npc", itemInfo, 0),
-        MapleDataTool.getString("spec/script", itemInfo, ""),
-        MapleDataTool.getInt("spec/runOnPickup", itemInfo, 0) == 1);
+                MapleDataTool.getString("spec/script", itemInfo, ""),
+                MapleDataTool.getInt("spec/runOnPickup", itemInfo, 0) == 1);
         scriptedItemCache.put(itemId, script);
         return scriptedItemCache.get(itemId);
     }
@@ -1608,23 +1619,19 @@ public class MapleItemInformationProvider {
 
     public boolean isUpgradeable(int itemId) {
         Item it = this.getEquipById(itemId);
-        Equip eq = (Equip)it;
+        Equip eq = (Equip) it;
 
         return (eq.getUpgradeSlots() > 0 || eq.getStr() > 0 || eq.getDex() > 0 || eq.getInt() > 0 || eq.getLuk() > 0 ||
                 eq.getWatk() > 0 || eq.getMatk() > 0 || eq.getWdef() > 0 || eq.getMdef() > 0 || eq.getAcc() > 0 ||
                 eq.getAvoid() > 0 || eq.getSpeed() > 0 || eq.getJump() > 0 || eq.getHp() > 0 || eq.getMp() > 0);
     }
-    
+
     public boolean isUnmerchable(int itemId) {
-        if(YamlConfig.config.server.USE_ENFORCE_UNMERCHABLE_CASH && isCash(itemId)) {
+        if (YamlConfig.config.server.USE_ENFORCE_UNMERCHABLE_CASH && isCash(itemId)) {
             return true;
         }
 
-        if (YamlConfig.config.server.USE_ENFORCE_UNMERCHABLE_PET && ItemConstants.isPet(itemId)) {
-            return true;
-        }
-        
-        return false;
+        return YamlConfig.config.server.USE_ENFORCE_UNMERCHABLE_PET && ItemConstants.isPet(itemId);
     }
 
     public Collection<Item> canWearEquipment(MapleCharacter chr, Collection<Item> items) {
@@ -1706,7 +1713,7 @@ public class MapleItemInformationProvider {
     public boolean canWearEquipment(MapleCharacter chr, Equip equip, int dst) {
         int id = equip.getItemId();
 
-        if(ItemConstants.isWeddingRing(id) && chr.hasJustMarried()) {
+        if (ItemConstants.isWeddingRing(id) && chr.hasJustMarried()) {
             chr.dropMessage(5, "The Wedding Ring cannot be equipped on this map.");  // will dc everyone due to doubled couple effect
             return false;
         }
@@ -1882,12 +1889,12 @@ public class MapleItemInformationProvider {
     private static int getCrystalForLevel(int level) {
         int range = (level - 1) / 10;
 
-        if(range < 5) {
+        if (range < 5) {
             return 4260000;
-        } else if(range > 11) {
+        } else if (range > 11) {
             return 4260008;
         } else {
-            switch(range) {
+            switch (range) {
                 case 5:
                     return 4260001;
 
@@ -1915,9 +1922,9 @@ public class MapleItemInformationProvider {
     public Pair<String, Integer> getMakerReagentStatUpgrade(int itemId) {
         try {
             Pair<String, Integer> statUpgd = statUpgradeMakerCache.get(itemId);
-            if(statUpgd != null) {
+            if (statUpgd != null) {
                 return statUpgd;
-            } else if(statUpgradeMakerCache.containsKey(itemId)) {
+            } else if (statUpgradeMakerCache.containsKey(itemId)) {
                 return null;
             }
 
@@ -1925,7 +1932,7 @@ public class MapleItemInformationProvider {
             PreparedStatement ps = con.prepareStatement("SELECT stat, value FROM makerreagentdata WHERE itemid = ?");
             ps.setInt(1, itemId);
             ResultSet rs = ps.executeQuery();
-            if(rs.next()) {
+            if (rs.next()) {
                 String statType = rs.getString("stat");
                 int statGain = rs.getInt("value");
 
@@ -1946,7 +1953,7 @@ public class MapleItemInformationProvider {
     public int getMakerCrystalFromLeftover(Integer leftoverId) {
         try {
             Integer itemid = mobCrystalMakerCache.get(leftoverId);
-            if(itemid != null) {
+            if (itemid != null) {
                 return itemid;
             }
 
@@ -1956,7 +1963,7 @@ public class MapleItemInformationProvider {
             PreparedStatement ps = con.prepareStatement("SELECT dropperid FROM drop_data WHERE itemid = ? ORDER BY dropperid;");
             ps.setInt(1, leftoverId);
             ResultSet rs = ps.executeQuery();
-            if(rs.next()) {
+            if (rs.next()) {
                 int dropperid = rs.getInt("dropperid");
                 itemid = getCrystalForLevel(MapleLifeFactory.getMonsterLevel(dropperid) - 1);
             }
@@ -2039,7 +2046,7 @@ public class MapleItemInformationProvider {
 
     public List<Pair<Integer, Integer>> getMakerDisassembledItems(Integer itemId) {
         List<Pair<Integer, Integer>> items = new LinkedList<>();
-        
+
         Connection con;
         try {
             con = DatabaseConnection.getConnection();
@@ -2070,7 +2077,7 @@ public class MapleItemInformationProvider {
             ps.setInt(1, itemId);
             ResultSet rs = ps.executeQuery();
 
-            if(rs.next()) {   // cost is 13.6363~ % of the original value, trim by 1000.
+            if (rs.next()) {   // cost is 13.6363~ % of the original value, trim by 1000.
                 float val = (float) (rs.getInt("req_meso") * 0.13636363636364);
                 fee = (int) (val / 1000);
                 fee *= 1000;
@@ -2088,15 +2095,15 @@ public class MapleItemInformationProvider {
 
     public int getMakerStimulant(int itemId) {  // thanks to Arnah
         Integer itemid = makerCatalystCache.get(itemId);
-        if(itemid != null) {
+        if (itemid != null) {
             return itemid;
         }
 
         itemid = -1;
-        for(MapleData md : etcData.getData("ItemMake.img").getChildren()) {
+        for (MapleData md : etcData.getData("ItemMake.img").getChildren()) {
             MapleData me = md.getChildByPath(StringUtil.getLeftPaddedStr(Integer.toString(itemId), '0', 8));
 
-            if(me != null) {
+            if (me != null) {
                 itemid = MapleDataTool.getInt(me.getChildByPath("catalyst"), -1);
                 break;
             }
@@ -2114,7 +2121,7 @@ public class MapleItemInformationProvider {
             PreparedStatement ps = con.prepareStatement("SELECT dropperid FROM drop_data WHERE itemid = ? LIMIT 50");
             ps.setInt(1, itemId);
             ResultSet rs = ps.executeQuery();
-            while(rs.next()) {
+            while (rs.next()) {
                 String resultName = MapleMonsterInformationProvider.getInstance().getMobNameFromId(rs.getInt("dropperid"));
                 if (!resultName.isEmpty()) {
                     list.add(resultName);
@@ -2132,7 +2139,7 @@ public class MapleItemInformationProvider {
 
     private boolean canUseSkillBook(MapleCharacter player, Integer skillBookId) {
         Map<String, Integer> skilldata = getSkillStats(skillBookId, player.getJob().getId());
-        if(skilldata == null || skilldata.get("skillid") == 0) return false;
+        if (skilldata == null || skilldata.get("skillid") == 0) return false;
 
         Skill skill2 = SkillFactory.getSkill(skilldata.get("skillid"));
         return (skilldata.get("skillid") != 0 && ((player.getSkillLevel(skill2) >= skilldata.get("reqSkillLevel") || skilldata.get("reqSkillLevel") == 0) && player.getMasterLevel(skill2) < skilldata.get("masterLevel")));
@@ -2140,8 +2147,8 @@ public class MapleItemInformationProvider {
 
     public List<Integer> usableMasteryBooks(MapleCharacter player) {
         List<Integer> masterybook = new LinkedList<>();
-        for(Integer i = 2290000; i <= 2290139; i++) {
-            if(canUseSkillBook(player, i)) {
+        for (Integer i = 2290000; i <= 2290139; i++) {
+            if (canUseSkillBook(player, i)) {
                 masterybook.add(i);
             }
         }
@@ -2151,22 +2158,22 @@ public class MapleItemInformationProvider {
 
     public List<Integer> usableSkillBooks(MapleCharacter player) {
         List<Integer> skillbook = new LinkedList<>();
-        for(Integer i = 2280000; i <= 2280019; i++) {
-            if(canUseSkillBook(player, i)) {
+        for (Integer i = 2280000; i <= 2280019; i++) {
+            if (canUseSkillBook(player, i)) {
                 skillbook.add(i);
             }
         }
 
         return skillbook;
     }
-    
+
     public final QuestConsItem getQuestConsumablesInfo(final int itemId) {
         if (questItemConsCache.containsKey(itemId)) {
             return questItemConsCache.get(itemId);
         }
         MapleData data = getItemData(itemId);
         QuestConsItem qcItem = null;
-        
+
         MapleData infoData = data.getChildByPath("info");
         if (infoData.getChildByPath("uiData") != null) {
             qcItem = new QuestConsItem();
@@ -2174,7 +2181,7 @@ public class MapleItemInformationProvider {
             qcItem.grade = MapleDataTool.getInt("grade", infoData);
             qcItem.questid = MapleDataTool.getInt("questId", infoData);
             qcItem.items = new HashMap<>(2);
-            
+
             Map<Integer, Integer> cItems = qcItem.items;
             MapleData ciData = infoData.getChildByPath("consumeItem");
             if (ciData != null) {
@@ -2186,16 +2193,16 @@ public class MapleItemInformationProvider {
                 }
             }
         }
-        
+
         questItemConsCache.put(itemId, qcItem);
         return qcItem;
     }
 
     public class ScriptedItem {
 
-        private boolean runOnPickup;
-        private int npc;
-        private String script;
+        private final boolean runOnPickup;
+        private final int npc;
+        private final String script;
 
         public ScriptedItem(int npc, String script, boolean rop) {
             this.npc = npc;
@@ -2222,15 +2229,15 @@ public class MapleItemInformationProvider {
         public short prob, quantity;
         public String effect, worldmsg;
     }
-    
+
     public static final class QuestConsItem {
 
         public int questid, exp, grade;
         public Map<Integer, Integer> items;
-        
+
         public Integer getItemRequirement(int itemid) {
             return items.get(itemid);
         }
-        
+
     }
 }

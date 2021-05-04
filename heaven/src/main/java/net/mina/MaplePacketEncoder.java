@@ -21,19 +21,19 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 package net.mina;
 
-import config.YamlConfig;
 import client.MapleClient;
+import config.YamlConfig;
 import constants.net.OpcodeConstants;
 import net.server.coordinator.session.MapleSessionCoordinator;
 import org.apache.mina.core.buffer.IoBuffer;
 import org.apache.mina.core.session.IoSession;
 import org.apache.mina.filter.codec.ProtocolEncoder;
 import org.apache.mina.filter.codec.ProtocolEncoderOutput;
-import tools.MapleAESOFB;
+import tools.FilePrinter;
 import tools.HexTool;
+import tools.MapleAESOFB;
 import tools.data.input.ByteArrayByteStream;
 import tools.data.input.GenericLittleEndianAccessor;
-import tools.FilePrinter;
 
 public class MaplePacketEncoder implements ProtocolEncoder {
 
@@ -84,7 +84,7 @@ public class MaplePacketEncoder implements ProtocolEncoder {
             out.write(IoBuffer.wrap(((byte[]) message)));
         }
     }
-    
+
     private String lookupRecv(int val) {
         return OpcodeConstants.sendOpcodeNames.get(val);
     }
@@ -94,5 +94,6 @@ public class MaplePacketEncoder implements ProtocolEncoder {
     }
 
     @Override
-    public void dispose(IoSession session) throws Exception {}
+    public void dispose(IoSession session) throws Exception {
+    }
 }

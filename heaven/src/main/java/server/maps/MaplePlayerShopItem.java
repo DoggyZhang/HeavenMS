@@ -24,13 +24,12 @@ package server.maps;
 import client.inventory.Item;
 
 /**
- *
  * @author Matze
  */
 public class MaplePlayerShopItem {
-    private Item item;
+    private final Item item;
     private short bundles;
-    private int price;
+    private final int price;
     private boolean doesExist;
 
     public MaplePlayerShopItem(Item item, short bundles, int price) {

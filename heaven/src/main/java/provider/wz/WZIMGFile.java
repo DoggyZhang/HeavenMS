@@ -21,22 +21,19 @@
 */
 package provider.wz;
 
-import java.awt.Point;
-import java.io.DataOutputStream;
-import java.io.File;
-import java.io.IOException;
-import java.io.OutputStream;
-import java.io.RandomAccessFile;
 import tools.data.input.GenericSeekableLittleEndianAccessor;
 import tools.data.input.RandomAccessByteStream;
 import tools.data.input.SeekableLittleEndianAccessor;
 
+import java.awt.Point;
+import java.io.*;
+
 public class WZIMGFile {
-    private WZFileEntry file;
-    private WZIMGEntry root;
-    private boolean provideImages;
-    @SuppressWarnings ("unused")
-    private boolean modernImg;
+    private final WZFileEntry file;
+    private final WZIMGEntry root;
+    private final boolean provideImages;
+    @SuppressWarnings("unused")
+    private final boolean modernImg;
 
     public WZIMGFile(File wzfile, WZFileEntry file, boolean provideImages, boolean modernImg) throws IOException {
         RandomAccessFile raf = new RandomAccessFile(wzfile, "r");

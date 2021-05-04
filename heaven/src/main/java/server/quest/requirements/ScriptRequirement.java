@@ -18,7 +18,7 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package server.quest.requirements;
-    
+
 import client.MapleCharacter;
 import provider.MapleData;
 import provider.MapleDataTool;
@@ -26,28 +26,27 @@ import server.quest.MapleQuest;
 import server.quest.MapleQuestRequirementType;
 
 /**
- *
  * @author Ronan
  */
 public class ScriptRequirement extends MapleQuestRequirement {
-        private boolean reqScript;
-        
-	public ScriptRequirement(MapleQuest quest, MapleData data) {
-		super(MapleQuestRequirementType.BUFF);
-		processData(data);
-	}
-	
-	@Override
-	public void processData(MapleData data) {
-                reqScript = !MapleDataTool.getString(data, "").isEmpty();
-	}
-	
-	@Override
-	public boolean check(MapleCharacter chr, Integer npcid) {
-                return true;
-	}
-        
-        public boolean get() {
-                return reqScript;
-        }
+    private boolean reqScript;
+
+    public ScriptRequirement(MapleQuest quest, MapleData data) {
+        super(MapleQuestRequirementType.BUFF);
+        processData(data);
+    }
+
+    @Override
+    public void processData(MapleData data) {
+        reqScript = !MapleDataTool.getString(data, "").isEmpty();
+    }
+
+    @Override
+    public boolean check(MapleCharacter chr, Integer npcid) {
+        return true;
+    }
+
+    public boolean get() {
+        return reqScript;
+    }
 }

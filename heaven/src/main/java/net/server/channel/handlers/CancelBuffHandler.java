@@ -23,25 +23,18 @@ package net.server.channel.handlers;
 
 import client.MapleClient;
 import client.SkillFactory;
-import constants.skills.Bishop;
-import constants.skills.Bowmaster;
-import constants.skills.Corsair;
-import constants.skills.Evan;
-import constants.skills.FPArchMage;
-import constants.skills.ILArchMage;
-import constants.skills.Marksman;
-import constants.skills.WindArcher;
+import constants.skills.*;
 import net.AbstractMaplePacketHandler;
 import net.MaplePacketHandler;
 import tools.MaplePacketCreator;
 import tools.data.input.SeekableLittleEndianAccessor;
 
 public final class CancelBuffHandler extends AbstractMaplePacketHandler implements MaplePacketHandler {
-    
+
     @Override
     public final void handlePacket(SeekableLittleEndianAccessor slea, MapleClient c) {
         int sourceid = slea.readInt();
-        
+
         switch (sourceid) {
             case FPArchMage.BIG_BANG:
             case ILArchMage.BIG_BANG:
@@ -54,7 +47,7 @@ public final class CancelBuffHandler extends AbstractMaplePacketHandler implemen
             case Evan.ICE_BREATH:
                 c.getPlayer().getMap().broadcastMessage(c.getPlayer(), MaplePacketCreator.skillCancel(c.getPlayer(), sourceid), false);
                 break;
-                
+
             default:
                 c.getPlayer().cancelEffect(SkillFactory.getSkill(sourceid).getEffect(1), false, -1);
                 break;

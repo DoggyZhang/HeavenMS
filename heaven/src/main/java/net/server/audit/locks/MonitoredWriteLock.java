@@ -20,17 +20,16 @@
 package net.server.audit.locks;
 
 /**
- *
  * @author RonanLana
  */
 public interface MonitoredWriteLock {
-    
-    public void lock();
-    
-    public void unlock();
-    
-    public boolean tryLock();
-    
-    public MonitoredWriteLock dispose();
-    
+
+    void lock();
+
+    void unlock();
+
+    boolean tryLock();
+
+    MonitoredWriteLock dispose();
+
 }

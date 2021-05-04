@@ -23,8 +23,6 @@ package net.server.channel.handlers;
 import client.MapleBuffStat;
 import client.MapleCharacter;
 import client.MapleClient;
-import java.util.Collections;
-import java.util.List;
 import net.AbstractMaplePacketHandler;
 import server.life.MapleMonster;
 import server.maps.MapleMapObject;
@@ -32,25 +30,27 @@ import tools.MaplePacketCreator;
 import tools.Pair;
 import tools.data.input.SeekableLittleEndianAccessor;
 
+import java.util.Collections;
+import java.util.List;
+
 /**
- *
  * @author Ronan
  */
 public final class PlayerMapTransitionHandler extends AbstractMaplePacketHandler {
-    
+
     @Override
     public final void handlePacket(SeekableLittleEndianAccessor slea, MapleClient c) {
         MapleCharacter chr = c.getPlayer();
         chr.setMapTransitionComplete();
-        
+
         int beaconid = chr.getBuffSource(MapleBuffStat.HOMING_BEACON);
         if (beaconid != -1) {
             chr.cancelBuffStats(MapleBuffStat.HOMING_BEACON);
-            
+
             final List<Pair<MapleBuffStat, Integer>> stat = Collections.singletonList(new Pair<>(MapleBuffStat.HOMING_BEACON, 0));
             chr.announce(MaplePacketCreator.giveBuff(1, beaconid, stat));
         }
-        
+
         if (!chr.isHidden()) {  // thanks Lame (Conrad) for noticing hidden characters controlling mobs
             for (MapleMapObject mo : chr.getMap().getMonsters()) {    // thanks BHB, IxianMace, Jefe for noticing several issues regarding mob statuses (such as freeze)
                 MapleMonster m = (MapleMonster) mo;

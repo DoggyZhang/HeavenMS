@@ -21,16 +21,16 @@
 */
 package net.server.channel.handlers;
 
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-
+import client.MapleClient;
 import net.AbstractMaplePacketHandler;
 import tools.DatabaseConnection;
 import tools.MaplePacketCreator;
 import tools.data.input.SeekableLittleEndianAccessor;
-import client.MapleClient;
+
 import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 public final class NoteActionHandler extends AbstractMaplePacketHandler {
     @Override
@@ -42,9 +42,9 @@ public final class NoteActionHandler extends AbstractMaplePacketHandler {
             try {
                 if (c.getPlayer().getCashShop().isOpened())
                     c.announce(MaplePacketCreator.showCashInventory(c));
-                
-                    c.getPlayer().sendNote(charname, message, (byte) 1);
-                    c.getPlayer().getCashShop().decreaseNotes();
+
+                c.getPlayer().sendNote(charname, message, (byte) 1);
+                c.getPlayer().getCashShop().decreaseNotes();
             } catch (SQLException e) {
                 e.printStackTrace();
             }
@@ -63,7 +63,7 @@ public final class NoteActionHandler extends AbstractMaplePacketHandler {
                     ps.setInt(1, id);
                     ResultSet rs = ps.executeQuery();
                     if (rs.next())
-                            fame += rs.getInt("fame");
+                        fame += rs.getInt("fame");
                     rs.close();
 
                     ps = con.prepareStatement("UPDATE notes SET `deleted` = 1 WHERE id = ?");

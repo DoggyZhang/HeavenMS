@@ -39,7 +39,7 @@ public abstract class Command {
     protected void setDescription(String description) {
         this.description = description;
     }
-    
+
     public int getRank() {
         return rank;
     }
@@ -48,7 +48,7 @@ public abstract class Command {
         this.rank = rank;
     }
 
-    protected String joinStringFrom(String arr[], int start) {
+    protected String joinStringFrom(String[] arr, int start) {
         StringBuilder builder = new StringBuilder();
         for (int i = start; i < arr.length; i++) {
             builder.append(arr[i]);

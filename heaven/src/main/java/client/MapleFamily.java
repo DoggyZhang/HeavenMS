@@ -21,6 +21,13 @@
  */
 package client;
 
+import net.server.Server;
+import net.server.world.World;
+import tools.DatabaseConnection;
+import tools.FilePrinter;
+import tools.MaplePacketCreator;
+import tools.Pair;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -32,15 +39,7 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicInteger;
 
-import net.server.Server;
-import net.server.world.World;
-import tools.DatabaseConnection;
-import tools.FilePrinter;
-import tools.MaplePacketCreator;
-import tools.Pair;
-
 /**
- *
  * @author Jay Estrella - Mr.Trash :3
  * @author Ubaware
  */
@@ -57,9 +56,9 @@ public class MapleFamily {
 
     public MapleFamily(int id, int world) {
         int newId = id;
-        if(id == -1) {
+        if (id == -1) {
             // get next available family id
-            while(idInUse(newId = familyIDCounter.incrementAndGet())) {
+            while (idInUse(newId = familyIDCounter.incrementAndGet())) {
             }
         }
         this.id = newId;
@@ -67,8 +66,8 @@ public class MapleFamily {
     }
 
     private static boolean idInUse(int id) {
-        for(World world : Server.getInstance().getWorlds()) {
-            if(world.getFamily(id) != null) return true;
+        for (World world : Server.getInstance().getWorlds()) {
+            if (world.getFamily(id) != null) return true;
         }
         return false;
     }
@@ -97,11 +96,11 @@ public class MapleFamily {
     public int getTotalMembers() {
         return members.size();
     }
-    
+
     public int getTotalGenerations() {
         return totalGenerations;
     }
-    
+
     public void setTotalGenerations(int generations) {
         this.totalGenerations = generations;
     }
@@ -112,13 +111,13 @@ public class MapleFamily {
 
     public void setMessage(String message, boolean save) {
         this.preceptsMessage = message;
-        if(save) {
+        if (save) {
             try (Connection con = DatabaseConnection.getConnection();
-                    PreparedStatement ps = con.prepareStatement("UPDATE family_character SET precepts = ? WHERE cid = ?")) {
+                 PreparedStatement ps = con.prepareStatement("UPDATE family_character SET precepts = ? WHERE cid = ?")) {
                 ps.setString(1, message);
                 ps.setInt(2, getLeader().getChrId());
                 ps.executeUpdate();
-            } catch(SQLException e) {
+            } catch (SQLException e) {
                 FilePrinter.printError(FilePrinter.FAMILY_ERROR, e, "Could not save new precepts for family " + getID() + ".");
                 e.printStackTrace();
             }
@@ -135,15 +134,15 @@ public class MapleFamily {
 
     public void removeEntryBranch(MapleFamilyEntry root) {
         members.remove(root.getChrId());
-        for(MapleFamilyEntry junior : root.getJuniors()) {
-            if(junior != null) removeEntryBranch(junior);
+        for (MapleFamilyEntry junior : root.getJuniors()) {
+            if (junior != null) removeEntryBranch(junior);
         }
     }
-    
+
     public void addEntryTree(MapleFamilyEntry root) {
         members.put(root.getChrId(), root);
-        for(MapleFamilyEntry junior : root.getJuniors()) {
-            if(junior != null) addEntryTree(junior);
+        for (MapleFamilyEntry junior : root.getJuniors()) {
+            if (junior != null) addEntryTree(junior);
         }
     }
 
@@ -156,26 +155,26 @@ public class MapleFamily {
     }
 
     public void broadcast(byte[] packet, int ignoreID) {
-        for(MapleFamilyEntry entry : members.values()) {
+        for (MapleFamilyEntry entry : members.values()) {
             MapleCharacter chr = entry.getChr();
-            if(chr != null) {
-                if(chr.getId() == ignoreID) continue;
+            if (chr != null) {
+                if (chr.getId() == ignoreID) continue;
                 chr.getClient().announce(packet);
             }
         }
     }
-    
+
     public void broadcastFamilyInfoUpdate() {
-        for(MapleFamilyEntry entry : members.values()) {
+        for (MapleFamilyEntry entry : members.values()) {
             MapleCharacter chr = entry.getChr();
-            if(chr != null) {
+            if (chr != null) {
                 chr.getClient().announce(MaplePacketCreator.getFamilyInfo(entry));
             }
         }
     }
-    
+
     public void resetDailyReps() {
-        for(MapleFamilyEntry entry : members.values()) {
+        for (MapleFamilyEntry entry : members.values()) {
             entry.setTodaysRep(0);
             entry.setRepsToSenior(0);
             entry.resetEntitlementUsages();
@@ -183,20 +182,20 @@ public class MapleFamily {
     }
 
     public static void loadAllFamilies() {
-        try(Connection con = DatabaseConnection.getConnection()) {
+        try (Connection con = DatabaseConnection.getConnection()) {
             List<Pair<Pair<Integer, Integer>, MapleFamilyEntry>> unmatchedJuniors = new ArrayList<Pair<Pair<Integer, Integer>, MapleFamilyEntry>>(200); // <<world, seniorid> familyEntry>
-            try(PreparedStatement psEntries = con.prepareStatement("SELECT * FROM family_character")) {
+            try (PreparedStatement psEntries = con.prepareStatement("SELECT * FROM family_character")) {
                 ResultSet rsEntries = psEntries.executeQuery();
-                while(rsEntries.next()) { // can be optimized
+                while (rsEntries.next()) { // can be optimized
                     int cid = rsEntries.getInt("cid");
                     String name = null;
                     int level = -1;
                     int jobID = -1;
                     int world = -1;
-                    try(PreparedStatement ps = con.prepareStatement("SELECT world, name, level, job FROM characters WHERE id = ?")) {
+                    try (PreparedStatement ps = con.prepareStatement("SELECT world, name, level, job FROM characters WHERE id = ?")) {
                         ps.setInt(1, cid);
                         ResultSet rs = ps.executeQuery();
-                        if(rs.next()) {
+                        if (rs.next()) {
                             world = rs.getInt("world");
                             name = rs.getString("name");
                             level = rs.getInt("level");
@@ -205,7 +204,7 @@ public class MapleFamily {
                             FilePrinter.printError(FilePrinter.FAMILY_ERROR, "Could not load character information of " + cid + " in loadAllFamilies(). (RECORD DOES NOT EXIST)");
                             continue;
                         }
-                    } catch(SQLException e) {
+                    } catch (SQLException e) {
                         FilePrinter.printError(FilePrinter.FAMILY_ERROR, e, "Could not load character information of " + cid + " in loadAllFamilies(). (SQL ERROR)");
                         continue;
                     }
@@ -222,21 +221,22 @@ public class MapleFamily {
                         continue;
                     }
                     MapleFamily family = wserv.getFamily(familyid);
-                    if(family == null) {
+                    if (family == null) {
                         family = new MapleFamily(familyid, world);
                         Server.getInstance().getWorld(world).addFamily(familyid, family);
                     }
                     MapleFamilyEntry familyEntry = new MapleFamilyEntry(family, cid, name, level, MapleJob.getById(jobID));
                     family.addEntry(familyEntry);
-                    if(seniorid <= 0) {
+                    if (seniorid <= 0) {
                         family.setLeader(familyEntry);
                         family.setMessage(precepts, false);
                     }
                     MapleFamilyEntry senior = family.getEntryByID(seniorid);
-                    if(senior != null) {
+                    if (senior != null) {
                         familyEntry.setSenior(family.getEntryByID(seniorid), false);
                     } else {
-                        if(seniorid > 0) unmatchedJuniors.add(new Pair<Pair<Integer, Integer>, MapleFamilyEntry>(new Pair<Integer, Integer>(world, seniorid), familyEntry));
+                        if (seniorid > 0)
+                            unmatchedJuniors.add(new Pair<Pair<Integer, Integer>, MapleFamilyEntry>(new Pair<Integer, Integer>(world, seniorid), familyEntry));
                     }
                     familyEntry.setReputation(reputation);
                     familyEntry.setTodaysRep(todaysRep);
@@ -246,56 +246,56 @@ public class MapleFamily {
                     try (PreparedStatement ps = con.prepareStatement("SELECT entitlementid FROM family_entitlement WHERE charid = ?")) {
                         ps.setInt(1, familyEntry.getChrId());
                         ResultSet rs = ps.executeQuery();
-                        while(rs.next()) {
+                        while (rs.next()) {
                             familyEntry.setEntitlementUsed(rs.getInt("entitlementid"));
                         }
                     }
                 }
-            } catch(SQLException e) {
+            } catch (SQLException e) {
                 FilePrinter.printError(FilePrinter.FAMILY_ERROR, e, "Could not get family_character entries.");
                 e.printStackTrace();
             }
             // link missing ones (out of order)
-            for(Pair<Pair<Integer, Integer>, MapleFamilyEntry> unmatchedJunior : unmatchedJuniors) {
+            for (Pair<Pair<Integer, Integer>, MapleFamilyEntry> unmatchedJunior : unmatchedJuniors) {
                 int world = unmatchedJunior.getLeft().getLeft();
                 int seniorid = unmatchedJunior.getLeft().getRight();
                 MapleFamilyEntry junior = unmatchedJunior.getRight();
                 MapleFamilyEntry senior = Server.getInstance().getWorld(world).getFamily(junior.getFamily().getID()).getEntryByID(seniorid);
-                if(senior != null) {
+                if (senior != null) {
                     junior.setSenior(senior, false);
                 } else {
                     FilePrinter.printError(FilePrinter.FAMILY_ERROR, "Missing senior for character " + junior.getName() + " in world " + world);
                 }
             }
-        } catch(SQLException e) {
+        } catch (SQLException e) {
             FilePrinter.printError(FilePrinter.FAMILY_ERROR, e, "Could not get DB connection.");
             e.printStackTrace();
         }
-        for(World world : Server.getInstance().getWorlds()) {
-            for(MapleFamily family : world.getFamilies()) {
+        for (World world : Server.getInstance().getWorlds()) {
+            for (MapleFamily family : world.getFamilies()) {
                 family.getLeader().doFullCount();
             }
         }
     }
 
     public void saveAllMembersRep() { //was used for autosave task, but character autosave should be enough
-        try(Connection con = DatabaseConnection.getConnection()) {
+        try (Connection con = DatabaseConnection.getConnection()) {
             con.setAutoCommit(false);
             boolean success = true;
-            for(MapleFamilyEntry entry : members.values()) {
+            for (MapleFamilyEntry entry : members.values()) {
                 success = entry.saveReputation(con);
-                if(!success) break;
+                if (!success) break;
             }
-            if(!success) {
+            if (!success) {
                 con.rollback();
                 FilePrinter.printError(FilePrinter.FAMILY_ERROR, "Family rep autosave failed for family " + getID() + " on " + Calendar.getInstance().getTime().toString() + ".");
             }
             con.setAutoCommit(true);
             //reset repChanged after successful save
-            for(MapleFamilyEntry entry : members.values()) {
+            for (MapleFamilyEntry entry : members.values()) {
                 entry.savedSuccessfully();
             }
-        } catch(SQLException e) {
+        } catch (SQLException e) {
             FilePrinter.printError(FilePrinter.FAMILY_ERROR, e, "Could not get connection to DB.");
             e.printStackTrace();
         }

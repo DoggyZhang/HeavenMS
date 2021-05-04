@@ -23,32 +23,29 @@ package server.maps;
 
 import client.MapleClient;
 import config.YamlConfig;
+import net.server.audit.locks.MonitoredLockType;
+import net.server.audit.locks.factory.MonitoredReentrantLockFactory;
+import net.server.services.task.channel.OverallService;
+import net.server.services.type.ChannelServices;
+import scripting.reactor.ReactorScriptManager;
+import server.TimerManager;
+import server.partyquest.GuardianSpawnPoint;
+import tools.MaplePacketCreator;
+import tools.Pair;
 
 import java.awt.Rectangle;
 import java.util.List;
-
 import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.locks.Lock;
-import net.server.audit.locks.factory.MonitoredReentrantLockFactory;
-
-import scripting.reactor.ReactorScriptManager;
-import server.TimerManager;
-import tools.MaplePacketCreator;
-import tools.Pair;
-import net.server.audit.locks.MonitoredLockType;
-import net.server.services.type.ChannelServices;
-import net.server.services.task.channel.OverallService;
-import server.partyquest.GuardianSpawnPoint;
 
 /**
- *
  * @author Lerk
  * @author Ronan
  */
 public class MapleReactor extends AbstractMapleMapObject {
 
-    private int rid;
-    private MapleReactorStats stats;
+    private final int rid;
+    private final MapleReactorStats stats;
     private byte state;
     private byte evstate;
     private int delay;
@@ -61,8 +58,8 @@ public class MapleReactor extends AbstractMapleMapObject {
     private Runnable delayedRespawnRun = null;
     private GuardianSpawnPoint guardian = null;
     private byte facingDirection = 0;
-    private Lock reactorLock = MonitoredReentrantLockFactory.createLock(MonitoredLockType.REACTOR, true);
-    private Lock hitLock = MonitoredReentrantLockFactory.createLock(MonitoredLockType.REACTOR_HIT, true);
+    private final Lock reactorLock = MonitoredReentrantLockFactory.createLock(MonitoredLockType.REACTOR, true);
+    private final Lock hitLock = MonitoredReentrantLockFactory.createLock(MonitoredLockType.REACTOR_HIT, true);
 
     public MapleReactor(MapleReactorStats stats, int rid) {
         this.evstate = (byte) 0;
@@ -86,7 +83,7 @@ public class MapleReactor extends AbstractMapleMapObject {
     public void unlockReactor() {
         reactorLock.unlock();
     }
-    
+
     public void hitLockReactor() {
         hitLock.lock();
         reactorLock.lock();
@@ -332,11 +329,12 @@ public class MapleReactor extends AbstractMapleMapObject {
             e.printStackTrace();
         }
     }
-    
+
     public boolean destroy() {
         if (reactorLock.tryLock()) {
             try {
                 boolean alive = this.isAlive();
+                // reactor neither alive nor in delayed respawn, remove map object allowed
                 if (alive) {
                     this.setAlive(false);
                     this.cancelReactorTimeout();
@@ -344,20 +342,16 @@ public class MapleReactor extends AbstractMapleMapObject {
                     if (this.getDelay() > 0) {
                         this.delayedRespawn();
                     }
-                } else if (this.inDelayedRespawn()) {
-                    return false;
-                } else {
-                    return true;    // reactor neither alive nor in delayed respawn, remove map object allowed
-                }
+                } else return !this.inDelayedRespawn();
             } finally {
                 reactorLock.unlock();
             }
         }
-        
+
         map.broadcastMessage(MaplePacketCreator.destroyReactor(this));
         return false;
     }
-    
+
     private void respawn() {
         this.lockReactor();
         try {
@@ -366,10 +360,10 @@ public class MapleReactor extends AbstractMapleMapObject {
         } finally {
             this.unlockReactor();
         }
-        
+
         map.broadcastMessage(this.makeSpawnData());
     }
-    
+
     public void delayedRespawn() {
         Runnable r = new Runnable() {
             @Override
@@ -378,16 +372,16 @@ public class MapleReactor extends AbstractMapleMapObject {
                 respawn();
             }
         };
-        
+
         delayedRespawnRun = r;
-        
+
         OverallService service = (OverallService) map.getChannelServer().getServiceAccess(ChannelServices.OVERALL);
         service.registerOverallAction(map.getId(), r, this.getDelay());
     }
-    
+
     public boolean forceDelayedRespawn() {
         Runnable r = delayedRespawnRun;
-        
+
         if (r != null) {
             OverallService service = (OverallService) map.getChannelServer().getServiceAccess(ChannelServices.OVERALL);
             service.forceRunOverallAction(map.getId(), r);
@@ -396,7 +390,7 @@ public class MapleReactor extends AbstractMapleMapObject {
             return false;
         }
     }
-    
+
     public boolean inDelayedRespawn() {
         return delayedRespawnRun != null;
     }

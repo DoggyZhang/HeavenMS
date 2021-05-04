@@ -22,14 +22,13 @@
 package server;
 
 /**
- *
  * @author Matze
  */
 public class MapleShopItem {
-    private short buyable;
-    private int itemId;
-    private int price;
-    private int pitch;
+    private final short buyable;
+    private final int itemId;
+    private final int price;
+    private final int pitch;
 
     public MapleShopItem(short buyable, int itemId, int price, int pitch) {
         this.buyable = buyable;

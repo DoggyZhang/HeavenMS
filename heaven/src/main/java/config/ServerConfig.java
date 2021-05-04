@@ -21,8 +21,8 @@ public class ServerConfig {
     public long RESPAWN_INTERVAL;
     public long PURGING_INTERVAL;
     public long RANKING_INTERVAL;
-    public long  COUPON_INTERVAL;
-    public long  UPDATE_INTERVAL;
+    public long COUPON_INTERVAL;
+    public long UPDATE_INTERVAL;
 
     public boolean ENABLE_PIC;
     public boolean ENABLE_PIN;
@@ -160,12 +160,12 @@ public class ServerConfig {
     public int MOB_REACTOR_REFRESH_TIME;
     public int PARTY_SEARCH_REENTRY_LIMIT;
     public long NAME_CHANGE_COOLDOWN;
-    public long WORLD_TRANSFER_COOLDOWN=NAME_CHANGE_COOLDOWN;//Cooldown for world tranfers, default is same as name change (30 days).
+    public long WORLD_TRANSFER_COOLDOWN = NAME_CHANGE_COOLDOWN;//Cooldown for world tranfers, default is same as name change (30 days).
     public boolean INSTANT_NAME_CHANGE;
 
     //Dangling Items/Locks Configuration
-    public int ITEM_EXPIRE_TIME ;
-    public int KITE_EXPIRE_TIME ;
+    public int ITEM_EXPIRE_TIME;
+    public int KITE_EXPIRE_TIME;
     public int ITEM_MONITOR_TIME;
     public int LOCK_MONITOR_TIME;
 

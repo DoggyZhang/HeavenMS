@@ -27,7 +27,6 @@ import java.util.LinkedList;
 import java.util.List;
 
 /**
- *
  * @author Matze
  */
 public class MapleFootholdTree {
@@ -35,12 +34,12 @@ public class MapleFootholdTree {
     private MapleFootholdTree ne = null;
     private MapleFootholdTree sw = null;
     private MapleFootholdTree se = null;
-    private List<MapleFoothold> footholds = new LinkedList<MapleFoothold>();
-    private Point p1;
-    private Point p2;
-    private Point center;
+    private final List<MapleFoothold> footholds = new LinkedList<MapleFoothold>();
+    private final Point p1;
+    private final Point p2;
+    private final Point center;
     private int depth = 0;
-    private static int maxDepth = 8;
+    private static final int maxDepth = 8;
     private int maxDropX;
     private int minDropX;
 
@@ -74,7 +73,7 @@ public class MapleFootholdTree {
         }
         if (depth == maxDepth ||
                 (f.getX1() >= p1.x && f.getX2() <= p2.x &&
-                f.getY1() >= p1.y && f.getY2() <= p2.y)) {
+                        f.getY1() >= p1.y && f.getY2() <= p2.y)) {
             footholds.add(f);
         } else {
             if (nw == null) {
@@ -144,9 +143,7 @@ public class MapleFootholdTree {
             }
             if ((p1.x > center.x || p2.x > center.x) && p1.y > center.y) {
                 ret = se.findWallR(p1, p2);
-                if (ret != null) {
-                    return ret;
-                }
+                return ret;
             }
         }
         return null;

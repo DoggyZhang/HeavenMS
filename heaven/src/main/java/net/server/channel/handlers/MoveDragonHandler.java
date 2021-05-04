@@ -21,14 +21,14 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 package net.server.channel.handlers;
 
-import java.awt.Point;
-
 import client.MapleCharacter;
 import client.MapleClient;
 import server.maps.MapleDragon;
 import tools.MaplePacketCreator;
 import tools.data.input.SeekableLittleEndianAccessor;
 import tools.exceptions.EmptyMovementException;
+
+import java.awt.Point;
 
 
 public class MoveDragonHandler extends AbstractMovementPacketHandler {
@@ -43,13 +43,14 @@ public class MoveDragonHandler extends AbstractMovementPacketHandler {
                 updatePosition(slea, dragon, 0);
                 long movementDataLength = slea.getPosition() - movementDataStart; //how many bytes were read by updatePosition
                 slea.seek(movementDataStart);
-                
+
                 if (chr.isHidden()) {
                     chr.getMap().broadcastGMMessage(chr, MaplePacketCreator.moveDragon(dragon, startPos, slea, movementDataLength));
                 } else {
                     chr.getMap().broadcastMessage(chr, MaplePacketCreator.moveDragon(dragon, startPos, slea, movementDataLength), dragon.getPosition());
                 }
-            } catch (EmptyMovementException e) {}
+            } catch (EmptyMovementException e) {
+            }
         }
     }
 }

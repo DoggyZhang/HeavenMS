@@ -21,19 +21,22 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 package client.inventory;
 
+import client.inventory.manipulator.MapleKarmaManipulator;
 import constants.inventory.ItemConstants;
+import server.MapleItemInformationProvider;
+
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
-import client.inventory.manipulator.MapleKarmaManipulator;
-import server.MapleItemInformationProvider;
 
 public class Item implements Comparable<Item> {
 
-    private static AtomicInteger runningCashId = new AtomicInteger(777000000);  // pets & rings shares cashid values
-    
-    private int id, cashId, sn;
+    private static final AtomicInteger runningCashId = new AtomicInteger(777000000);  // pets & rings shares cashid values
+
+    private final int id;
+    private int cashId;
+    private int sn;
     private short position;
     private short quantity;
     private int petid = -1;
@@ -107,7 +110,7 @@ public class Item implements Comparable<Item> {
     public MapleInventoryType getInventoryType() {
         return ItemConstants.getInventoryType(id);
     }
-    
+
     public byte getItemType() { // 1: equip, 3: pet, 2: other
         if (getPetId() > -1) {
             return 3;
@@ -126,7 +129,7 @@ public class Item implements Comparable<Item> {
     public int getPetId() {
         return petid;
     }
-    
+
     @Override
     public int compareTo(Item other) {
         if (this.id < other.getItemId()) {
@@ -136,7 +139,7 @@ public class Item implements Comparable<Item> {
         }
         return 0;
     }
-    
+
     @Override
     public String toString() {
         return "Item: " + id + " quantity: " + quantity;
@@ -155,7 +158,7 @@ public class Item implements Comparable<Item> {
         if (ii.isAccountRestricted(id)) {
             b |= ItemConstants.ACCOUNT_SHARING; // thanks Shinigami15 for noticing ACCOUNT_SHARING flag not being applied properly to items server-side
         }
-        
+
         this.flag = b;
     }
 
@@ -186,7 +189,7 @@ public class Item implements Comparable<Item> {
     public MaplePet getPet() {
         return pet;
     }
-    
+
     public boolean isUntradeable() {
         return ((this.getFlag() & ItemConstants.UNTRADEABLE) == ItemConstants.UNTRADEABLE) || (MapleItemInformationProvider.getInstance().isDropRestricted(this.getItemId()) && !MapleKarmaManipulator.hasKarmaFlag(this));
     }

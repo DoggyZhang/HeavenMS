@@ -3,13 +3,15 @@ package client.command.commands.gm2;
 import client.MapleCharacter;
 import client.MapleClient;
 import client.command.Command;
+import server.ThreadManager;
 import tools.exceptions.IdTypeNotSupportedException;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.*;
-import server.ThreadManager;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 
 public class IdCommand extends Command {
     {
@@ -44,17 +46,17 @@ public class IdCommand extends Command {
 
                     Map<String, String> resultList = fetchResults(itemMap.get(params[0]), queryItem);
                     StringBuilder sb = new StringBuilder();
-                    
+
                     if (resultList.size() > 0) {
                         int count = 0;
-                        for (Map.Entry<String, String> entry: resultList.entrySet()) {
+                        for (Map.Entry<String, String> entry : resultList.entrySet()) {
                             sb.append(String.format("Id for %s is: #b%s#k", entry.getKey(), entry.getValue()) + "\r\n");
                             if (++count > 100) {
                                 break;
                             }
                         }
                         sb.append(String.format("Results found: #r%d#k | Returned: #b%d#k/100 | Refine search query to improve time.", resultList.size(), count) + "\r\n");
-                        
+
                         player.getAbstractPlayerInteraction().npcTalk(9010000, sb.toString());
                     } else {
                         player.yellowMessage(String.format("Id not found for item: %s, of type: %s.", queryItem, params[0]));
@@ -66,7 +68,7 @@ public class IdCommand extends Command {
                 }
             }
         };
-        
+
         ThreadManager.getInstance().newTask(queryRunnable);
     }
 
@@ -95,7 +97,7 @@ public class IdCommand extends Command {
 
     private Map<String, String> fetchResults(Map<String, String> queryMap, String queryItem) {
         Map<String, String> results = new HashMap<>();
-        for (String item: queryMap.keySet()) {
+        for (String item : queryMap.keySet()) {
             if (item.indexOf(queryItem) != -1) {
                 results.put(item, queryMap.get(item));
             }

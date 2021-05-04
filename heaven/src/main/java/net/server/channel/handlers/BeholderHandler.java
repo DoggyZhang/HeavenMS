@@ -23,13 +23,13 @@ package net.server.channel.handlers;
 
 import client.MapleClient;
 import constants.skills.DarkKnight;
-import java.util.Collection;
 import net.AbstractMaplePacketHandler;
 import server.maps.MapleSummon;
 import tools.data.input.SeekableLittleEndianAccessor;
 
+import java.util.Collection;
+
 /**
- *
  * @author BubblesDev
  */
 public final class BeholderHandler extends AbstractMaplePacketHandler {//Summon Skills noobs

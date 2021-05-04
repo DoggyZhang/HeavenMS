@@ -19,13 +19,14 @@
 */
 package net.server.task;
 
-import java.sql.SQLException;
 import net.server.Server;
 import tools.FilePrinter;
 
+import java.sql.SQLException;
+
 /**
  * @author Ronan
- * @info   Thread responsible for maintaining coupons EXP & DROP effects active
+ * @info Thread responsible for maintaining coupons EXP & DROP effects active
  */
 public class CouponTask implements Runnable {
     @Override
@@ -33,7 +34,7 @@ public class CouponTask implements Runnable {
         try {
             Server.getInstance().updateActiveCoupons();
             Server.getInstance().commitActiveCoupons();
-        } catch(SQLException sqle) {
+        } catch (SQLException sqle) {
             FilePrinter.printError(FilePrinter.EXCEPTION_CAUGHT, "Unexpected SQL error: " + sqle.getMessage());
         }
     }

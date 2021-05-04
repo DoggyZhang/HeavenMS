@@ -23,8 +23,8 @@
 */
 package client.command.commands.gm3;
 
-import client.command.Command;
 import client.MapleClient;
+import client.command.Command;
 import server.MapleShopFactory;
 
 

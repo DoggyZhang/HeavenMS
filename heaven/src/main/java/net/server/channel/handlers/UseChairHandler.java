@@ -31,12 +31,12 @@ public final class UseChairHandler extends AbstractMaplePacketHandler {
     @Override
     public final void handlePacket(SeekableLittleEndianAccessor slea, MapleClient c) {
         int itemId = slea.readInt();
-        
+
         // thanks Darter (YungMoozi) for reporting unchecked chair item
         if (!ItemConstants.isChair(itemId) || c.getPlayer().getInventory(MapleInventoryType.SETUP).findById(itemId) == null) {
             return;
         }
-        
+
         if (c.tryacquireClient()) {
             try {
                 c.getPlayer().sitChair(itemId);

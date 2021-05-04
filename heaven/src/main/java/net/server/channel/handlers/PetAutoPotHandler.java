@@ -30,7 +30,7 @@ import server.MapleStatEffect;
 import tools.data.input.SeekableLittleEndianAccessor;
 
 public final class PetAutoPotHandler extends AbstractMaplePacketHandler {
-    
+
     @Override
     public final void handlePacket(SeekableLittleEndianAccessor slea, MapleClient c) {
         slea.readByte();
@@ -38,20 +38,20 @@ public final class PetAutoPotHandler extends AbstractMaplePacketHandler {
         slea.readInt();
         short slot = slea.readShort();
         int itemId = slea.readInt();
-        
+
         MapleCharacter chr = c.getPlayer();
         MapleStatEffect stat = MapleItemInformationProvider.getInstance().getItemEffect(itemId);
         if (stat.getHp() > 0 || stat.getHpRate() > 0.0) {
             float estimatedHp = ((float) chr.getHp()) / chr.getMaxHp();
             chr.setAutopotHpAlert(estimatedHp + 0.05f);
         }
-        
+
         if (stat.getMp() > 0 || stat.getMpRate() > 0.0) {
             float estimatedMp = ((float) chr.getMp()) / chr.getMaxMp();
             chr.setAutopotMpAlert(estimatedMp + 0.05f);
         }
-        
+
         PetAutopotProcessor.runAutopotAction(c, slot, itemId);
     }
-    
+
 }

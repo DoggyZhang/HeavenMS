@@ -23,19 +23,18 @@ package net.server.channel.handlers;
 
 import client.MapleCharacter;
 import client.MapleClient;
-import client.inventory.MapleInventoryType;
 import client.autoban.AutobanManager;
+import client.inventory.MapleInventoryType;
+import client.inventory.manipulator.MapleInventoryManipulator;
 import constants.inventory.ItemConstants;
 import net.AbstractMaplePacketHandler;
 import net.server.Server;
-import client.inventory.manipulator.MapleInventoryManipulator;
 import server.MapleItemInformationProvider;
 import server.life.MapleMonster;
 import tools.MaplePacketCreator;
 import tools.data.input.SeekableLittleEndianAccessor;
 
 /**
- *
  * @author kevintjuh93
  */
 public final class UseCatchItemHandler extends AbstractMaplePacketHandler {
@@ -48,13 +47,13 @@ public final class UseCatchItemHandler extends AbstractMaplePacketHandler {
         slea.readShort();
         int itemId = slea.readInt();
         int monsterid = slea.readInt();
-        
+
         MapleMonster mob = chr.getMap().getMonsterByOid(monsterid);
         if (chr.getInventory(ItemConstants.getInventoryType(itemId)).countById(itemId) <= 0) {
-           return;
+            return;
         }
         if (mob == null) {
-           return;
+            return;
         }
         switch (itemId) {
             case 2270000:
@@ -63,7 +62,7 @@ public final class UseCatchItemHandler extends AbstractMaplePacketHandler {
                     mob.getMap().killMonster(mob, null, false);
                     MapleInventoryManipulator.removeById(c, MapleInventoryType.USE, itemId, 1, true, true);
                     MapleInventoryManipulator.addById(c, 1902000, (short) 1, "", -1);
-                 }
+                }
                 c.announce(MaplePacketCreator.enableActions());
                 break;
             case 2270001:
@@ -98,7 +97,7 @@ public final class UseCatchItemHandler extends AbstractMaplePacketHandler {
                             } else {
                                 chr.dropMessage(5, "Make a ETC slot available before using this item.");
                             }
-                            
+
                             abm.spam(10);
                         } else {
                             c.announce(MaplePacketCreator.catchMessage(0));
@@ -162,12 +161,12 @@ public final class UseCatchItemHandler extends AbstractMaplePacketHandler {
             case 2270004:
                 if (mob.getId() == 9300175) {
                     if (mob.getHp() < ((mob.getMaxHp() / 10) * 4)) {
-                    chr.getMap().broadcastMessage(MaplePacketCreator.catchMonster(monsterid, itemId, (byte) 1));
-                    mob.getMap().killMonster(mob, null, false);
-                    MapleInventoryManipulator.removeById(c, MapleInventoryType.USE, itemId, 1, true, true);
-                    MapleInventoryManipulator.addById(c, 4001169, (short) 1, "", -1);
+                        chr.getMap().broadcastMessage(MaplePacketCreator.catchMonster(monsterid, itemId, (byte) 1));
+                        mob.getMap().killMonster(mob, null, false);
+                        MapleInventoryManipulator.removeById(c, MapleInventoryType.USE, itemId, 1, true, true);
+                        MapleInventoryManipulator.addById(c, 4001169, (short) 1, "", -1);
                     } else {
-                    c.announce(MaplePacketCreator.catchMessage(0));
+                        c.announce(MaplePacketCreator.catchMessage(0));
                     }
                 }
                 c.announce(MaplePacketCreator.enableActions());
@@ -188,15 +187,15 @@ public final class UseCatchItemHandler extends AbstractMaplePacketHandler {
                 break;
             default:
                 // proper Fish catch, thanks to Dragohe4rt
-                
+
                 MapleItemInformationProvider ii = MapleItemInformationProvider.getInstance();
                 int itemGanho = ii.getCreateItem(itemId);
                 int mobItem = ii.getMobItem(itemId);
-                
+
                 if (itemGanho != 0 && mobItem == mob.getId()) {
                     int timeCatch = ii.getUseDelay(itemId);
                     int mobHp = ii.getMobHP(itemId);
-                    
+
                     if (timeCatch != 0 && (abm.getLastSpam(10) + timeCatch) < currentServerTime()) {
                         if (mobHp != 0 && mob.getHp() < ((mob.getMaxHp() / 100) * mobHp)) {
                             chr.getMap().broadcastMessage(MaplePacketCreator.catchMonster(monsterid, itemId, (byte) 1));
@@ -214,7 +213,7 @@ public final class UseCatchItemHandler extends AbstractMaplePacketHandler {
                     }
                 }
                 c.announce(MaplePacketCreator.enableActions());
-                
+
                 // System.out.println("UseCatchItemHandler: \r\n" + slea.toString());
         }
     }

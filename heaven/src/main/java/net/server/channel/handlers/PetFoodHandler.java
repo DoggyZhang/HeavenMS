@@ -21,15 +21,15 @@
  */
 package net.server.channel.handlers;
 
-import net.AbstractMaplePacketHandler;
 import client.MapleCharacter;
 import client.MapleClient;
+import client.autoban.AutobanManager;
+import client.inventory.Item;
 import client.inventory.MapleInventory;
 import client.inventory.MapleInventoryType;
 import client.inventory.MaplePet;
-import client.autoban.AutobanManager;
-import client.inventory.Item;
 import client.inventory.manipulator.MapleInventoryManipulator;
+import net.AbstractMaplePacketHandler;
 import net.server.Server;
 import tools.MaplePacketCreator;
 import tools.data.input.SeekableLittleEndianAccessor;
@@ -62,13 +62,13 @@ public final class PetFoodHandler extends AbstractMaplePacketHandler {
                 }
             }
         }
-        
+
         MaplePet pet = chr.getPet(slot);
-        if(pet == null) return;
-        
+        if (pet == null) return;
+
         short pos = slea.readShort();
         int itemId = slea.readInt();
-        
+
         if (c.tryacquireClient()) {
             try {
                 MapleInventory useInv = chr.getInventory(MapleInventoryType.USE);

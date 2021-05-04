@@ -26,32 +26,31 @@ import server.quest.MapleQuest;
 import server.quest.MapleQuestRequirementType;
 
 /**
- *
  * @author Ronan
  */
 public class InfoNumberRequirement extends MapleQuestRequirement {
-        
-        private short infoNumber;
-        private int questID;
 
-        public InfoNumberRequirement(MapleQuest quest, MapleData data) {
-                super(MapleQuestRequirementType.INFO_NUMBER);
-                questID = quest.getId();
-                processData(data);
-        }
+    private short infoNumber;
+    private final int questID;
 
-        @Override
-        public void processData(MapleData data) {
-                infoNumber = (short) MapleDataTool.getIntConvert(data, 0);
-        }
+    public InfoNumberRequirement(MapleQuest quest, MapleData data) {
+        super(MapleQuestRequirementType.INFO_NUMBER);
+        questID = quest.getId();
+        processData(data);
+    }
+
+    @Override
+    public void processData(MapleData data) {
+        infoNumber = (short) MapleDataTool.getIntConvert(data, 0);
+    }
 
 
-        @Override
-        public boolean check(MapleCharacter chr, Integer npcid) {
-                return true;
-        }
+    @Override
+    public boolean check(MapleCharacter chr, Integer npcid) {
+        return true;
+    }
 
-        public short getInfoNumber() {
-                return infoNumber;
-        }
+    public short getInfoNumber() {
+        return infoNumber;
+    }
 }

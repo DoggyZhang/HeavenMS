@@ -21,22 +21,22 @@
 */
 package server.life;
 
-import java.io.File;
-import java.util.HashMap;
-import java.util.Map;
 import provider.MapleData;
 import provider.MapleDataProvider;
 import provider.MapleDataProviderFactory;
 import provider.MapleDataTool;
 import tools.StringUtil;
 
+import java.io.File;
+import java.util.HashMap;
+import java.util.Map;
+
 /**
- *
  * @author Danny (Leifde)
  */
 public class MobAttackInfoFactory {
-    private static Map<String, MobAttackInfo> mobAttacks = new HashMap<String, MobAttackInfo>();
-    private static MapleDataProvider dataSource = MapleDataProviderFactory.getDataProvider(new File(System.getProperty("wzpath") + "/Mob.wz"));
+    private static final Map<String, MobAttackInfo> mobAttacks = new HashMap<String, MobAttackInfo>();
+    private static final MapleDataProvider dataSource = MapleDataProviderFactory.getDataProvider(new File(System.getProperty("wzpath") + "/Mob.wz"));
 
     public static MobAttackInfo getMobAttackInfo(MapleMonster mob, int attack) {
         MobAttackInfo ret = mobAttacks.get(mob.getId() + "" + attack);
@@ -46,7 +46,7 @@ public class MobAttackInfoFactory {
         synchronized (mobAttacks) {
             ret = mobAttacks.get(mob.getId() + "" + attack);
             if (ret == null) {
-                MapleData mobData = dataSource.getData(StringUtil.getLeftPaddedStr(Integer.toString(mob.getId()) + ".img", '0', 11));
+                MapleData mobData = dataSource.getData(StringUtil.getLeftPaddedStr(mob.getId() + ".img", '0', 11));
                 if (mobData != null) {
 //					MapleData infoData = mobData.getChildByPath("info");
                     String linkedmob = MapleDataTool.getString("link", mobData, "");
@@ -54,11 +54,11 @@ public class MobAttackInfoFactory {
                         mobData = dataSource.getData(StringUtil.getLeftPaddedStr(linkedmob + ".img", '0', 11));
                     }
                     MapleData attackData = mobData.getChildByPath("attack" + (attack + 1) + "/info");
-                   
+
                     if (attackData == null) {
-                    	return null;
+                        return null;
                     }
-                    
+
                     MapleData deadlyAttack = attackData.getChildByPath("deadlyAttack");
                     int mpBurn = MapleDataTool.getInt("mpBurn", attackData, 0);
                     int disease = MapleDataTool.getInt("disease", attackData, 0);
@@ -69,7 +69,7 @@ public class MobAttackInfoFactory {
                     ret.setMpBurn(mpBurn);
                     ret.setDiseaseSkill(disease);
                     ret.setDiseaseLevel(level);
-                    ret.setMpCon(mpCon);          
+                    ret.setMpCon(mpCon);
                 }
                 mobAttacks.put(mob.getId() + "" + attack, ret);
             }

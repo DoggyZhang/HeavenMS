@@ -19,34 +19,34 @@
 */
 package server;
 
-import client.MapleClient;
 import client.MapleCharacter;
+import client.MapleClient;
 import client.inventory.Item;
 import client.inventory.ItemFactory;
 import client.inventory.MapleInventory;
 import client.inventory.MapleInventoryType;
 import client.inventory.manipulator.MapleInventoryManipulator;
 import scripting.event.EventInstanceManager;
+import scripting.event.EventManager;
+import tools.DatabaseConnection;
+import tools.Pair;
+
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
-import scripting.event.EventManager;
-import tools.DatabaseConnection;
-import tools.Pair;
 
 /**
- *
  * @author Ronan
  */
 public class MapleMarriage extends EventInstanceManager {
-    
+
     public MapleMarriage(EventManager em, String name) {
         super(em, name);
     }
-    
+
     public boolean giftItemToSpouse(int cid) {
         return this.getIntProperty("wishlistSelection") == 0;
     }
@@ -100,7 +100,7 @@ public class MapleMarriage extends EventInstanceManager {
             gifts.remove(item);
         }
     }
-        
+
     public Boolean isMarriageGroom(MapleCharacter chr) {
         Boolean groom = null;
         try {
@@ -110,7 +110,8 @@ public class MapleMarriage extends EventInstanceManager {
             } else if (chr.getId() == brideid) {
                 groom = false;
             }
-        } catch (NumberFormatException nfe) {}
+        } catch (NumberFormatException nfe) {
+        }
 
         return groom;
     }
@@ -135,10 +136,10 @@ public class MapleMarriage extends EventInstanceManager {
 
         return false;
     }
-        
+
     public static List<Item> loadGiftItemsFromDb(MapleClient c, int cid) {
         List<Item> items = new LinkedList<>();
-        
+
         try {
             for (Pair<Item, MapleInventoryType> it : ItemFactory.MARRIAGE_GIFTS.loadItems(cid, false)) {
                 items.add(it.getLeft());
@@ -146,20 +147,20 @@ public class MapleMarriage extends EventInstanceManager {
         } catch (SQLException sqle) {
             sqle.printStackTrace();
         }
-        
+
         return items;
     }
-        
+
     public void saveGiftItemsToDb(MapleClient c, boolean groom, int cid) {
         MapleMarriage.saveGiftItemsToDb(c, getGiftItems(c, groom), cid);
     }
-    
+
     public static void saveGiftItemsToDb(MapleClient c, List<Item> giftItems, int cid) {
         List<Pair<Item, MapleInventoryType>> items = new LinkedList<>();
         for (Item it : giftItems) {
             items.add(new Pair<>(it, it.getInventoryType()));
         }
-        
+
         try {
             Connection con = DatabaseConnection.getConnection();
             ItemFactory.MARRIAGE_GIFTS.saveItems(items, cid, con);

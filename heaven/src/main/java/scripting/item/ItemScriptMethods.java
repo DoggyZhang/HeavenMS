@@ -25,11 +25,10 @@ import client.MapleClient;
 import scripting.AbstractPlayerInteraction;
 
 /**
- *
  * @author kevintjuh93
  */
 public class ItemScriptMethods extends AbstractPlayerInteraction {
     public ItemScriptMethods(MapleClient c) {
-    	super(c);
+        super(c);
     }
 }

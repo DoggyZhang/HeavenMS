@@ -18,16 +18,16 @@ public class FamilySummonResponseHandler extends AbstractMaplePacketHandler {
 
     @Override
     public void handlePacket(SeekableLittleEndianAccessor slea, MapleClient c) {
-        if(!YamlConfig.config.server.USE_FAMILY_SYSTEM) return;
+        if (!YamlConfig.config.server.USE_FAMILY_SYSTEM) return;
         slea.readMapleAsciiString(); //family name
         boolean accept = slea.readByte() != 0;
         MapleInviteResult inviteResult = MapleInviteCoordinator.answerInvite(InviteType.FAMILY_SUMMON, c.getPlayer().getId(), c.getPlayer(), accept);
-        if(inviteResult.result == InviteResult.NOT_FOUND) return;
+        if (inviteResult.result == InviteResult.NOT_FOUND) return;
         MapleCharacter inviter = inviteResult.from;
         MapleFamilyEntry inviterEntry = inviter.getFamilyEntry();
-        if(inviterEntry == null) return;
+        if (inviterEntry == null) return;
         MapleMap map = (MapleMap) inviteResult.params[0];
-        if(accept && inviter.getMap() == map) { //cancel if inviter has changed maps
+        if (accept && inviter.getMap() == map) { //cancel if inviter has changed maps
             c.getPlayer().changeMap(map, map.getPortal(0));
         } else {
             inviterEntry.refundEntitlement(MapleFamilyEntitlement.SUMMON_FAMILY);

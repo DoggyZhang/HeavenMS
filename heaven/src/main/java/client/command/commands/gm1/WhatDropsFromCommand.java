@@ -24,8 +24,8 @@
 package client.command.commands.gm1;
 
 import client.MapleCharacter;
-import client.command.Command;
 import client.MapleClient;
+import client.command.Command;
 import server.MapleItemInformationProvider;
 import server.life.MapleMonsterInformationProvider;
 import server.life.MonsterDropEntry;
@@ -50,20 +50,20 @@ public class WhatDropsFromCommand extends Command {
         int limit = 3;
         Iterator<Pair<Integer, String>> listIterator = MapleMonsterInformationProvider.getMobsIDsFromName(monsterName).iterator();
         for (int i = 0; i < limit; i++) {
-            if(listIterator.hasNext()) {
+            if (listIterator.hasNext()) {
                 Pair<Integer, String> data = listIterator.next();
                 int mobId = data.getLeft();
                 String mobName = data.getRight();
                 output += mobName + " drops the following items:\r\n\r\n";
-                for (MonsterDropEntry drop : MapleMonsterInformationProvider.getInstance().retrieveDrop(mobId)){
+                for (MonsterDropEntry drop : MapleMonsterInformationProvider.getInstance().retrieveDrop(mobId)) {
                     try {
                         String name = MapleItemInformationProvider.getInstance().getName(drop.itemId);
-                        if (name == null || name.equals("null") || drop.chance == 0){
+                        if (name == null || name.equals("null") || drop.chance == 0) {
                             continue;
                         }
                         float chance = Math.max(1000000 / drop.chance / (!MapleMonsterInformationProvider.getInstance().isBoss(mobId) ? player.getDropRate() : player.getBossDropRate()), 1);
                         output += "- " + name + " (1/" + (int) chance + ")\r\n";
-                    } catch (Exception ex){
+                    } catch (Exception ex) {
                         ex.printStackTrace();
                         continue;
                     }
@@ -71,7 +71,7 @@ public class WhatDropsFromCommand extends Command {
                 output += "\r\n";
             }
         }
-        
+
         c.getAbstractPlayerInteraction().npcTalk(9010000, output);
     }
 }

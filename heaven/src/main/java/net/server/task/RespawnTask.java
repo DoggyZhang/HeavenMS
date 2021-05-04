@@ -9,7 +9,7 @@ import server.maps.MapleMapManager;
  * @author Resinate
  */
 public class RespawnTask implements Runnable {
-    
+
     @Override
     public void run() {
         for (Channel ch : Server.getInstance().getAllChannels()) {

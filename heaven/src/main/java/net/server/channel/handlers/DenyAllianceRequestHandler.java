@@ -19,8 +19,8 @@
 */
 package net.server.channel.handlers;
 
-import client.MapleClient;
 import client.MapleCharacter;
+import client.MapleClient;
 import net.AbstractMaplePacketHandler;
 import net.server.guild.MapleAlliance;
 import tools.data.input.SeekableLittleEndianAccessor;
@@ -35,7 +35,7 @@ public final class DenyAllianceRequestHandler extends AbstractMaplePacketHandler
         slea.readByte();
         String inviterName = slea.readMapleAsciiString();
         String guildName = slea.readMapleAsciiString();
-        
+
         MapleCharacter chr = c.getWorldServer().getPlayerStorage().getCharacterByName(inviterName);
         if (chr != null) {
             MapleAlliance alliance = chr.getAlliance();

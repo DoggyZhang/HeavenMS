@@ -21,8 +21,6 @@
 */
 package net.server.channel.handlers;
 
-import java.util.Set;
-
 import client.MapleCharacter;
 import client.MapleClient;
 import client.inventory.MaplePet;
@@ -32,6 +30,8 @@ import server.maps.MapleMapObject;
 import tools.MaplePacketCreator;
 import tools.data.input.SeekableLittleEndianAccessor;
 
+import java.util.Set;
+
 /**
  * @author TheRamon
  * @author Ronan
@@ -40,17 +40,17 @@ public final class PetLootHandler extends AbstractMaplePacketHandler {
     @Override
     public final void handlePacket(SeekableLittleEndianAccessor slea, MapleClient c) {
         MapleCharacter chr = c.getPlayer();
-        
+
         int petIndex = chr.getPetIndex(slea.readInt());
         MaplePet pet = chr.getPet(petIndex);
         if (pet == null || !pet.isSummoned()) {
             c.announce(MaplePacketCreator.enableActions());
             return;
         }
-        
+
         slea.skip(13);
         int oid = slea.readInt();
-        MapleMapObject ob = chr.getMap().getMapObject(oid);        
+        MapleMapObject ob = chr.getMap().getMapObject(oid);
         try {
             MapleMapItem mapitem = (MapleMapItem) ob;
             if (mapitem.getMeso() > 0) {
@@ -61,7 +61,7 @@ public final class PetLootHandler extends AbstractMaplePacketHandler {
 
                 if (chr.isEquippedPetItemIgnore()) {
                     final Set<Integer> petIgnore = chr.getExcludedItems();
-                    if(!petIgnore.isEmpty() && petIgnore.contains(Integer.MAX_VALUE)) {
+                    if (!petIgnore.isEmpty() && petIgnore.contains(Integer.MAX_VALUE)) {
                         c.announce(MaplePacketCreator.enableActions());
                         return;
                     }
@@ -74,7 +74,7 @@ public final class PetLootHandler extends AbstractMaplePacketHandler {
 
                 if (chr.isEquippedPetItemIgnore()) {
                     final Set<Integer> petIgnore = chr.getExcludedItems();
-                    if(!petIgnore.isEmpty() && petIgnore.contains(mapitem.getItem().getItemId())) {
+                    if (!petIgnore.isEmpty() && petIgnore.contains(mapitem.getItem().getItemId())) {
                         c.announce(MaplePacketCreator.enableActions());
                         return;
                     }

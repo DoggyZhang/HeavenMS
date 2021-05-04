@@ -35,7 +35,7 @@ public class TimeCommand extends Command {
     {
         setDescription("");
     }
-    
+
     @Override
     public void execute(MapleClient client, String[] params) {
         DateFormat dateFormat = new SimpleDateFormat("HH:mm:ss");

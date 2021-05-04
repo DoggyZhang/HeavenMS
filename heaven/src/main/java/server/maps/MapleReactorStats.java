@@ -21,12 +21,13 @@
 */
 package server.maps;
 
+import tools.Pair;
+
 import java.awt.Point;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import tools.Pair;
 
 /**
  * @author Lerk
@@ -35,8 +36,8 @@ import tools.Pair;
 public class MapleReactorStats {
     private Point tl;
     private Point br;
-    private Map<Byte, List<StateData>> stateInfo = new HashMap<>();
-    private Map<Byte, Integer> timeoutInfo = new HashMap<>();
+    private final Map<Byte, List<StateData>> stateInfo = new HashMap<>();
+    private final Map<Byte, Integer> timeoutInfo = new HashMap<>();
 
     public void setTL(Point tl) {
         this.tl = tl;
@@ -56,20 +57,20 @@ public class MapleReactorStats {
 
     public void addState(byte state, List<StateData> data, int timeOut) {
         stateInfo.put(state, data);
-        if(timeOut > -1) timeoutInfo.put(state, timeOut);
+        if (timeOut > -1) timeoutInfo.put(state, timeOut);
     }
-    
+
     public void addState(byte state, int type, Pair<Integer, Integer> reactItem, byte nextState, int timeOut, byte canTouch) {
         List<StateData> data = new ArrayList<>();
         data.add(new StateData(type, reactItem, null, nextState));
         stateInfo.put(state, data);
     }
-    
+
     public int getTimeout(byte state) {
         Integer i = timeoutInfo.get(state);
         return (i == null) ? -1 : i;
     }
-    
+
     public byte getTimeoutState(byte state) {
         return stateInfo.get(state).get(stateInfo.get(state).size() - 1).getNextState();
     }
@@ -117,10 +118,10 @@ public class MapleReactorStats {
 
 
     public static class StateData {
-        private int type;
-        private Pair<Integer, Integer> reactItem;
-        private List<Integer> activeSkills;
-        private byte nextState;
+        private final int type;
+        private final Pair<Integer, Integer> reactItem;
+        private final List<Integer> activeSkills;
+        private final byte nextState;
 
         public StateData(int type, Pair<Integer, Integer> reactItem, List<Integer> activeSkills, byte nextState) {
             this.type = type;

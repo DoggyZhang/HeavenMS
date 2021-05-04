@@ -22,7 +22,8 @@
 package client.keybind;
 
 public class MapleKeyBinding {
-    private int type, action;
+    private final int type;
+    private final int action;
 
     public MapleKeyBinding(int type, int action) {
         this.type = type;

@@ -21,12 +21,10 @@
 */
 package server.maps;
 
-import java.awt.Point;
-
 import provider.MapleData;
 import provider.MapleDataTool;
-import server.maps.MapleGenericPortal;
-import server.maps.MapleMapPortal;
+
+import java.awt.Point;
 
 public class MaplePortalFactory {
     private int nextDoorPortal;

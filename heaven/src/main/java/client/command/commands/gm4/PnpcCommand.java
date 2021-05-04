@@ -23,20 +23,20 @@
 */
 package client.command.commands.gm4;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
-
+import client.MapleCharacter;
+import client.MapleClient;
+import client.command.Command;
 import net.server.channel.Channel;
 import server.life.MapleLifeFactory;
 import server.life.MapleNPC;
-import client.command.Command;
-import client.MapleCharacter;
-import client.MapleClient;
-import java.awt.Point;
 import server.maps.MapleMap;
 import tools.DatabaseConnection;
 import tools.MaplePacketCreator;
+
+import java.awt.Point;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 
 public class PnpcCommand extends Command {
     {
@@ -50,7 +50,7 @@ public class PnpcCommand extends Command {
             player.yellowMessage("Syntax: !pnpc <npcid>");
             return;
         }
-        
+
         // command suggestion thanks to HighKey21, none, bibiko94 (TAYAMO), asafgb
         int mapId = player.getMapId();
         int npcId = Integer.parseInt(params[0]);
@@ -58,14 +58,14 @@ public class PnpcCommand extends Command {
             player.dropMessage(5, "This map already contains the specified NPC.");
             return;
         }
-        
+
         MapleNPC npc = MapleLifeFactory.getNPC(npcId);
-        
+
         Point checkpos = player.getMap().getGroundBelow(player.getPosition());
         int xpos = checkpos.x;
         int ypos = checkpos.y;
         int fh = player.getMap().getFootholds().findBelow(checkpos).getId();
-        
+
         if (npc != null && !npc.getName().equals("MISSINGNO")) {
             try {
                 Connection con = DatabaseConnection.getConnection();
@@ -86,15 +86,15 @@ public class PnpcCommand extends Command {
                 ps.executeUpdate();
                 ps.close();
                 con.close();
-                
-                for (Channel ch: player.getWorldServer().getChannels()) {
+
+                for (Channel ch : player.getWorldServer().getChannels()) {
                     npc = MapleLifeFactory.getNPC(npcId);
                     npc.setPosition(checkpos);
                     npc.setCy(ypos);
                     npc.setRx0(xpos + 50);
                     npc.setRx1(xpos - 50);
                     npc.setFh(fh);
-                    
+
                     MapleMap map = ch.getMapFactory().getMap(mapId);
                     map.addMapObject(npc);
                     map.broadcastMessage(MaplePacketCreator.spawnNPC(npc));

@@ -21,30 +21,30 @@
 */
 package net.server.channel.handlers;
 
-import client.inventory.ItemFactory;
 import client.MapleCharacter;
-import java.sql.SQLException;
-import java.util.Arrays;
 import client.MapleClient;
+import client.inventory.ItemFactory;
 import constants.game.GameConstants;
-import java.awt.Point;
 import net.AbstractMaplePacketHandler;
-import server.maps.MaplePortal;
 import server.maps.MapleMapObject;
 import server.maps.MapleMapObjectType;
 import server.maps.MaplePlayerShop;
+import server.maps.MaplePortal;
 import tools.MaplePacketCreator;
 import tools.data.input.SeekableLittleEndianAccessor;
 
+import java.awt.Point;
+import java.sql.SQLException;
+import java.util.Arrays;
+
 /**
- *
  * @author XoticStory
  */
 public final class HiredMerchantRequest extends AbstractMaplePacketHandler {
     @Override
     public final void handlePacket(SeekableLittleEndianAccessor slea, MapleClient c) {
         MapleCharacter chr = c.getPlayer();
-        
+
         try {
             for (MapleMapObject mmo : chr.getMap().getMapObjectsInRange(chr.getPosition(), 23000, Arrays.asList(MapleMapObjectType.HIRED_MERCHANT, MapleMapObjectType.PLAYER))) {
                 if (mmo instanceof MapleCharacter) {
@@ -70,7 +70,7 @@ public final class HiredMerchantRequest extends AbstractMaplePacketHandler {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        
+
         if (GameConstants.isFreeMarketRoom(chr.getMapId())) {
             if (!chr.hasMerchant()) {
                 try {

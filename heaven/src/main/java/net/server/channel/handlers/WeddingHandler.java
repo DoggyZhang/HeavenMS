@@ -21,18 +21,18 @@ import server.MapleMarriage;
 import tools.MaplePacketCreator;
 import tools.data.input.SeekableLittleEndianAccessor;
 import tools.packets.Wedding;
+
 import java.util.Collections;
 import java.util.List;
 
 /**
- *
  * @author Drago (Dragohe4rt)
  */
 public final class WeddingHandler extends AbstractMaplePacketHandler {
-    
+
     @Override
     public final void handlePacket(SeekableLittleEndianAccessor slea, MapleClient c) {
-        
+
         if (c.tryacquireClient()) {
             try {
                 MapleCharacter chr = c.getPlayer();
@@ -69,7 +69,7 @@ public final class WeddingHandler extends AbstractMaplePacketHandler {
 
                                                         marriage.addGiftItem(groomWishlist, newItem);
                                                         MapleInventoryManipulator.removeFromSlot(c, type, slot, quantity, false, false);
-                                                        
+
                                                         MapleKarmaManipulator.toggleKarmaFlagToUntradeable(newItem);
                                                         marriage.setIntProperty(groomWishlistProp, giftCount + 1);
 
@@ -82,9 +82,10 @@ public final class WeddingHandler extends AbstractMaplePacketHandler {
                                         } finally {
                                             chrInv.unlockInventory();
                                         }
-                                        
+
                                         if (newItem != null) {
-                                            if (YamlConfig.config.server.USE_ENFORCE_MERCHANT_SAVE) chr.saveCharToDB(false); 
+                                            if (YamlConfig.config.server.USE_ENFORCE_MERCHANT_SAVE)
+                                                chr.saveCharToDB(false);
                                             marriage.saveGiftItemsToDb(c, groomWishlist, cid);
                                         }
                                     } else {
@@ -96,7 +97,8 @@ public final class WeddingHandler extends AbstractMaplePacketHandler {
                             } else {
                                 c.announce(Wedding.OnWeddingGiftResult((byte) 0xC, marriage.getWishlistItems(groomWishlist), null));
                             }
-                        } catch (NumberFormatException nfe) {}
+                        } catch (NumberFormatException nfe) {
+                        }
                     } else {
                         c.announce(MaplePacketCreator.enableActions());
                     }

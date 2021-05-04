@@ -21,6 +21,16 @@
  */
 package server.maps;
 
+import provider.MapleData;
+import provider.MapleDataProvider;
+import provider.MapleDataProviderFactory;
+import provider.MapleDataTool;
+import scripting.event.EventInstanceManager;
+import server.life.*;
+import server.partyquest.GuardianSpawnPoint;
+import tools.DatabaseConnection;
+import tools.StringUtil;
+
 import java.awt.Point;
 import java.awt.Rectangle;
 import java.io.File;
@@ -31,30 +41,17 @@ import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
-import provider.MapleData;
-import provider.MapleDataProvider;
-import provider.MapleDataProviderFactory;
-import provider.MapleDataTool;
-import server.life.AbstractLoadedMapleLife;
-import server.life.MapleLifeFactory;
-import server.life.MapleMonster;
-import server.life.MaplePlayerNPC;
-import server.life.MaplePlayerNPCFactory;
-import scripting.event.EventInstanceManager;
-import server.partyquest.GuardianSpawnPoint;
-import tools.DatabaseConnection;
-import tools.StringUtil;
 
 public class MapleMapFactory {
 
-    private static MapleData nameData;
-    private static MapleDataProvider mapSource;
-    
+    private static final MapleData nameData;
+    private static final MapleDataProvider mapSource;
+
     static {
         nameData = MapleDataProviderFactory.getDataProvider(new File(System.getProperty("wzpath") + "/String.wz")).getData("Map.img");
         mapSource = MapleDataProviderFactory.getDataProvider(new File(System.getProperty("wzpath") + "/Map.wz"));
     }
-    
+
     private static void loadLifeFromWz(MapleMap map, MapleData mapData) {
         for (MapleData life : mapData.getChildByPath("life")) {
             life.getName();
@@ -78,7 +75,7 @@ public class MapleMapFactory {
             int y = MapleDataTool.getInt(life.getChildByPath("y"));
             int hide = MapleDataTool.getInt("hide", life, 0);
             int mobTime = MapleDataTool.getInt("mobTime", life, 0);
-            
+
             loadLifeRaw(map, Integer.parseInt(id), type, cy, f, fh, rx0, rx1, x, y, hide, mobTime, team);
         }
     }
@@ -136,7 +133,7 @@ public class MapleMapFactory {
 
     public static MapleMap loadMapFromWz(int mapid, int world, int channel, EventInstanceManager event) {
         MapleMap map;
-        
+
         String mapName = getMapName(mapid);
         MapleData mapData = mapSource.getData(mapName);    // source.getData issue with giving nulls in rare ocasions found thanks to MedicOP
         MapleData infoData = mapData.getChildByPath("info");
@@ -171,7 +168,7 @@ public class MapleMapFactory {
             map.setTimeMob(MapleDataTool.getInt(timeMob.getChildByPath("id")), MapleDataTool.getString(timeMob.getChildByPath("message")));
         }
 
-        int bounds[] = new int[4];
+        int[] bounds = new int[4];
         bounds[0] = MapleDataTool.getInt(infoData.getChildByPath("VRTop"));
         bounds[1] = MapleDataTool.getInt(infoData.getChildByPath("VRBottom"));
 
@@ -309,10 +306,10 @@ public class MapleMapFactory {
                 }
             }
         }
-        
+
         map.setMapName(loadPlaceName(mapid));
         map.setStreetName(loadStreetName(mapid));
-        
+
         map.setClock(mapData.getChildByPath("clock") != null);
         map.setEverlast(MapleDataTool.getIntConvert("everlast", infoData, 0) != 0); // thanks davidlafriniere for noticing value 0 accounting as true
         map.setTown(MapleDataTool.getIntConvert("town", infoData, 0) != 0);
@@ -323,7 +320,7 @@ public class MapleMapFactory {
         map.setTimeLimit(MapleDataTool.getIntConvert("timeLimit", infoData, -1));
         map.setFieldType(MapleDataTool.getIntConvert("fieldType", infoData, 0));
         map.setMobCapacity(MapleDataTool.getIntConvert("fixedMobCapacity", infoData, 500));//Is there a map that contains more than 500 mobs?
-        
+
         MapleData recData = infoData.getChildByPath("recovery");
         if (recData != null) {
             map.setRecovery(MapleDataTool.getFloat(recData));
@@ -347,7 +344,7 @@ public class MapleMapFactory {
 
         return map;
     }
-    
+
     private static AbstractLoadedMapleLife loadLife(int id, String type, int cy, int f, int fh, int rx0, int rx1, int x, int y, int hide) {
         AbstractLoadedMapleLife myLife = MapleLifeFactory.getLife(id, type);
         myLife.setCy(cy);
@@ -424,7 +421,7 @@ public class MapleMapFactory {
         builder.append("/").append(mapid);
         return builder.toString();
     }
-    
+
     public static String loadPlaceName(int mapid) {
         try {
             return MapleDataTool.getString("mapName", nameData.getChildByPath(getMapStringName(mapid)), "");
@@ -432,7 +429,7 @@ public class MapleMapFactory {
             return "";
         }
     }
-    
+
     public static String loadStreetName(int mapid) {
         try {
             return MapleDataTool.getString("streetName", nameData.getChildByPath(getMapStringName(mapid)), "");
@@ -440,5 +437,5 @@ public class MapleMapFactory {
             return "";
         }
     }
-    
+
 }

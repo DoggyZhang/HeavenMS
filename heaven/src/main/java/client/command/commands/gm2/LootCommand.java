@@ -25,11 +25,12 @@ package client.command.commands.gm2;
 
 import client.MapleClient;
 import client.command.Command;
-import java.util.Arrays;
-import java.util.List;
 import server.maps.MapleMapItem;
 import server.maps.MapleMapObject;
 import server.maps.MapleMapObjectType;
+
+import java.util.Arrays;
+import java.util.List;
 
 public class LootCommand extends Command {
 

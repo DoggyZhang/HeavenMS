@@ -23,9 +23,9 @@
 */
 package client.command.commands.gm4;
 
-import client.command.Command;
-import client.MapleClient;
 import client.MapleCharacter;
+import client.MapleClient;
+import client.command.Command;
 import client.inventory.Equip;
 import client.inventory.Item;
 import client.inventory.MapleInventoryType;
@@ -45,18 +45,18 @@ public class ProItemCommand extends Command {
             player.yellowMessage("Syntax: !proitem <itemid> <stat value> [<spdjmp value>]");
             return;
         }
-        
+
         MapleItemInformationProvider ii = MapleItemInformationProvider.getInstance();
         int itemid = Integer.parseInt(params[0]);
-        
-        if(ii.getName(itemid) == null) {
+
+        if (ii.getName(itemid) == null) {
             player.yellowMessage("Item id '" + params[0] + "' does not exist.");
             return;
         }
-        
+
         short stat = (short) Math.max(0, Short.parseShort(params[1]));
         short spdjmp = params.length >= 3 ? (short) Math.max(0, Short.parseShort(params[2])) : 0;
-        
+
         MapleInventoryType type = ItemConstants.getInventoryType(itemid);
         if (type.equals(MapleInventoryType.EQUIP)) {
             Item it = ii.getEquipById(itemid);
@@ -68,6 +68,7 @@ public class ProItemCommand extends Command {
             player.dropMessage(6, "Make sure it's an equippable item.");
         }
     }
+
     private static void hardsetItemStats(Equip equip, short stat, short spdjmp) {
         equip.setStr(stat);
         equip.setDex(stat);

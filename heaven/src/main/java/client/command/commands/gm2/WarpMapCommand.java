@@ -51,7 +51,7 @@ public class WarpMapCommand extends Command {
             }
 
             Collection<MapleCharacter> characters = player.getMap().getAllPlayers();
-            
+
             for (MapleCharacter victim : characters) {
                 victim.saveLocationOnWarp();
                 victim.changeMap(target, target.getRandomPlayerSpawnpoint());

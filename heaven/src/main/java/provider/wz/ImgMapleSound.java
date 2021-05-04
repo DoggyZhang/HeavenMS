@@ -22,7 +22,8 @@
 package provider.wz;
 
 public class ImgMapleSound {
-    private int dataLength, offset;
+    private final int dataLength;
+    private final int offset;
 
     public ImgMapleSound(int dataLength, int offset) {
         this.dataLength = dataLength;

@@ -22,23 +22,7 @@
 package net.server.channel.handlers;
 
 import client.MapleClient;
-import constants.skills.Bishop;
-import constants.skills.Bowmaster;
-import constants.skills.Brawler;
-import constants.skills.ChiefBandit;
-import constants.skills.Corsair;
-import constants.skills.DarkKnight;
-import constants.skills.Evan;
-import constants.skills.FPArchMage;
-import constants.skills.FPMage;
-import constants.skills.Gunslinger;
-import constants.skills.Hero;
-import constants.skills.ILArchMage;
-import constants.skills.Marksman;
-import constants.skills.NightWalker;
-import constants.skills.Paladin;
-import constants.skills.ThunderBreaker;
-import constants.skills.WindArcher;
+import constants.skills.*;
 import net.AbstractMaplePacketHandler;
 import tools.MaplePacketCreator;
 import tools.data.input.SeekableLittleEndianAccessor;

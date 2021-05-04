@@ -22,23 +22,22 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package scripting;
 
 import client.MapleClient;
-
-import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
-
-import javax.script.*;
-
 import constants.net.ServerConstants;
 import jdk.nashorn.api.scripting.NashornScriptEngine;
 import tools.FilePrinter;
 
+import javax.script.ScriptEngineFactory;
+import javax.script.ScriptEngineManager;
+import javax.script.ScriptException;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
+
 /**
- *
  * @author Matze
  */
 public abstract class AbstractScriptManager {
-    private ScriptEngineFactory sef;
+    private final ScriptEngineFactory sef;
 
     protected AbstractScriptManager() {
         sef = new ScriptEngineManager().getEngineByName("javascript").getFactory();
@@ -52,7 +51,7 @@ public abstract class AbstractScriptManager {
         }
         NashornScriptEngine engine = (NashornScriptEngine) sef.getScriptEngine();
         try (FileReader fr = new FileReader(scriptFile)) {
-            if (ServerConstants.JAVA_8){
+            if (ServerConstants.JAVA_8) {
                 engine.eval("load('nashorn:mozilla_compat.js');" + System.lineSeparator());
             }
             engine.eval(fr);

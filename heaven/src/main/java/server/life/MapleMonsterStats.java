@@ -21,17 +21,13 @@
 */
 package server.life;
 
-import java.lang.reflect.Field;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
 import server.life.MapleLifeFactory.BanishInfo;
 import server.life.MapleLifeFactory.loseItem;
 import server.life.MapleLifeFactory.selfDestruction;
 import tools.Pair;
+
+import java.lang.reflect.Field;
+import java.util.*;
 
 /**
  * @author Frz
@@ -60,7 +56,7 @@ public class MapleMonsterStats {
     public boolean isChangeable() {
         return changeable;
     }
-    
+
     public int getExp() {
         return exp;
     }
@@ -198,7 +194,7 @@ public class MapleMonsterStats {
         for (int i = this.skills.size(); i < skills.size(); i++) {
             this.skills.add(null);
         }
-        
+
         for (int i = 0; i < skills.size(); i++) {
             this.skills.set(i, skills.get(i));
         }
@@ -283,7 +279,7 @@ public class MapleMonsterStats {
     public void setSelfDestruction(selfDestruction sd) {
         this.selfDestruction = sd;
     }
-    
+
     public void setExplosiveReward(boolean isExplosiveReward) {
         this.isExplosiveReward = isExplosiveReward;
     }
@@ -307,47 +303,47 @@ public class MapleMonsterStats {
     public Pair<Integer, Integer> getCool() {
         return cool;
     }
-    
+
     public int getPDDamage() {
         return PDDamage;
     }
-    
+
     public int getMADamage() {
         return MADamage;
     }
-    
+
     public int getMDDamage() {
         return MDDamage;
     }
-    
+
     public boolean isFriendly() {
         return friendly;
     }
-    
+
     public void setFriendly(boolean value) {
         this.friendly = value;
     }
-    
+
     public void setPDDamage(int PDDamage) {
         this.PDDamage = PDDamage;
     }
-    
+
     public void setMADamage(int MADamage) {
         this.MADamage = MADamage;
     }
-    
+
     public void setMDDamage(int MDDamage) {
         this.MDDamage = MDDamage;
-    } 
-    
+    }
+
     public int getFixedStance() {
         return this.fixedStance;
     }
-    
+
     public void setFixedStance(int stance) {
         this.fixedStance = stance;
     }
-    
+
     public MapleMonsterStats copy() {
         MapleMonsterStats copy = new MapleMonsterStats();
         try {
@@ -357,14 +353,14 @@ public class MapleMonsterStats {
             try {
                 Thread.sleep(10000);
             } catch (Exception ex) {
-                
+
             }
-            
+
         }
-        
+
         return copy;
     }
-    
+
     // FieldCopyUtil src: http://www.codesenior.com/en/tutorial/Java-Copy-Fields-From-One-Object-to-Another-Object-with-Reflection
     private static class FieldCopyUtil { // thanks to Codesenior dev team
         private static void setFields(Object from, Object to) {

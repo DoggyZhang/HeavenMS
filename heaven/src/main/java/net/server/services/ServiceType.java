@@ -20,11 +20,12 @@
 package net.server.services;
 
 /**
- *
  * @author Ronan
  */
-public interface ServiceType <T extends Enum<?>> {
-    public abstract Service createService();
-    public int ordinal();
-    public T[] enumValues();
+public interface ServiceType<T extends Enum<?>> {
+    Service createService();
+
+    int ordinal();
+
+    T[] enumValues();
 }

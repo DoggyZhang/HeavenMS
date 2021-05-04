@@ -25,7 +25,7 @@ import server.expeditions.MapleExpeditionBossLog;
  * @author Ronan
  */
 public class BossLogTask implements Runnable {
-    
+
     @Override
     public void run() {
         MapleExpeditionBossLog.resetBossLogTable();

@@ -1,17 +1,18 @@
 package server.maps;
 
-import java.awt.Point;
 import client.MapleCharacter;
 import client.MapleClient;
 import tools.MaplePacketCreator;
 
+import java.awt.Point;
+
 public class MapleKite extends AbstractMapleMapObject {
 
-    private Point pos;
-    private MapleCharacter owner;
-    private String text;
-    private int ft;
-    private int itemid;
+    private final Point pos;
+    private final MapleCharacter owner;
+    private final String text;
+    private final int ft;
+    private final int itemid;
 
     public MapleKite(MapleCharacter owner, String text, int itemid) {
         this.owner = owner;

@@ -21,22 +21,19 @@
 */
 package provider.wz;
 
-import java.io.BufferedInputStream;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.List;
 import provider.MapleDataProviderFactory;
 import tools.data.input.GenericLittleEndianAccessor;
 import tools.data.input.InputStreamByteStream;
 import tools.data.input.LittleEndianAccessor;
 
+import java.io.BufferedInputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.util.*;
+
 public class ListWZFile {
-    private LittleEndianAccessor lea;
+    private final LittleEndianAccessor lea;
     private List<String> entries = new ArrayList<String>();
     private static Collection<String> modernImgs = new HashSet<String>();
 

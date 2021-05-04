@@ -20,17 +20,16 @@
 package net.server.channel.handlers;
 
 import client.MapleClient;
+import constants.game.GameConstants;
 import net.AbstractMaplePacketHandler;
-import tools.data.input.SeekableLittleEndianAccessor;
 import tools.MaplePacketCreator;
 import tools.Pair;
+import tools.data.input.SeekableLittleEndianAccessor;
 
 import java.util.Comparator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.PriorityQueue;
-
-import constants.game.GameConstants;
 
 /**
  * @author Ronan
@@ -41,10 +40,10 @@ public final class UseOwlOfMinervaHandler extends AbstractMaplePacketHandler {
     public final void handlePacket(SeekableLittleEndianAccessor slea, MapleClient c) {
         List<Pair<Integer, Integer>> owlSearched = c.getWorldServer().getOwlSearchedItems();
         List<Integer> owlLeaderboards;
-        
-        if(owlSearched.size() < 5) {
+
+        if (owlSearched.size() < 5) {
             owlLeaderboards = new LinkedList<>();
-            for(int i : GameConstants.OWL_DATA) {
+            for (int i : GameConstants.OWL_DATA) {
                 owlLeaderboards.add(i);
             }
         } else {
@@ -54,18 +53,18 @@ public final class UseOwlOfMinervaHandler extends AbstractMaplePacketHandler {
                     return p2.getRight().compareTo(p1.getRight());
                 }
             };
-            
+
             PriorityQueue<Pair<Integer, Integer>> queue = new PriorityQueue<>(Math.max(1, owlSearched.size()), comparator);
-            for(Pair<Integer, Integer> p : owlSearched) {
+            for (Pair<Integer, Integer> p : owlSearched) {
                 queue.add(p);
             }
-            
+
             owlLeaderboards = new LinkedList<>();
-            for(int i = 0; i < Math.min(owlSearched.size(), 10); i++) {
+            for (int i = 0; i < Math.min(owlSearched.size(), 10); i++) {
                 owlLeaderboards.add(queue.remove().getLeft());
             }
         }
-        
+
         c.announce(MaplePacketCreator.getOwlOpen(owlLeaderboards));
     }
 }
