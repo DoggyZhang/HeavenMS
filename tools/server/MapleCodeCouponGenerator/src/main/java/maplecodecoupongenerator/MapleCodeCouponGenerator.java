@@ -19,20 +19,9 @@
 */
 package maplecodecoupongenerator;
 
-import java.io.BufferedReader;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.io.*;
+import java.sql.*;
+import java.util.*;
 
 /**
  *
@@ -48,7 +37,7 @@ public class MapleCodeCouponGenerator {
     static String host = "jdbc:mysql://localhost:3306/heavenms";
     static String driver = "com.mysql.jdbc.Driver";
     static String username = "root";
-    static String password = "";
+    static String password = "123456";
     
     static Connection con = null;
     static InputStreamReader fileReader = null;

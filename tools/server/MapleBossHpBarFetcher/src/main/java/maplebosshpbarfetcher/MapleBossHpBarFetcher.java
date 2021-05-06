@@ -41,8 +41,10 @@ import java.io.File;
  
  */
 public class MapleBossHpBarFetcher {
-    static String mobDirectory = "../../wz/Mob.wz/";
-    static String newFile = "lib/Report.txt";
+    static String modulePath = ".\\tools\\server\\MapleBossHpBarFetcher";
+
+    static String mobDirectory = "./wz/Mob.wz/";
+    static String newFile = modulePath + "/lib/Report.txt";
 
     static Connection con = null;
     static PrintWriter printWriter = null;
